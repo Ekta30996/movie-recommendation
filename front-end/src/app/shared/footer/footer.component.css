@@ -7,3 +7,13 @@ a:hover {
   top: 68%;
   position: relative;
 }
+.footer__nav a
+{
+  text-decoration: none;  
+  color: white;
+  text-decoration: none;
+}
+.footer__nav a:hover{
+  opacity: 0.5;
+  cursor: pointer;
+}
