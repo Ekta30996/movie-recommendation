@@ -7,10 +7,11 @@ img {
     font-size: 25px;
     font-weight: 700;
   }
-  li a {
+  .header__logo a,
+  .header__menu  a ,
+  .header__right a{
     text-decoration: none;
-  }
-  a {
+    color: white;
     text-decoration: none;
   }
   .primary {

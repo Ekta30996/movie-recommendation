@@ -14,7 +14,7 @@ import { LatestComponent } from '../latest/latest.component';
 export class HomeComponent implements OnInit {
 
   @ViewChild('container' , { read:ViewContainerRef }) container!: ViewContainerRef
-  page!:string
+  
 
   data: string = 'Hunnyuuuuu'
   pages = {

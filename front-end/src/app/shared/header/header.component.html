@@ -13,11 +13,11 @@
           <div class="header__nav">
             <nav class="header__menu mobile-menu">
               <ul>
-                <li><a routerLink="/movies">Homepage</a></li>
-                <li><a routerLink="/movies/recommend">Recommended</a></li>
-                <li><a routerLink="/movies/favoritelist">Favoritelist</a></li>
-                <li><a routerLink="/movies/watchlist">Watchlist</a></li>
-                <li><a routerLink="/movies/latest">Latest</a></li>
+                <li><a (click)="onCreateComponent(pages.home)">Homepage</a></li>
+                <li><a (click)="onCreateComponent(pages.recommend)">Recommended</a></li>
+                <li><a (click)="onCreateComponent(pages.favorite)">Favoritelist</a></li>
+                <li><a (click)="onCreateComponent(pages.watch)">Watchlist</a></li>
+                <li><a (click)="onCreateComponent(pages.latest)" >Latest</a></li>
               </ul>
             </nav>
           </div>
@@ -39,12 +39,12 @@
               *ngIf="_authService.signedIn()"
               (click)="_authService.signout()"
               >Sign Out</Button>
-
-              {{name}}
           </div>
         </div>
       </div>
       <div id="mobile-menu-wrap"></div>
     </div>
   </header>
+  <ng-container #container></ng-container>
+
   <!-- Header End -->
