@@ -1,0 +1,35 @@
+li a,
+a{
+    text-decoration: none;
+    line-height: 70px;
+    color: #e53637;
+    font-weight: 700;
+}
+li a:hover{
+    color: #832525;
+}
+.nav-item{
+    border-bottom: 1px solid #832525 ;
+}
+.card, .card-body li a{
+    background-color:#3445b4;
+}
+#sidebar {
+    height: 100%;
+    width: 300px;
+    background-color: #070720;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  #content{
+    margin-left: 260px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+    width: 100%;
+    height: auto;
+    color: white;
+  }  

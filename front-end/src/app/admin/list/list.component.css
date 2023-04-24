@@ -1,0 +1,11 @@
+select{
+    width:200px;
+    height: 40px;
+    background-color: #e53637;
+    border: none;
+    color: white;
+}
+
+.display{
+    color: white;
+}

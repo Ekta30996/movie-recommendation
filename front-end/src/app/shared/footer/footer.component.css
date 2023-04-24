@@ -1,0 +1,9 @@
+a,
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+.footer{
+  top: 61%;
+  position: relative;
+}

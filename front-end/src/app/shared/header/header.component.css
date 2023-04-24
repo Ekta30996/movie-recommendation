@@ -1,0 +1,28 @@
+img {
+    height: 50px;
+  }
+  span {
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  li a {
+    text-decoration: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  .primary {
+    background-color: #e53637;
+    padding: 7px;
+    color: white;
+    font-weight: 500;
+  }
+  button {
+    background-color: #e53637;
+    padding: 7px;
+    color: white;
+    font-weight: 500;
+    border: none;
+  }

@@ -1,0 +1,50 @@
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-1">
+          <div class="header__logo">
+            <a routerLink="/movie">
+              <span>Movie<span style="color: #e53637">Flix</span> </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="header__nav">
+            <nav class="header__menu mobile-menu">
+              <ul>
+                <li><a routerLink="/movies">Homepage</a></li>
+                <li><a routerLink="/movies/recommend">Recommended</a></li>
+                <li><a routerLink="/movies/favoritelist">Favoritelist</a></li>
+                <li><a routerLink="/movies/watchlist">Watchlist</a></li>
+                <li><a routerLink="/movies/latest">Latest</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="header__right">
+            <a href="#" class="search-switch"
+              ><span class="icon_search"></span
+            ></a>
+            <a href="#"
+            ><span class="icon_profile"></span
+          ></a>
+            <a
+              routerLink="/user/signin"
+              class="primary"
+              *ngIf="!_authService.signedIn()"
+              >Sign In</a>
+            <Button
+              *ngIf="_authService.signedIn()"
+              (click)="_authService.signout()"
+              >Sign Out</Button>
+
+              {{name}}
+          </div>
+        </div>
+      </div>
+      <div id="mobile-menu-wrap"></div>
+    </div>
+  </header>
+  <!-- Header End -->

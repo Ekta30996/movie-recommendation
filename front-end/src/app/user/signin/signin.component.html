@@ -1,0 +1,52 @@
+<!-- Page Preloder -->
+<!-- <div id="preloder">
+  <div class="loader"></div>
+</div> -->
+<!-- Login Section Begin -->
+<section class="login spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="login__form">
+            <h3>Sign In</h3>
+            <form [formGroup]="signinForm" (ngSubmit)="onSignin()" novalidate>
+              <div class="input__item">
+                <input type="text" 
+                placeholder="Email address"
+                name="email"
+                formControlName="email"
+                required/>
+                <span class="icon_mail"></span>
+                <div *ngIf="email && (email.valid || email.touched)">
+                  <small *ngIf="email.errors?.['required']" class="text-danger">Email is required</small>
+                  <small *ngIf="email.errors?.['email']" class="text-danger">Email is invalid</small>
+                </div>
+              </div>
+              <div class="input__item">
+                <input type="text" 
+                placeholder="Password" 
+                name="password"
+                formControlName="password"
+                required/>
+                <span class="icon_lock"></span>
+                <div *ngIf="password && (password.valid || password.touched)">
+                  <small *ngIf="password.errors?.['required']" class="text-danger">Password is required</small>
+                  <small *ngIf="password.errors?.['minlength']" class="text-danger">Password is invalid</small>
+                </div>
+              </div>
+              <button type="submit" class="site-btn" [disabled]="!signinForm.valid">Signin Now</button>
+            </form>
+            <a href="#" class="forget_pass">Forgot your password?</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="login__register">
+            <h3>Dont’t have an account?</h3>
+            <a routerLink="/signup" class="primary-btn">Signup Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Login Section End -->
+  
