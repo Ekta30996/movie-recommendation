@@ -4,15 +4,13 @@ a{
     line-height: 70px;
     color: #e53637;
     font-weight: 700;
+    cursor: pointer;
 }
 li a:hover{
     color: #832525;
 }
 .nav-item{
     border-bottom: 1px solid #832525 ;
-}
-.card, .card-body li a{
-    background-color:#3445b4;
 }
 #sidebar {
     height: 100%;
@@ -32,4 +30,4 @@ li a:hover{
     width: 100%;
     height: auto;
     color: white;
-  }  
+}  

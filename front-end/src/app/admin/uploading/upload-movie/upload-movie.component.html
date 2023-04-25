@@ -1,0 +1,46 @@
+<div class=" change-loader" *ngIf="loader" >
+	<div class="spinner-border text-primary" role="status">
+	  <span class="visually-hidden">Loading...</span>
+	</div>
+  </div>
+
+  <div class="login-page" [ngClass]="loader ? 'page-blur' : '' ">
+	  <div class="form">
+		  <h3  style="color: #e53637;"><i class="fas fa-film me-2"></i>Upload Movie</h3>
+		<form [formGroup]="uploadForm" (ngSubmit)="onUpload()">
+			<input type="text" 
+			placeholder="title"
+			name="title"
+			formControlName="title"
+			required>
+			<textarea name="description" 
+				cols="30" 
+				rows="5"
+				formControlName="description">
+			</textarea>
+		  <input type="file" 
+		  name="file"
+		  formControlName="file"
+		  class="file-input"
+		  (change)="onFileSelected($event)"
+		  accept="video/mp4"
+		  required>
+		  <!-- <div *ngIf="file && (file.valid || file.touched)">
+			<small *ngIf="file.errors?.['required']" class="text-danger">Image file is required</small>
+			<small *ngIf="file.errors?.['accept']" class="text-danger">genre file is invalid</small>
+		  </div> -->
+		  <select class="form-select" 							
+			name="genre" 
+			formControlName="genre"
+			>
+			<option value="default" selected>Select genre</option>
+			<option *ngFor="let genre of genres">{{genre?.['genre']}}</option>
+			</select>
+		  <!-- <div *ngIf="genre && (genre.valid || genre.touched)">
+			<small *ngIf="genre.errors?.['required']" class="text-danger">genre is required</small>
+			<small *ngIf="genre.errors?.['genre']" class="text-danger">genre is invalid</small>
+		  </div> -->
+		  <button>Upload</button>
+		</form>
+	  </div>
+	</div>

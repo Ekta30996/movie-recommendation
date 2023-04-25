@@ -4,8 +4,10 @@ a:hover {
   color: white;
 }
 .footer{
-  top: 68%;
-  position: relative;
+  top: 73%;
+}
+.footer__nav{
+  height: 20px;
 }
 .footer__nav a
 {

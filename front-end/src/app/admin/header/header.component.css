@@ -1,0 +1,11 @@
+li a,
+a{
+    text-decoration: none;
+    line-height: 70px;
+    color: #e53637;
+    font-weight: 700;    
+}
+li a:hover{
+    color: #832525;
+}
+

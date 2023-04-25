@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #070720; height: 70px;">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <h2>
+                <a href="index.html" class="logo px-4"><i class="fa fa-user me-4"></i>Profile</a>
+            </h2>
+        </li>
+      </ul>
+      <form class="form-inline my-2  mx-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit" style="background-color: #e53637; border:none ;" (click)="onSearch()">Search</button>
+        <button class="btn btn-success mx-4 my-sm-0" 
+        type="submit" 
+        style="background-color: #e53637; border:none ;" 
+        *ngIf="_authService.signedIn()"
+        (click)="_authService.signout()">Sign Out</button>
+      </form>
+    </div>
+</nav>

@@ -1,11 +1,9 @@
 <div class="wrapper d-flex align-items-stretch">
     <nav id="sidebar">
       <div class="p-4">
-        <h1>
-          <a href="index.html" class="logo"><i class="fa fa-user me-4"></i> Profile</a>
-        </h1>
-        <ul class="list-unstyled components mb-5">
-          <li class="nav-item" >
+        
+        <ul class="list-unstyled components mb-5 ">
+          <li class="nav-item mt-4" >
             <a (click)="onCreateComponent(pages.home)"><i class="fas fa-home me-2"></i>Home</a>
           </li>
           <li class="nav-item">
@@ -17,9 +15,9 @@
         </ul>
       </div>
     </nav>
-  
-    <!-- Page Content  -->
-    <div id="content" class="px-5" >
-      <ng-container #container></ng-container>
-  </div>
 </div>  
+<app-header></app-header>
+<!-- Page Content  -->
+<div id="content" class="px-5" >
+  <ng-container #container></ng-container>
+</div>

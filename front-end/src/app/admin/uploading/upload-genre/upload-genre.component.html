@@ -1,0 +1,32 @@
+<div *ngIf="loader" id="preloder">
+  <div class="loader"></div>
+</div>
+  
+  <div class="login-page" [ngClass]="loader ? 'login-page-blur' : '' ">
+      <div class="form mr-6">
+          <h3 class="mx-2" style="color: #e53637;"><i class="fas fa-masks-theater me-2"></i>Upload Genre</h3>
+        <form [formGroup]="uploadForm" (ngSubmit)="onUpload()" novalidate>
+          <input type="file" 
+          name="file"
+          formControlName="file"
+          class="file-input"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          required>
+          <div *ngIf="file && (file.valid || file.touched)">
+            <small *ngIf="file.errors?.['required']" class="text-danger">Image file is required</small>
+            <small *ngIf="file.errors?.['accept']" class="text-danger">genre file is invalid</small>
+          </div>
+          <input type="text" 
+          placeholder="genre"
+          name="genre"
+          formControlName="genre"
+          required/>
+          <div *ngIf="genre && (genre.valid || genre.touched)">
+            <small *ngIf="genre.errors?.['required']" class="text-danger">genre is required</small>
+            <small *ngIf="genre.errors?.['genre']" class="text-danger">genre is invalid</small>
+          </div>
+          <button [disabled]="!uploadForm.valid" >Upload</button>
+        </form>
+      </div>
+    </div>

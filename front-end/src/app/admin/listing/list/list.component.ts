@@ -21,9 +21,10 @@ export class ListComponent implements OnInit {
     
   }
 
-  onCreateComponent(component:string){
+  onCreateComponent(event:Event){
+    const component = (event.target as HTMLInputElement).value;
     this.container.clear()
-    const componentType = this.getComponentType(component)
+    const componentType = this.getComponentType(component.toLowerCase())
     this.container.createComponent(componentType)
   }
 

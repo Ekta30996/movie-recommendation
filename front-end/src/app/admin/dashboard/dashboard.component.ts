@@ -1,7 +1,7 @@
 import { Component, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { ListComponent } from '../list/list.component';
+import { ListComponent } from '../listing/list/list.component';
 import { HomeComponent } from '../home/home.component';
-import { UploadComponent } from '../upload/upload.component';
+import { UploadComponent } from '../uploading/upload/upload.component';
 
 @Component({
   selector: 'app-dashboard',

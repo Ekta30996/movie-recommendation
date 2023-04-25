@@ -69,6 +69,7 @@ exports.readById = async (req, res) => {
   }
 };
 
+
 //delete by id
 exports.deleteById = async (req, res) => {
   try {

@@ -1,5 +1,4 @@
 import { Component, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { HomePageComponent } from '../home-page/home-page.component';
 import { RecommendComponent } from '../recommend/recommend.component';
 import { FavoriteListComponent } from '../favorite-list/favorite-list.component';
