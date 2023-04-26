@@ -1,4 +1,4 @@
-const {uploadGenre, readAllGenre,deleteById, updatedById, readById}  = require('../controllers/genre.controller')
+const {uploadGenre, readAllGenre,deleteById, readById, updatedGenreById, readGenreById, deleteGenreById}  = require('../controllers/genre.controller')
 const route = require('express').Router()
 const storage = require('../lib/multer')
 const auth = require('../middleware/auth')
@@ -10,12 +10,12 @@ route.post('/upload',auth,storage.single('image'),uploadGenre)
 route.get('/read',readAllGenre)
 
 //read genre by id
-route.get('/:id',readById)
+route.get('/:id',readGenreById)
 
 //delete genre
-route.delete('/:id',auth,deleteById)
+route.delete('/:id',auth,deleteGenreById)
 
-route.patch('/:id',auth,storage.single('image'),updatedById)
+route.patch('/:id',auth,storage.single('image'),updatedGenreById)
 
 
-module.exports = route
+module.exports = route  

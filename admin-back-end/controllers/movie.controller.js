@@ -27,8 +27,8 @@ exports.uploadMovie = (req, res) => {
         });
         newVideo.save();
         res.status(200).json({
-           newVideo,
-           status:'SUCCESS'
+          newVideo,
+          status: "SUCCESS",
         });
         console.log(newVideo);
       } catch (err) {
@@ -39,7 +39,7 @@ exports.uploadMovie = (req, res) => {
 };
 
 //list movies
-exports.readAll = async (req, res) => {
+exports.readAllMovies = async (req, res) => {
   try {
     const read = await movieModel.find();
     res.status(200).json(read);
@@ -54,7 +54,7 @@ exports.readAll = async (req, res) => {
 };
 
 //list movie by id
-exports.readById = async (req, res) => {
+exports.readMovieById = async (req, res) => {
   const id = req.params.id;
   try {
     const read = await movieModel.find({ _id: id });
@@ -69,13 +69,11 @@ exports.readById = async (req, res) => {
   }
 };
 
-
 //delete by id
-exports.deleteById = async (req, res) => {
+exports.deleteMovieById = async (req, res) => {
   try {
     const movie = await movieModel.findById(req.params.id);
-
-    await cloudinary.uploader.destroy(
+     cloudinary.uploader.destroy(
       movie.cloudinary_id,
       { resource_type: "video" },
       (err, result) => {
@@ -89,8 +87,8 @@ exports.deleteById = async (req, res) => {
     const deleted = await movie.deleteOne(movie);
 
     res.status(200).json({
-      message:"Movie deleted successfully!!",
-      deleted
+      message: "Movie deleted successfully!!",
+      deleted,
     });
     console.log("Movie deleted successfully!!");
   } catch (err) {
@@ -101,3 +99,86 @@ exports.deleteById = async (req, res) => {
     console.log("Error occur when delete movie " + err);
   }
 };
+
+//edit movie by id
+exports.updatedMovieById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const movieRecord = await movieModel.findById({ _id: id });
+    cloudinary.uploader.destroy(
+      movieRecord.cloudinary_id,
+      { resource_type: "video" },
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
+      }
+    );
+    cloudinary.uploader.upload(
+      req.file.path,
+      {
+        resource_type: "video",
+        folder: "movie",
+      },
+      async (err, result) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        }
+        const updatedMovie = {
+          title: req.body.title,
+          description: req.body.description,
+          genre: req.body.genre,
+          video: req.file.originalname,
+          videourl: result.url,
+          cloudinary_id: result.public_id,
+        };
+        const updated = await movieModel.findByIdAndUpdate(
+          { _id: id },
+          updatedMovie,
+          { new: true }
+        );
+        res.status(200).json({
+          message: "updated",
+          updated,
+        });
+      }
+    );
+  } catch (err) {
+    res.status(500).json({
+      message: "Error occur when update movie",
+      err,
+    });
+    console.log("Error occur when update movie " + err);
+  }
+};
+
+
+exports.readByParameters = async(req,res)=>{
+      try{
+          const q = req.params.q;
+          const read = await movieModel.find(
+              {
+                  '$or':[
+                      {'title':{$regex:q , $options:'i'}},
+                      {'description':{$regex:q , $options:'i'}},
+                      {'genre':{$regex:q , $options:'i'}}
+                  ]
+              }
+          )
+          if(read.length===0){
+            return res.status(400).send('No result found')
+          }
+          res.status(200).send(read)
+          console.log('Search movies '+ read)
+      }catch(err){
+          res.status(500).json({
+              message:'Error occurs when search',
+              err
+          })
+          console.log('Error occurs when search ',err)
+      }
+  }
+  

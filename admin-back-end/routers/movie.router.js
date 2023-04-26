@@ -1,5 +1,6 @@
 const route = require('express').Router()
-const { uploadMovie, readAll, readById, deleteById } = require('../controllers/movie.controller')
+const { uploadMovie, readAllMovies, readMovieById, deleteMovieById, updatedMovieById, readByParameters } = require('../controllers/movie.controller')
+const { single } = require('../lib/multer')
 const storage = require('../lib/multer')
 const auth = require('../middleware/auth')
 
@@ -7,13 +8,19 @@ const auth = require('../middleware/auth')
 route.post('/upload',auth,storage.single('file'),uploadMovie)
 
 //list all movies
-route.get('/read',readAll)
+route.get('/read',readAllMovies)
 
 //list movie by id
-route.get('/:id',readById)
+route.get('/:id',readMovieById)
+
+route.get('/search/:q',readByParameters)
 
 //delete movies
-route.delete('/:id',auth,deleteById)
+route.delete('/:id',auth,deleteMovieById)
+
+route.patch('/:id',auth,storage.single('file'),updatedMovieById)
+
+
 
 
 module.exports = route
