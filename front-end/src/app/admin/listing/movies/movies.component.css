@@ -21,7 +21,11 @@
   height: 20px;
   overflow: hidden;
 }
-
+video:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  cursor:pointer;
+}
 
 
 

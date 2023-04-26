@@ -1,18 +1,16 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #070720; height: 70px;">
+<nav class="navbar navbar-expand-lg sticky" style="background-color: #070720; height: 70px;">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <h2>
-                <a href="index.html" class="logo px-4"><i class="fa fa-user me-4"></i>Profile</a>
-            </h2>
-        </li>
+          <div class="header__logo">
+              <span style="color:white">Movie<span style="color: #e53637">Flix</span> </span>
+          </div>
       </ul>
       <form class="form-inline my-2  mx-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0" type="submit" style="background-color: #e53637; border:none ;" (click)="onSearch()">Search</button>
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="border-radius: 0">
+        <span class="btn btn-success my-2 my-sm-0" type="submit" style="background-color: #e53637; border:1px solid #e53637; border-radius: 0">Search</span>
         <button class="btn btn-success mx-4 my-sm-0" 
         type="submit" 
-        style="background-color: #e53637; border:none ;" 
+        style="background-color: #e53637; border:none; border-radius: 0;" 
         *ngIf="_authService.signedIn()"
         (click)="_authService.signout()">Sign Out</button>
       </form>

@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit{
       case this.pages.upload:{
         type = UploadComponent
       }
+      
     }
     return type
   }

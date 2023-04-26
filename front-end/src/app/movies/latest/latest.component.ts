@@ -28,6 +28,8 @@ export class LatestComponent implements OnInit , OnDestroy {
         this.movies = movie
         this.loader = false
         console.log(this.movies);
+      },err=>{
+        console.log(err);
       })
     }
 

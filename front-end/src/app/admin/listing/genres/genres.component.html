@@ -1,7 +1,18 @@
 <div *ngIf="loader" id="preloder">
     <div class="loader"></div>
 </div>
-<div class="container mt-5 mb-5 mx-6">
+<ng-template #noData>
+    <div class="container mt-5 mb-5 mx-2">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="row p-2 border rounded" style="background-color: #070720;">
+                    <h3 style="color:white">No any genre is exists</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<div class="container mt-5 mb-5 mx-6" *ngIf="genres.length!=0; else noData">
     <div class="d-flex justify-content-center row">
         <div class="col-md-7" *ngFor="let genre of genres">
             <div class="row p-2  border rounded">

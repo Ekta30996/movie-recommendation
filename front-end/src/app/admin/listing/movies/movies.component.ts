@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/movie.interface';
 import { MoviesService } from 'src/app/shared/service/movies.service';
 import Swal from 'sweetalert2';
+import { EditMovieComponent } from '../../editing/edit-movie/edit-movie.component';
 
 @Component({
   selector: 'app-movies',
@@ -11,16 +12,17 @@ import Swal from 'sweetalert2';
 })
 export class MoviesComponent implements OnInit , OnDestroy {
 
+ 
   isReadMore = true
+  movie!: Movie
+  movies: Movie[] = []
+  loader:boolean = false
+  subscription !: Subscription
 
   showText() {
      this.isReadMore = !this.isReadMore
   }
-  
-  movies: Movie[] = []
-  loader:boolean = false
 
-  subscription !: Subscription
 
   constructor(public _movieService:MoviesService){}
 
@@ -29,14 +31,13 @@ export class MoviesComponent implements OnInit , OnDestroy {
     this.subscription =  this._movieService.listMovies()
     .subscribe(movie=>{
       this.movies = movie
-      console.log(movie);
-      
       this.loader = false
     },(err)=>{
       console.log(err);
       this.loader = false
     })
   }
+
 
 deleteMovie(id:string){
   Swal.fire({
@@ -65,8 +66,17 @@ deleteMovie(id:string){
   })
 }
 
+editMovie(id:string){
+ this._movieService.getMovieById(id)
+ .subscribe(movie=>{
+  this.movie = movie
+  console.log(this.movie);
+ })
+}
+
+
 ngOnDestroy(): void {
   this.subscription.unsubscribe()
 }
-  
+
 }

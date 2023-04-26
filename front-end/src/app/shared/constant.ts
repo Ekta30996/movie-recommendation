@@ -28,11 +28,19 @@ export const READ_MOVIE_BY_ID_ENDPONT = 'http://localhost:5000/movie/'
 export const READ_GENRE_BY_ID_ENDPONT = 'http://localhost:5000/genre/'
 
 
-//upload movies at ADMIN-SIDE
+//upload movies and genres at ADMIN-SIDE
 export const UPLOAD_GENRE_ENDPOINT = 'http://localhost:5000/genre/upload'
 export const UPLOAD_MOVIE_ENDPOINT = 'http://localhost:5000/movie/upload'
 
 
 //delete movie by id at ADMIN-SIDE
-export const DELETE_GENRE_ENDPOINT = 'http://localhost:5000/genre'
-export const DELETE_MOVIE_ENDPOINT = 'http://localhost:5000/movie'
+export const DELETE_GENRE_ENDPOINT = 'http://localhost:5000/genre/'
+export const DELETE_MOVIE_ENDPOINT = 'http://localhost:5000/movie/'
+
+//edit movie and gener by id at ADMIN-SIDE
+export const EDIT_MOVIE_ENDPOINT = 'http://localhost:5000/movie/'
+export const EDIT_GENRE_ENDPOINT = 'http://localhost:5000/genre/'
+
+
+//search functionality for movie
+export const SERACH_MOVIE_ENDPOINT = 'http://localhost:5000/movie/search/'

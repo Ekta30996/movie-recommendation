@@ -8,4 +8,19 @@ a{
 li a:hover{
     color: #832525;
 }
-
+.header__logo{
+    font-size: 30px;
+    margin-left: 20px;
+    font-weight: 700;
+}
+button{
+    font-weight: 500;
+}
+span{
+    font-weight: 500;
+}
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }

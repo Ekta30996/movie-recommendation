@@ -9,7 +9,7 @@ import { LatestComponent } from './latest/latest.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
-  // {path:'',component:HomePageComponent},
+  {path:'home',component:HomePageComponent},
   {path:'recommend',component:RecommendComponent},
   {path:'favoritelist',component:FavoriteListComponent},
   {path:'watchlist',component:WatchListComponent},

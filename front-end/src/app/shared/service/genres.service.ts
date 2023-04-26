@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, retry, Subject, tap } from 'rxjs';
 import { DELETE_GENRE_ENDPOINT, READ_ALL_GENRE_ENDPOINT, UPLOAD_GENRE_ENDPOINT } from '../constant';
 import { Genre } from '../genre.interface';
 
@@ -10,13 +10,16 @@ import { Genre } from '../genre.interface';
 export class GenresService {
 
   constructor(private http:HttpClient) { }
-
+ 
   uploadGenre(genre:FormData): Observable<Genre>{
     return this.http.post<Genre>(UPLOAD_GENRE_ENDPOINT,genre)
   }
 
   loadGenre():Observable<Genre[]>{
     return this.http.get<Genre[]>(READ_ALL_GENRE_ENDPOINT)
+    .pipe(
+      retry(3),
+      tap((res)=>res))
   }
 
   deleteGenre(id:string):Observable<Genre>{

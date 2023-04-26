@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/shared/auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+ 
   constructor(public _authService:AuthService){}
-  onSearch(){}
 }

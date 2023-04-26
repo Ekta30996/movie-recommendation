@@ -1,7 +1,18 @@
 <div *ngIf="loader" id="preloder">
     <div class="loader"></div>
 </div>
-<div class="container mt-5 mb-5 mx-2" >
+<ng-template #noData>
+    <div class="container mt-5 mb-5 mx-2">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="row p-2 border rounded" style="background-color: #070720;">
+                    <h3 style="color:white">No any movie is exixts</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<div class="container mt-5 mb-5 mx-2" *ngIf="movies.length!=0; else noData">
     <div class="d-flex justify-content-center row"  *ngFor="let movie of movies">
         <div class="col-md-10" *ngFor="let thumb of movie.thumb">
             <div class="row p-2 border rounded" style="background-color: #070720;">
@@ -17,7 +28,7 @@
                         <p  style="color:white">{{movie?.['description']}}<br></p>
                     </div>
                     <span style="font-size: small;" (click)="showText()">
-                        {{ isReadMore ? 'Read More... ': ' Read Less' }}
+                        {{ isReadMore ? 'Read More... ' : ' Read Less' }}
                       </span>
                 </div>
                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
@@ -25,7 +36,7 @@
                         <h4 class="mr-1" style="color:white">Action</h4>
                     </div>
                     <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-success btn-sm" type="button">Edit</button>
+                        <button class="btn btn-success btn-sm" type="button" (click)="editMovie(movie._id)" >Edit</button>
                         <button class="btn btn-danger btn-sm mt-2" type="button" (click)="deleteMovie(movie._id)">Delete</button>
                         <button class="btn btn-primary btn-sm mt-2" type="button">Thumbnail</button>
                     </div>

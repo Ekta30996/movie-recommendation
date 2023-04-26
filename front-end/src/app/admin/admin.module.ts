@@ -12,6 +12,8 @@ import { GenresComponent } from './listing/genres/genres.component';
 import { UploadMovieComponent } from './uploading/upload-movie/upload-movie.component';
 import { UploadGenreComponent } from './uploading/upload-genre/upload-genre.component';
 import { HeaderComponent } from './header/header.component';
+import { EditMovieComponent } from './editing/edit-movie/edit-movie.component';
+import { EditGenreComponent } from './editing/edit-genre/edit-genre.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { HeaderComponent } from './header/header.component';
     GenresComponent,
     UploadMovieComponent,
     UploadGenreComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditMovieComponent,
+    EditGenreComponent
   ],
   imports: [
     CommonModule,

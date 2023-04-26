@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HomePageComponent } from 'src/app/movies/home-page/home-page.component';
 import { RecommendComponent } from 'src/app/movies/recommend/recommend.component';
 import { FavoriteListComponent } from 'src/app/movies/favorite-list/favorite-list.component';
@@ -61,6 +61,4 @@ export class HeaderComponent implements OnInit {
     }
     return type
   }
-
-  
 } 
