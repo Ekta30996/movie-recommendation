@@ -1,1 +1,3 @@
-<router-outlet></router-outlet> 
+<app-header *ngIf="!!_authService.signedIn() && router.url !== '/admin/dashboard'"></app-header>
+<router-outlet></router-outlet>
+<app-footer *ngIf="!!_authService.signedIn() && router.url !== '/admin/dashboard'"></app-footer>

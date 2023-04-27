@@ -1,6 +1,8 @@
 <div id="preloder" *ngIf="loader">
     <div class="loader"></div>
 </div>
+
+<app-search></app-search>
 <section class="product-page spad">
     <div class="container">
         <div class="row">
@@ -19,12 +21,12 @@
                         <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let movie of movies?.[0]?.['movies']" >
                             <div class="product__item" *ngFor="let thumb of movie.thumb">
                                 <div class="product__item__pic">
-                                    <video style="width:300px; height: 250px;" poster="{{thumb.thumburl}}">
-                                        <source src="{{movie.videourl}}">
+                                    <video style="width:300px; height: 250px;" poster="{{thumb?.['thumburl']}}">
+                                        <source src="{{movie?.['videourl']}}">
                                     </video>
                                 </div>
-                                <div class="product__item__text ">
-                                    <div class="text">{{movie.title | uppercase}}</div>
+                                <div class="product__item__text">
+                                    <div class="text">{{movie?.['title'] | titlecase}}</div>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/c
 import { ListComponent } from '../listing/list/list.component';
 import { HomeComponent } from '../home/home.component';
 import { UploadComponent } from '../uploading/upload/upload.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,8 @@ export class DashboardComponent implements OnInit{
     list:'list',
     upload:'upload'
   }
+
+  constructor(public router: Router){}
   ngOnInit(): void {
     
   }

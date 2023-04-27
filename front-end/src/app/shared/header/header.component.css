@@ -1,7 +1,7 @@
 img {
     height: 50px;
   }
-  span {
+  .header__logo {
     text-decoration: none;
     color: white;
     font-size: 25px;
@@ -20,7 +20,7 @@ img {
   }
   .primary {
     background-color: #e53637;
-    padding: 7px;
+    padding: 7px; 
     color: white;
     font-weight: 500;
   }

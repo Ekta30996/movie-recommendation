@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/auth/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditGenreComponent } from './editing/edit-genre/edit-genre.component';
 
 const routes: Routes = [
-  {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]}
+  {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
+  {path:'edit',component:EditGenreComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

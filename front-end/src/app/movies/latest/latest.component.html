@@ -1,6 +1,7 @@
 <div id="preloder" *ngIf="loader">
     <div class="loader"></div>
 </div>
+<app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
 <section class="product-page spad">
     <div class="container">
         <div class="row">
@@ -16,15 +17,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let movie of movies" >
+                        <div class="col-lg-4 col-md-6  col-sm-6 " *ngFor="let movie of movies" >
                             <div class="product__item" *ngFor="let thumb of movie.thumb">
-                                <div class="product__item__pic">
-                                    <video style="width:300px; height: 250px;" poster="{{thumb.thumburl}}">
-                                        <source src="{{movie.videourl}}">
+                                <div class="product__item__pic ">
+                                    <video style="width:300px; height: 250px;" poster="{{thumb?.['thumburl']}}">
+                                        <source src="{{movie?.['videourl']}}">
                                     </video>
                                 </div>
                                 <div class="product__item__text">
-                                    <div class="text">{{movie.title}}</div>
+                                    <div class="text" >{{movie?.['title'] | titlecase}}</div>
                                 </div>
                             </div>
                         </div>

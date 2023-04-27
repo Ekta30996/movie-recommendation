@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { TokenInterceptorService } from './shared/auth/token-interceptor.service';
+import { SharedModule } from './shared/shared.module';
+import { MoviesModule } from './movies/movies.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { TokenInterceptorService } from './shared/auth/token-interceptor.service
   imports: [
     BrowserModule,
     HttpClientModule,
+    SharedModule,
+    MoviesModule, 
     AppRoutingModule
   ],
   providers: [AuthService,

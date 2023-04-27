@@ -27,8 +27,8 @@ export class MoviesService {
   currentMovie = this.passMovieData.asObservable();
 
   //search movie for ADMIN as well as USER
-  searchMovie(data: string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(SERACH_MOVIE_ENDPOINT + `${data}`);
+  searchMovie(q: string): Observable<Movie[]> {
+    return this.http.get<Movie[]>(SERACH_MOVIE_ENDPOINT + `${q}`);
   }
 
   //for ADMIN as well as USER

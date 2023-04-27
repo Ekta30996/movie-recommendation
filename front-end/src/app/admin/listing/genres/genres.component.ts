@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { GenresService } from 'src/app/shared/service/genres.service';
 import Swal from 'sweetalert2';
+import { EditGenreComponent } from '../../editing/edit-genre/edit-genre.component';
 
 @Component({
   selector: 'app-genres',
@@ -10,9 +11,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./genres.component.css']
 })
   export class GenresComponent implements OnInit , OnDestroy {
+
+    @ViewChild('edit',{read:ViewContainerRef,static:true}) container!:ViewContainerRef
     genres: Genre[] = [];
     loader: boolean = false;
     listGenres$!: Subscription;
+    deleteGenres$!: Subscription;
     constructor(public _genreService: GenresService) {}
   
     ngOnInit(): void {
@@ -56,6 +60,12 @@ import Swal from 'sweetalert2';
         }
       });
     }
+    
+    onCreateComponent(){
+      this.container.clear()
+      this.container.createComponent(EditGenreComponent)
+    }
+
     ngOnDestroy(): void {
       this.listGenres$.unsubscribe();
     }

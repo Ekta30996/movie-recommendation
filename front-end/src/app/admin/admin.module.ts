@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListComponent } from './listing/list/list.component';
@@ -33,6 +34,7 @@ import { EditGenreComponent } from './editing/edit-genre/edit-genre.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    
     AdminRoutingModule
   ],
 })
