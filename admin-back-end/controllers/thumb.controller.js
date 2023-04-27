@@ -8,7 +8,8 @@ exports.uploadThumb = async(req,res)=>{
         resource_type:'image',
         folder:'thumb',
         transformation: [
-            { width: 1350, height: 650}
+            { width: 1350, height: 650},
+            {quality:70}
         ]
     },
     async (err,result)=>{
