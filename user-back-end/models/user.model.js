@@ -25,15 +25,15 @@ const userSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },  
-    genres:[{
+    genrelist:[{
         type:mongoose.Types.ObjectId,
         ref:'genre'
     }],
-    watches:[{
+    watchlist:[{
         type:mongoose.Types.ObjectId,
         ref:'video'
     }],
-    wishes:[{
+    favoritelist:[{
         type:mongoose.Types.ObjectId,
         ref:'video'
     }]
