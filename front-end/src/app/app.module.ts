@@ -9,6 +9,7 @@ import { AuthGuard } from './shared/auth/auth.guard';
 import { TokenInterceptorService } from './shared/auth/token-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { MoviesModule } from './movies/movies.module';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { MoviesModule } from './movies/movies.module';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true,
-    },],
+    },
+    { provide: LocationStrategy, useClass: PathLocationStrategy }
+  ],
   bootstrap: [AppComponent],
 
 })

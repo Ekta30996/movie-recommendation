@@ -1,0 +1,10 @@
+.anime__video__player{
+    width:600px;
+}
+.limitTextHeight {
+    height: 50px;
+    overflow: hidden;
+}
+span{
+    cursor: pointer;
+}

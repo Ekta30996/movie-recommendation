@@ -1,0 +1,87 @@
+<div class="container py-4" *ngIf="!isWatchNow ; else yesWatchNow">
+  <div class="product__page__content">
+    <div class="product__page__title">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="section-title">
+            <h4>Movie Details</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="anime__details__content">
+    <div class="row" *ngIf="movie">
+      <div class="col-lg-3">
+        <div class="anime__details__pic" *ngFor="let thumb of movie.thumb">
+          <video
+            poster="{{thumb?.['thumburl']}}"
+            style="width: 500px; height: 300px"
+          >
+            <source src="{{ movie['videourl'] }}" />
+          </video>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="anime__details__text">
+          <div class="anime__details__title">
+            <h3>{{ movie['title'] | uppercase }}</h3>
+          </div>
+          <div [ngClass]="{ limitTextHeight: isReadMore }">
+            <p style="color: white">{{ movie['description'] }}<br /></p>
+          </div>
+          <span style="font-size: medium; color: #e53637" (click)="showText()">
+            {{ isReadMore ? "Read More... " : " Read Less" }}
+          </span>
+          <div class="anime__details__widget">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <ul>
+                  <li><span>Genre:</span> {{ movie['genre'] }}</li>
+                  <li>
+                    <span>Date aired:</span> {{ movie['uploadedat'] | date }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="anime__details__btn">
+            <a
+              class="follow-btn"
+              *ngIf="!addToFavorite"
+              (click)="addFavoriteList(movie._id)"
+              ><i class="fa fa-star-o"></i
+            ></a>
+            <a
+              class="follow-btn"
+              *ngIf="addToFavorite"
+              (click)="addFavoriteList(movie._id)"
+              ><i class="fa fa-star"></i
+            ></a>
+            <a
+              class="follow-btn"
+              *ngIf="!addToWatch"
+              (click)="addWatchList(movie._id)"
+              ><i class="fa fa-bookmark-o"></i
+            ></a>
+            <a
+              class="follow-btn"
+              *ngIf="addToWatch"
+              (click)="addWatchList(movie._id)"
+              ><i class="fa fa-bookmark"></i
+            ></a>
+            <button class="watch-btn" (click)="sendMovieDeatils()">
+              <span>Watch Now</span>
+              <i class="fa fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- watch now -->
+<ng-template #yesWatchNow>
+  <app-watch-now [watchMovie]="movie"></app-watch-now>
+</ng-template>

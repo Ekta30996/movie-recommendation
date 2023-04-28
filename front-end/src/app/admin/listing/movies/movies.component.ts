@@ -13,7 +13,8 @@ import { EditMovieComponent } from '../../editing/edit-movie/edit-movie.componen
 export class MoviesComponent implements OnInit , OnDestroy {
 
  
-  isReadMore = true
+  isReadMore:boolean = true
+  isEdit:boolean = false
   movie!: Movie
   movies: Movie[] = []
   loader:boolean = false
@@ -31,6 +32,8 @@ export class MoviesComponent implements OnInit , OnDestroy {
     this.subscription =  this._movieService.listMovies()
     .subscribe(movie=>{
       this.movies = movie
+      console.log(this.movies);
+      
       this.loader = false
     },(err)=>{
       console.log(err);
@@ -52,6 +55,7 @@ deleteMovie(id:string){
     if (result.isConfirmed) {
       this._movieService.deleteMovie(id)
       .subscribe(movie=>{
+        console.log(movie);
         this.loader = false
       },err=>{
         console.log(err);
@@ -66,14 +70,16 @@ deleteMovie(id:string){
   })
 }
 
-editMovie(id:string){
- this._movieService.getMovieById(id)
- .subscribe(movie=>{
-  this.movie = movie
-  console.log(this.movie);
- })
+editMovie(id:string)
+{
+  this.isEdit = true
+  this._movieService.getMovieById(id)
+  .subscribe(movie=>{
+    this.movie=movie
+    console.log(this.movie);
+    
+  })
 }
-
 
 ngOnDestroy(): void {
   this.subscription.unsubscribe()

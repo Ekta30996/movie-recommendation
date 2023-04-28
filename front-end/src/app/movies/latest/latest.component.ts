@@ -1,6 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime, distinctUntilChanged, filter, Subject, Subscription, takeUntil } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  Subject,
+  Subscription,
+  takeUntil,
+} from 'rxjs';
 import { Movie } from 'src/app/shared/movie.interface';
 import { MoviesService } from 'src/app/shared/service/movies.service';
 
@@ -48,16 +55,16 @@ export class LatestComponent implements OnInit, OnDestroy {
 
   onSearchApi(data: string) {
     const q = data;
-    if(q.length===0){
-      return
+    if (q.length === 0) {
+      return;
     }
-    this._movieService.searchMovie(q)
-    .pipe(debounceTime(100),
-         distinctUntilChanged())
-    .subscribe((movie) => {
-      console.log(movie);
-      this.movies = movie;
-    });
+    this._movieService
+      .searchMovie(q)
+      .pipe(debounceTime(100), distinctUntilChanged())
+      .subscribe((movie) => {
+        console.log(movie);
+        this.movies = movie;
+      });
   }
 
   getMovie(id: string) {
@@ -75,6 +82,5 @@ export class LatestComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-    // this.paramSubscription.unsubscribe()
   }
 }

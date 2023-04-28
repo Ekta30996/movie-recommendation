@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
               timer: 4000,
             });
             localStorage.setItem('token', res['token']);
-            this.router.navigate(['/movies'])
+            this.router.navigate(['/movies/home'])
           }
           
         }  

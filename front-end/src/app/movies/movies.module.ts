@@ -8,6 +8,8 @@ import { RecommendComponent } from './recommend/recommend.component';
 import { FavoriteListComponent } from './favorite-list/favorite-list.component';
 import { WatchListComponent } from './watch-list/watch-list.component';
 import { LatestComponent } from './latest/latest.component';
+import { DetailsComponent } from './details/details.component';
+import { WatchNowComponent } from './watch-now/watch-now.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { LatestComponent } from './latest/latest.component';
     FavoriteListComponent,
     WatchListComponent,
     LatestComponent,
+    DetailsComponent,
+    WatchNowComponent,
   ],
   imports: [
     CommonModule, 

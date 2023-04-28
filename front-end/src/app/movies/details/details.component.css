@@ -1,0 +1,7 @@
+.limitTextHeight {
+  height: 50px;
+  overflow: hidden;
+}
+span:hover {
+  cursor: pointer;
+}

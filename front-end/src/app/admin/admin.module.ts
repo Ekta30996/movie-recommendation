@@ -15,6 +15,7 @@ import { UploadGenreComponent } from './uploading/upload-genre/upload-genre.comp
 import { HeaderComponent } from './header/header.component';
 import { EditMovieComponent } from './editing/edit-movie/edit-movie.component';
 import { EditGenreComponent } from './editing/edit-genre/edit-genre.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EditGenreComponent } from './editing/edit-genre/edit-genre.component';
     UploadGenreComponent,
     HeaderComponent,
     EditMovieComponent,
-    EditGenreComponent
+    EditGenreComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

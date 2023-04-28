@@ -1,22 +1,23 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { GenresService } from 'src/app/shared/service/genres.service';
 import Swal from 'sweetalert2';
-import { EditGenreComponent } from '../../editing/edit-genre/edit-genre.component';
 
 @Component({
   selector: 'app-genres',
   templateUrl: './genres.component.html',
   styleUrls: ['./genres.component.css']
 })
-  export class GenresComponent implements OnInit , OnDestroy {
+  export class GenresComponent implements OnInit , OnDestroy  {
 
-    @ViewChild('edit',{read:ViewContainerRef,static:true}) container!:ViewContainerRef
+
     genres: Genre[] = [];
+    genreById!:Genre
     loader: boolean = false;
     listGenres$!: Subscription;
-    deleteGenres$!: Subscription;
+    isEdit:boolean = false;
+
     constructor(public _genreService: GenresService) {}
   
     ngOnInit(): void {
@@ -24,7 +25,7 @@ import { EditGenreComponent } from '../../editing/edit-genre/edit-genre.componen
       this.listGenres$ = this._genreService.loadGenre()
       .subscribe((genre) => {
           this.genres = genre;
-          console.log(genre);
+          console.log(this.genres);
           this.loader = false;
         },
         (err) => {
@@ -49,7 +50,7 @@ import { EditGenreComponent } from '../../editing/edit-genre/edit-genre.componen
           this._genreService.deleteGenre(id)
           .subscribe(
             (genre) => {
-              this.loader = false
+              this.loader = false              
             },
             (err) => {  
               console.log(err)
@@ -60,12 +61,17 @@ import { EditGenreComponent } from '../../editing/edit-genre/edit-genre.componen
         }
       });
     }
-    
-    onCreateComponent(){
-      this.container.clear()
-      this.container.createComponent(EditGenreComponent)
-    }
 
+  
+    onGetGenreById(id:string){
+      this.isEdit = true;
+      this._genreService.getGenreById(id)
+      .subscribe(genre=>{
+        this.genreById = genre
+        console.log('edit click',this.genreById);
+        
+      })
+    }
     ngOnDestroy(): void {
       this.listGenres$.unsubscribe();
     }

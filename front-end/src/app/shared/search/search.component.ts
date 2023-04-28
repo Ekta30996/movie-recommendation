@@ -15,12 +15,10 @@ export class SearchComponent implements OnInit {
   @Output() searchTextChanged: EventEmitter<Event> = new EventEmitter<Event>()
 
   ngOnInit(): void {
-    // let query = this.activatedRoute.snapshot.paramMap.get('q')
-    // console.log(query);
+ 
   }
 
 onSearchTextChanged(){
   this.searchTextChanged.emit(this.enteredSearchValue)
-  // console.log(this.searchTextChanged);
 }
 }

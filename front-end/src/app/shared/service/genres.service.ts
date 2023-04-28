@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry, Subject, tap } from 'rxjs';
-import { DELETE_GENRE_ENDPOINT, READ_ALL_GENRE_ENDPOINT, UPLOAD_GENRE_ENDPOINT } from '../constant';
+import { DELETE_GENRE_ENDPOINT, READ_ALL_GENRE_ENDPOINT, READ_GENRE_BY_ID_ENDPONT, UPLOAD_GENRE_ENDPOINT } from '../constant';
 import { Genre } from '../genre.interface';
 
 @Injectable({
@@ -23,6 +23,10 @@ export class GenresService {
   }
 
   deleteGenre(id:string):Observable<Genre>{
-    return this.http.delete<Genre>(DELETE_GENRE_ENDPOINT+`/${id}`)
+    return this.http.delete<Genre>(DELETE_GENRE_ENDPOINT+`${id}`)
+  }
+
+  getGenreById(id:string):Observable<Genre>{
+    return this.http.get<Genre>(READ_GENRE_BY_ID_ENDPONT+`${id}`)
   }
 }

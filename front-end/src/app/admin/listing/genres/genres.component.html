@@ -12,25 +12,29 @@
         </div>
     </div>
 </ng-template>
-<div class="container mt-5 mb-5 mx-6" *ngIf="genres.length!=0; else noData">
-    <div class="d-flex justify-content-center row">
-        <div class="col-md-7" *ngFor="let genre of genres">
-            <div class="row p-2  border rounded">
-                <div class="col-md-3 mt-1">
-                    <img class="img-fluid img-responsive rounded product-image " 
-                    src="{{genre?.['genreurl']}}" 
-                    style="width: 100px; height: 100px;">
-                    <h5 style="color:white ;text-transform: capitalize;" class="px-2">{{genre?.['genre'] }}</h5>
-                </div>
-                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                    <h4 class="mr-1" style="color:white">Action</h4>
-                    <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-success btn-sm" type="button" (click)="onCreateComponent()">Edit</button>
-                        <button class="btn btn-danger btn-sm mt-2" type="button" (click)="onDeleteGenre(genre['_id'])">Delete</button>
+<ng-container *ngIf="!isEdit">
+    <div class="container mt-5 mb-5 mx-6" *ngIf="genres.length!=0 ; else noData" >
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-7" *ngFor="let genre of genres">
+                <div class="row p-2  border rounded">
+                    <div class="col-md-3 mt-1">
+                        <img class="img-fluid img-responsive rounded product-image " 
+                        src="{{genre?.['genreurl']}}" 
+                        style="width: 100px; height: 100px;">
+                        <h5 style="color:white ;text-transform: capitalize;" class="px-2">{{genre?.['genre'] }}</h5>
+                    </div>
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <h4 class="mr-1" style="color:white">Action</h4>
+                        <div class="d-flex flex-column mt-4">
+                            <button class="btn btn-success btn-sm" type="button" (click)="onGetGenreById(genre['_id'])">Edit</button>
+                            <button class="btn btn-danger btn-sm mt-2" type="button" (click)="onDeleteGenre(genre['_id'])">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<ng-container #edit></ng-container>
+</ng-container>
+<ng-container *ngIf="isEdit">
+    <app-edit-genre [genreDetail]="genreById"></app-edit-genre>
+</ng-container>

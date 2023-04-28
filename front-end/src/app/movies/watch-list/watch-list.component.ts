@@ -21,7 +21,7 @@ export class WatchListComponent implements OnInit , OnDestroy {
     .subscribe(movie=>{
       this.watchlist = movie
       this.loader = false
-      console.log(movie);
+      // console.log(movie);
       console.log(this.watchlist);
     })
   }
