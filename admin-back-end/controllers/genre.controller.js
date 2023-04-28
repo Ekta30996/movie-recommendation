@@ -51,7 +51,7 @@ exports.readGenreById = async (req, res) => {
   try {
     const id = req.params.id;
     const read = await genreModel.find({ _id: id });
-    res.status(200).send(read);
+    res.status(200).send(read[0]);
     console.log(read);
   } catch (err) {
     res.status(500).send(err);
