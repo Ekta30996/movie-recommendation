@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
         .status(400)
         .json({ message: 'Password is minimum to 8 characters'});
     }
-    const hashPassword = await bcrypt.hash(password, 10);
+    const hashPassword = await bcrypt.hash(password, process.env.SALT);
 
     //3) Create new user
     const newUser = await userModel.create({

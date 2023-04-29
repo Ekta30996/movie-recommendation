@@ -4,14 +4,17 @@ const movieSchema = new mongoose.Schema({
     title:{
         type:String,
         trim:true,
+        match:[new RegExp(/^[A-Za-z+\s][a-z0-9+\s]{4,20}$/),'Movie title must start with letters']
     },
     description:{
         type:String,
         trim:true,
+        match:[new RegExp(/^([A-Za-z0-9+\s]||[a-z+\s()?&-_]{100,5000})$/),'movie description is invalid']
     },
     genre:{
         type:String,
         trim:true,
+        match:[new RegExp(/^[A-Za-z]{4,20}$/),'genre should conatains characters only ']
     },
     video:{
         type:String,

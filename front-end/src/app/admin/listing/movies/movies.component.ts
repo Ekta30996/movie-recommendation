@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/movie.interface';
 import { MoviesService } from 'src/app/shared/service/movies.service';
 import Swal from 'sweetalert2';
-import { EditMovieComponent } from '../../editing/edit-movie/edit-movie.component';
 
 @Component({
   selector: 'app-movies',

@@ -11,7 +11,7 @@ exports.uploadMovie = (req, res) => {
       resource_type: "video",
       folder: "movie",
       transformation:[
-        {quality:70},
+        {quality:200},
         {async:true}
       ]
     },
@@ -79,7 +79,7 @@ exports.deleteMovieById = async (req, res) => {
     const movie = await movieModel.findById(req.params.id);
      cloudinary.uploader.destroy(
       movie.cloudinary_id,
-      { resource_type: "video" },
+      { resource_type: 'video' },
       (err, result) => {
         if (err) {
           console.log(err);
@@ -88,6 +88,19 @@ exports.deleteMovieById = async (req, res) => {
         }
       }
     );
+    const thumb = movie.thumb
+    thumb.find(id=> thumb_clodinary_id =  id.cloudinary_id)
+    cloudinary.uploader.destroy(
+      thumb_clodinary_id,
+      {resource_type:'image'},
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
+      }
+    )
     const deleted = await movie.deleteOne(movie);
 
     res.status(200).json({

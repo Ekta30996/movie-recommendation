@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, retry, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, retry, tap, throwError } from 'rxjs';
 import {
   ADD_FAVORITELIST,
   ADD_WATCHLIST,
@@ -80,9 +80,31 @@ export class MoviesService {
   }
 
   //upload movie
-  uploadMovie(movie: FormData): Observable<Movie> {
-    return this.http.post<Movie>(UPLOAD_MOVIE_ENDPOINT, movie);
+  uploadMovie(movie: FormData): Observable<any> {
+    return this.http.post<any>(UPLOAD_MOVIE_ENDPOINT, movie, {
+      reportProgress: true,
+      observe: 'events',
+    })
+    .pipe(catchError(this.errorMgmt));
   }
+
+
+  errorMgmt(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(() => {
+      return errorMessage;
+    });
+  }
+
+
 
   //edit movie
   editMovie(id: string, movie: FormData): Observable<Movie> {

@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         trim:true,
+        maxlength:8,
     },
     isverified:{
         type:Boolean,
@@ -31,11 +32,11 @@ const userSchema = new mongoose.Schema({
     }],
     watchlist:[{
         type:mongoose.Types.ObjectId,
-        ref:'video'
+        ref:'movie'
     }],
     favoritelist:[{
         type:mongoose.Types.ObjectId,
-        ref:'video'
+        ref:'movie'
     }]
 },{timestamps:true})
 
