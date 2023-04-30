@@ -1,8 +1,9 @@
 const movieModel = require('../models/movie.model')
 const cloudinary = require('../lib/cloudinary')
-// const path = require('path');
+
 exports.uploadThumb = async(req,res)=>{
     const movie = req.params.id
+
     cloudinary.uploader.upload(req.file.path,
     {
         resource_type:'image',

@@ -27,9 +27,11 @@ exports.uploadGenre = (req, res) => {
           status: "SUCCESS",
           newGenre,
         });
+        console.log('new genre'+ newGenre);
       } catch (err) {
         res.status(500).send(err);
       }
+      console.log('Error occurs when upload genre');
     }
   );
 };
@@ -65,7 +67,7 @@ exports.deleteGenreById = async (req, res) => {
     const genre = await genreModel.findById(req.params.id);
     cloudinary.uploader.destroy(
       genre.cloudinary_id,
-      { resource_type: "image" },
+      { resource_type: 'image' },
       (err, result) => {
         if (err) {
           console.log(err);
@@ -103,7 +105,7 @@ exports.updatedGenreById = async (req, res) => {
           console.log(err);
         } else {
           console.log(result);
-        }x
+        }
       }
     );
     cloudinary.uploader.upload(

@@ -88,19 +88,6 @@ exports.deleteMovieById = async (req, res) => {
         }
       }
     );
-    const thumb = movie.thumb
-    thumb.find(id=> thumb_clodinary_id =  id.cloudinary_id)
-    cloudinary.uploader.destroy(
-      thumb_clodinary_id,
-      {resource_type:'image'},
-      (err, result) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(result);
-        }
-      }
-    )
     const deleted = await movie.deleteOne(movie);
 
     res.status(200).json({

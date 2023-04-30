@@ -9,7 +9,7 @@ const movieSchema = new mongoose.Schema({
     description:{
         type:String,
         trim:true,
-        match:[new RegExp(/^([A-Za-z0-9+\s]||[a-z+\s()?&-_]{100,5000})$/),'movie description is invalid']
+        match:[new RegExp(/((.+)((\r?\n.+)*){100,5000})$/),'movie description is invalid']
     },
     genre:{
         type:String,

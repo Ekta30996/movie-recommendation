@@ -5,7 +5,7 @@ const genreSchema = new mongoose.Schema({
         type:String,
         trim:true,
         require,
-        match:[new RegExp(/^[A-Za-z]{4,20}$/),'genre should conatains characters only ']
+        match:[new RegExp(/^[A-Za-z\s]+[a-z]{4,20}$/),'genre should conatains characters only ']
 
     },
     genreimg:{
