@@ -1,12 +1,3 @@
-<div id="preloder" *ngIf="loader">
-  <div class="loader"></div>
-</div>
-<ng-container>
-  <div class="progress form-group mt-3" *ngIf="progress > 0"  style="width: 900px;">
-    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
-  </div>
-</div>  
-</ng-container>
 <section class="login spad">
   <div class="container">
     <div class="row">
@@ -21,13 +12,16 @@
                 placeholder=" Genre type"
                 name="genre"
                 formControlName="genre"
+                pattern="[A-Za-z\s]+[a-z]"
                 required
               />
               <div *ngIf="genre && (genre.valid || genre.touched)">
                 <small *ngIf="genre.errors?.['required']" class="text-danger"
                   >Genre is required</small
                 >
-                <!-- <small *ngIf="genre.errors?.['email']" class="text-danger">Email is invalid</small> -->
+                <small *ngIf="genre.errors?.['pattern']" class="text-danger">Genre is invalid</small>
+                <small *ngIf="genre.errors?.['minlength']" class="text-danger">Genre is minimun 4 characters</small>
+                <small *ngIf="genre.errors?.['maxlength']" class="text-danger">Genre is maximum 20 characters</small>
               </div>
             </div>
             <div
@@ -49,7 +43,7 @@
               />
               <div *ngIf="file && (file.valid || file.touched)">
                 <small *ngIf="file.errors?.['required']" class="text-danger"
-                  >genre file is required</small
+                  >Genre file is required</small
                 >
                 <small *ngIf="file.errors?.['accept']" class="text-danger"
                   >It should image file</small
@@ -70,7 +64,7 @@
               type="submit"
               class="site-btn"
               [disabled]="!uploadForm.valid"
-              (click)="onUpload()"
+              (click)="onEdit(genreDetail['_id'])"
             >
               Edit Genre
             </button>
@@ -80,14 +74,42 @@
       <div class="col-lg-6">
         <div class="login__register">
           <h3>Preview</h3>
-          <ng-container *ngIf="!isEdit">
-            <!-- <img src="{{genreDetail['genreurl']}}" alt="" style="width:200px; height:200px"> -->
+          <ng-container *ngIf="inProgress">
+            <div  class="progress">
+              <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }"
+              >
+                {{ progress }}%
+              </div>
+            </div>  
           </ng-container>
-          <ng-container *ngIf="isEdit && genreDetail">
-            <img src="{{genreDetail['genreurl']}}" alt="" style="width:200px; height:200px">
+          <!-- Shows when upload genre -->
+          <ng-container *ngIf="imgURL && !isEdit  ||  inProgress && !isSelectedInEditMode ">
+            <img src="{{imgURL}}" alt="" style="width:100px; height:100px; margin-top: 30px;">
+          </ng-container>
+
+          <!-- Shows when no any file is selected -->
+          <ng-container *ngIf="!imgURL && !isEdit">
+            <h6 style="width:100px; height:100px; margin-top: 30px; color:white">No image selected</h6>
+          </ng-container>
+
+          <!-- Shows when in edit mode and genreDetails is not an empty  -->
+          <ng-container *ngIf="isEdit && genreDetail && !imgURL && !inProgress && !isSelectedInEditMode">
+            <img src="{{genreDetail['genreurl']}}" alt="" style="width:100px; height:100px; margin-top: 30px;" >
+          </ng-container>
+
+          <!--  -->
+          <ng-container *ngIf="isEdit && imgURL || inProgress && isSelectedInEditMode ">
+            <img src="{{imgURL}}" alt="" style="width:100px; height:100px; margin-top: 30px;">
           </ng-container>
         </div>
       </div>
     </div>
   </div>
 </section>
+

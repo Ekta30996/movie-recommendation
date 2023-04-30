@@ -15,6 +15,7 @@ import { UploadGenreComponent } from './uploading/upload-genre/upload-genre.comp
 import { HeaderComponent } from './header/header.component';
 
 import { SearchComponent } from './search/search.component';
+import { UploadThumbComponent } from './uploading/upload-thumb/upload-thumb.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SearchComponent } from './search/search.component';
     UploadMovieComponent,
     UploadGenreComponent,
     HeaderComponent,
-    SearchComponent
+    SearchComponent,
+    UploadThumbComponent
   ],
   imports: [
     CommonModule,

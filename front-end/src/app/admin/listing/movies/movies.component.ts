@@ -14,6 +14,7 @@ export class MoviesComponent implements OnInit , OnDestroy {
  
   isReadMore:boolean = true
   isEdit:boolean = false
+  addThumb:boolean = false
   movie!: Movie
   movies: Movie[] = []
   loader:boolean = false
@@ -62,7 +63,7 @@ deleteMovie(id:string){
       })
       Swal.fire(
         'Deleted!',
-        'Your file has been deleted.',
+        'Movie has been deleted.',
         'success'
       )
     }
@@ -75,8 +76,14 @@ editMovie(id:string)
   this._movieService.getMovieById(id)
   .subscribe(movie=>{
     this.movie=movie
-    console.log(this.movie);
-    
+  })
+}
+
+uploadThumb(id:string){
+  this.addThumb = true
+  this._movieService.getMovieById(id)
+  .subscribe(movie=>{
+    this.movie=movie
   })
 }
 

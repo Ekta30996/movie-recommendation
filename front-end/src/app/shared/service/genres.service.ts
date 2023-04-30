@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, Subject, tap, throwError } from 'rxjs';
-import { DELETE_GENRE_ENDPOINT, READ_ALL_GENRE_ENDPOINT, READ_GENRE_BY_ID_ENDPONT, UPLOAD_GENRE_ENDPOINT } from '../constant';
+import { ADD_GENRE_ENDPOINT, DELETE_GENRE_ENDPOINT, EDIT_GENRE_ENDPOINT, READ_ALL_GENRE_ENDPOINT, READ_GENRE_BY_ID_ENDPONT, UPLOAD_GENRE_ENDPOINT } from '../constant';
 import { Genre } from '../genre.interface';
 
 @Injectable({
@@ -11,12 +11,23 @@ export class GenresService {
 
   constructor(private http:HttpClient) { }
  
-  uploadGenre(genre:FormData): Observable<any>{
-    return this.http.post<any>(UPLOAD_GENRE_ENDPOINT , genre , {
+  uploadGenre(genre:FormData): Observable<HttpEvent<Genre>>{
+     return this.http.post<Genre>(UPLOAD_GENRE_ENDPOINT , genre ,{
       reportProgress: true,
-      observe: 'events',
-    })
-    .pipe(catchError(this.errorMgmt));
+      observe: 'events'
+    }).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
+  
+  editGenre(id:string,genre:FormData): Observable<HttpEvent<Genre>>{
+    return this.http.patch<Genre>(EDIT_GENRE_ENDPOINT + `${id}` , genre ,{
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      catchError(this.errorMgmt)
+    )
   }
 
   errorMgmt(error: HttpErrorResponse) {
@@ -27,14 +38,11 @@ export class GenresService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      console.log(error);
     }
     console.log(errorMessage);
-    return throwError(() => {
-      return errorMessage;
-    });
+    return throwError(errorMessage);
   }
-
-  
 
   loadGenre():Observable<Genre[]>{
     return this.http.get<Genre[]>(READ_ALL_GENRE_ENDPOINT)
@@ -49,5 +57,11 @@ export class GenresService {
 
   getGenreById(id:string):Observable<Genre>{
     return this.http.get<Genre>(READ_GENRE_BY_ID_ENDPONT+`${id}`)
+  }
+
+
+  addGenre(id:string):Observable<Genre[]>{
+    const body = {id:id}
+    return this.http.post<Genre[]>(ADD_GENRE_ENDPOINT,body)
   }
 }

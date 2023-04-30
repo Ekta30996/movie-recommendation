@@ -26,6 +26,14 @@ video:hover {
   transform: scale(1.1);
   cursor:pointer;
 }
+img:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  cursor:pointer;
+}
+button{
+  width: 100px;
+}
 
 
 

@@ -1,4 +1,4 @@
-import { HttpEventType } from '@angular/common/http';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,9 +18,15 @@ export class UploadMovieComponent implements OnInit , OnChanges {
   @Input() movieDetail!: Movie
   isEdit:boolean = false
   uploadForm!:FormGroup
-  selectedFile!:File
-  genres:Genre[]=[]
+  selectedFile!: File
   progress: number = 0;
+  message:string = ''
+  inProgress:boolean = false
+  videoURL: any;
+  reader = new FileReader();
+  isSelectedInEditMode:boolean = false
+  genres:Genre[]=[]
+  
 
 
   constructor(private fb:FormBuilder,
@@ -30,8 +36,8 @@ export class UploadMovieComponent implements OnInit , OnChanges {
 
   ngOnInit(): void {
     this.uploadForm = this.fb.group({
-      title:['',Validators.required],
-      description:['',Validators.required],
+      title:['',[Validators.required , Validators.minLength(4), Validators.maxLength(20)]],
+      description:['',[Validators.required, Validators.minLength(100), Validators.maxLength(5000)]],
       file:[null,Validators.required],
       genre:['',Validators.required]
     })
@@ -45,18 +51,23 @@ export class UploadMovieComponent implements OnInit , OnChanges {
   onFileSelected(event:Event){
     const target= event.target as HTMLInputElement;
     this.selectedFile = (target.files as FileList)[0];
-    if(this.selectedFile  && this.selectedFile.type === 'video/mp4'){
-      // console.log('correct');
-    }
+    
+    if(this.selectedFile.type ==='video/mp4' || this.selectedFile.type ==='video/mkv')
+    {
+      this.reader.readAsDataURL(this.selectedFile); 
+      this.reader.onload = (_event) => {
+      this.videoURL = this.reader.result; 
+    }}
     else{
       Swal.fire({
         icon: 'error',
-        title: 'file must be .mp4 ',
+        title: 'Only accept video file',
         showConfirmButton: false,
         timer: 4000,
-      })
+      });
       this.uploadForm.reset()
-    }
+      this.videoURL = this.reader.EMPTY
+    }    
   }
 
   get title() {
@@ -80,62 +91,99 @@ export class UploadMovieComponent implements OnInit , OnChanges {
     fd.append('description',this.uploadForm.get('description')?.value)
     fd.append('file',this.selectedFile,this.selectedFile.name)
     fd.append('genre',this.uploadForm.get('genre')?.value)
+
+    this.inProgress = true
     this._movieService.uploadMovie(fd)
-    .subscribe((event: any) => {
-      switch (event.type) {
-        case HttpEventType.Sent:
-          // console.log('Request has been made!');
-          break;
-        case HttpEventType.ResponseHeader:
-          // console.log('Response header has been received!');
-          break;
-        case HttpEventType.UploadProgress:
-          this.progress = Math.round(event.loaded / event.total * 100);
-          console.log(`Uploaded! ${this.progress}%`);
-          break;
-        case HttpEventType.Response:
-          // console.log('User successfully created!', event.body);
-          setTimeout(() => {
-            this.progress = 0;
-          }, 1500);
+    .subscribe(  (event:any) => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.progress = Math.round(100 * event.loaded / event.total);
+        // console.log(this.progress);
+      } else if (event instanceof HttpResponse) {
+        this.message = event.body.message;
+        setTimeout(() => {  
+          this.inProgress = false
+          this.progress = 0;
+          this.videoURL = this.reader.EMPTY
           Swal.fire({
             icon: 'success',
-            title: 'Genre uploaded successfully',
-            showConfirmButton: true,
+            title: 'Movie uploaded successfully!!',
+            showConfirmButton: false,
             timer: 4000,
           });
+        }, 1000);
+        // console.log(this.message);
       }
-      if (event['status'] === 'SUCCESS') {
-        Swal.fire({
-          icon: 'success',
-          title: 'Genre uploaded successfully',
-          showConfirmButton: true,
-          timer: 4000,
-        });
-      }  
+
     },
-    (err)=>{
-      if (err['status'] == '401') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Unauthorized user ',
-          showConfirmButton: false,
-          timer: 4000,
-        });
-      }
-    })
-      this.uploadForm.reset()
+    err => {
+      if(err['status'] === '500')
+      this.progress = 0;
+      this.inProgress = false
+      Swal.fire({
+        icon: 'error',
+        title: 'No intenet connection',
+        showConfirmButton: false,
+        timer: 4000,
+      });
+      this.message = 'Could not upload the file!';
+      this.videoURL = this.reader.EMPTY
+    }); 
+this.uploadForm.reset()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isEdit = true
+    this.isEdit = true    
     this.movieDetail && this.uploadForm.patchValue({title: this.movieDetail.title})
     this.movieDetail && this.uploadForm.patchValue({description: this.movieDetail.description})
-    // this.movieDetail && this.uploadForm.patchValue({file:this.movieDetail.video})
+    this.movieDetail && this.uploadForm.patchValue({genre: this.movieDetail.genre})
+
   }
 
-  onEdit(){
-    console.log('edit');
+  onEdit(id:string){
+    const fd = new FormData()
+    fd.append('title',this.uploadForm.get('title')?.value)
+    fd.append('description',this.uploadForm.get('description')?.value)
+    fd.append('file',this.selectedFile,this.selectedFile.name)
+    fd.append('genre',this.uploadForm.get('genre')?.value)
+
+    this.inProgress = true
+    this.isSelectedInEditMode = true
     
+    this._movieService.editMovie(id,fd).subscribe(
+      (event:any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+          // console.log(this.progress);
+        } else if (event instanceof HttpResponse) {
+          this.message = event.body.message;
+          setTimeout(() => {
+            this.inProgress = false
+            this.progress = 0;
+            this.videoURL = this.reader.EMPTY
+            Swal.fire({
+              icon: 'success',
+              title: 'Movie edited successfully!!',
+              showConfirmButton: false,
+              timer: 4000,
+            });
+          }, 1000);
+          // console.log(this.message);
+        }
+      },
+      err => {
+        if(err['status'] === '500')
+        this.progress = 0;
+        this.inProgress = false
+        Swal.fire({
+          icon: 'error',
+          title: 'No intenet connection',
+          showConfirmButton: false,
+          timer: 4000,
+        });
+        this.message = 'Could not upload the file!';
+        this.videoURL = this.reader.EMPTY
+        console.log(err);
+      }); 
+  this.uploadForm.reset()
   }
 }

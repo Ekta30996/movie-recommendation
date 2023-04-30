@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, retry, tap, throwError } from 'rxjs';
 import {
@@ -80,8 +80,8 @@ export class MoviesService {
   }
 
   //upload movie
-  uploadMovie(movie: FormData): Observable<any> {
-    return this.http.post<any>(UPLOAD_MOVIE_ENDPOINT, movie, {
+  uploadMovie(movie: FormData): Observable<HttpEvent<Movie>> {
+    return this.http.post<Movie>(UPLOAD_MOVIE_ENDPOINT, movie, {
       reportProgress: true,
       observe: 'events',
     })
@@ -107,7 +107,12 @@ export class MoviesService {
 
 
   //edit movie
-  editMovie(id: string, movie: FormData): Observable<Movie> {
-    return this.http.patch<Movie>(EDIT_MOVIE_ENDPOINT + `${id}`, movie);
+  editMovie(id: string, movie: FormData): Observable<HttpEvent<Movie>> {
+    return this.http.patch<Movie>(EDIT_MOVIE_ENDPOINT + `${id}`, movie,{
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      catchError(this.errorMgmt)
+    )
   }
 }
