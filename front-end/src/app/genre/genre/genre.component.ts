@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { GenresService } from 'src/app/shared/service/genres.service';
@@ -8,7 +8,7 @@ import { GenresService } from 'src/app/shared/service/genres.service';
   templateUrl: './genre.component.html',
   styleUrls: ['./genre.component.css']
 })
-export class GenreComponent implements OnInit {
+export class GenreComponent implements OnInit , OnDestroy{
 
   genres: Genre[] = []
   subscription!: Subscription
@@ -36,6 +36,8 @@ export class GenreComponent implements OnInit {
     .subscribe((genre)=>{
       console.log(genre);
     })
-
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 }

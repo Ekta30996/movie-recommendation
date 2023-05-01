@@ -23,7 +23,7 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
       .subscribe((movie) => {
         this.favoritelist = movie;
         this.loader = false;
-        console.log(this.favoritelist);
+        // console.log(this.favoritelist);
       });
   }
 
@@ -41,7 +41,7 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
       .searchMovie(q)
       .pipe(debounceTime(100), distinctUntilChanged())
       .subscribe((movie) => {
-        console.log(movie);
+        // console.log(movie);
         this.favoritelist = movie;
       });
   }

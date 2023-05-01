@@ -23,8 +23,8 @@ export class MoviesService {
   constructor(private http: HttpClient) {}
 
   movie!: Movie;
-  passMovieData = new BehaviorSubject<Movie>(this.movie);
-  currentMovie = this.passMovieData.asObservable();
+  // passMovieData = new BehaviorSubject<Movie>(this.movie);
+  // currentMovie = this.passMovieData.asObservable();
 
   //search movie for ADMIN as well as USER
   searchMovie(q: string): Observable<Movie[]> {
@@ -48,9 +48,9 @@ export class MoviesService {
     return this.http.get<Movie>(READ_MOVIE_BY_ID_ENDPONT + `${id}`);
   }
 
-  passMovieObject(movie: Movie) {
-    this.passMovieData.next(movie);
-  }
+  // passMovieObject(movie: Movie) {
+  //   this.passMovieData.next(movie);
+  // }
 
   //For USER
 

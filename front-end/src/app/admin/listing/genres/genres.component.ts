@@ -25,11 +25,9 @@ import Swal from 'sweetalert2';
       this.listGenres$ = this._genreService.loadGenre()
       .subscribe((genre) => {
           this.genres = genre;
-          console.log(this.genres);
           this.loader = false;
         },
         (err) => {
-          console.log(err);
           this.loader = false;
         }
       );
@@ -68,7 +66,7 @@ import Swal from 'sweetalert2';
       this._genreService.getGenreById(id)
       .subscribe(genre=>{
         this.genreById = genre
-        console.log('edit click',this.genreById);
+        // console.log('edit click',this.genreById);
         
       })
     }

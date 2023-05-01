@@ -91,17 +91,17 @@ export class UploadThumbComponent {
           }
         },
         err => {
-          // if(err['status'] === '500')
-          // this.progress = 0;
-          // this.inProgress = false
-          // Swal.fire({
-          //   icon: 'error',
-          //   title: 'No intenet connection',
-          //   showConfirmButton: false,
-          //   timer: 4000,
-          // });
-          // this.message = 'Could not upload the file!';
-          // this.imgURL = this.reader.EMPTY
+          if(err['status'] === '500')
+          this.progress = 0;
+          this.inProgress = false
+          Swal.fire({
+            icon: 'error',
+            title: 'No intenet connection',
+            showConfirmButton: false,
+            timer: 4000,
+          });
+          this.message = 'Could not upload the file!';
+          this.imgURL = this.reader.EMPTY
           console.log(err);
           
         }); 
@@ -110,49 +110,5 @@ export class UploadThumbComponent {
   
   ngOnChanges(): void {
     this.isAdded = true
-  }
-
-  onEdit(id:string)
-  {
-    // const fd = new FormData()
-    // fd.append('thumb',this.selectedFile,this.selectedFile.name)
-    
-    //   this.inProgress = true
-    //   this.isSelectedInEditMode = true
-      
-    //   this._genreService.editGenre(id,fd).subscribe(
-    //     (event:any) => {
-    //       if (event.type === HttpEventType.UploadProgress) {
-    //         this.progress = Math.round(100 * event.loaded / event.total);
-    //       } else if (event instanceof HttpResponse) {
-    //         this.message = event.body.message;
-    //         setTimeout(() => {
-    //           this.inProgress = false
-    //           this.progress = 0;
-    //           this.imgURL = this.reader.EMPTY
-    //           Swal.fire({
-    //             icon: 'success',
-    //             title: 'Genre edited successfully!!',
-    //             showConfirmButton: false,
-    //             timer: 4000,
-    //           });
-    //         }, 1000);
-    //       }
-    //     },
-    //     err => {
-    //       if(err['status'] === '500')
-    //       this.progress = 0;
-    //       this.inProgress = false
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: 'No intenet connection',
-    //         showConfirmButton: false,
-    //         timer: 4000,
-    //       });
-    //       this.message = 'Could not upload the file!';
-    //       this.imgURL = this.reader.EMPTY
-    //       console.log(err);
-    //     }); 
-    // this.uploadForm.reset()
   }
 }

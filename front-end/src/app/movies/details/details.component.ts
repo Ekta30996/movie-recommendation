@@ -15,6 +15,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   addToWatch: boolean = false;
   addToFavorite: boolean = false;
   paramSubscription!: Subscription;
+  favoriteSubscription!: Subscription;
   isReadMore = true;
   isWatchNow: boolean = false;
 
@@ -27,9 +28,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.paramSubscription = this.activatedRoute.params.subscribe((param) => {
       this.getMovie(param['id']);
     });
-    this._movieService.listFavoritelist().subscribe((res) => {
+
+    this.favoriteSubscription = this._movieService.listFavoritelist().subscribe((res) => {
       this.movies = res;
-      console.log('favorite list' + this.movies);
+      // console.log('favorite list' + this.movies);
     });
   }
 
@@ -40,10 +42,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this._movieService.getMovieById(id).subscribe(
       (res) => {
         this.movie = res;
-        console.log(res);
+        // console.log(res);
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -62,11 +64,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   addFavoriteList(id: string) {
     this._movieService.addToFavoritelist(id).subscribe((res) => {
       this.addToFavorite = !this.addToFavorite;
-      console.log(res);
+      // console.log(res);
     });
   }
 
   ngOnDestroy(): void {
     this.paramSubscription.unsubscribe();
+    this.favoriteSubscription.unsubscribe()
   }
 }

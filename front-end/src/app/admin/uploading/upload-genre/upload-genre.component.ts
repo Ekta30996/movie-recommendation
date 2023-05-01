@@ -166,6 +166,5 @@ export class UploadGenreComponent implements OnInit , OnChanges {
           console.log(err);
         }); 
     this.uploadForm.reset()
-    
   }
 }

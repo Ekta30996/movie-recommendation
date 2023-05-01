@@ -20,11 +20,13 @@
                 <div class="col-md-10" >
                     <div class="row p-2 border rounded" style="background-color: #070720;">
                         <div class="col-md-3 mt-1">
+                            <h6 style="color:white">Movie</h6>
                             <video class="img-fluid img-responsive rounded product-image" style="border-radius: none;" controls>
                                 <source src="{{movie?.['videourl']}}">
                             </video>
                         </div>
                         <div class="col-md-3 mt-1" *ngFor="let t of movie?.['thumb']">
+                            <h6 style="color:white">Thumbnail</h6>
                             <img *ngIf="movie?.['thumb']"  style="width: 210px; height: 135px;" src="{{t?.['thumburl']}}" alt=" No Thumbnail" class="img-fluid img-responsive rounded product-image">
                             <h1 *ngIf="!movie?.['thumb']"  style="width: 210px; height: 135px;"  class="img-fluid img-responsive rounded product-image">No thumbnail</h1>
                         </div>

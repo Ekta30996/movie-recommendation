@@ -1,7 +1,8 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { Movie } from 'src/app/shared/movie.interface';
 import { GenresService } from 'src/app/shared/service/genres.service';
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
   templateUrl: './upload-movie.component.html',
   styleUrls: ['./upload-movie.component.css']
 })
-export class UploadMovieComponent implements OnInit , OnChanges {
+export class UploadMovieComponent implements OnInit , OnChanges , OnDestroy {
 
   @Input() movieDetail!: Movie
   isEdit:boolean = false
@@ -26,7 +27,7 @@ export class UploadMovieComponent implements OnInit , OnChanges {
   reader = new FileReader();
   isSelectedInEditMode:boolean = false
   genres:Genre[]=[]
-  
+  genreSubscription$!: Subscription
 
 
   constructor(private fb:FormBuilder,
@@ -42,7 +43,7 @@ export class UploadMovieComponent implements OnInit , OnChanges {
       genre:['',Validators.required]
     })
 
-    this._genreService.loadGenre()
+    this.genreSubscription$ = this._genreService.loadGenre()
     .subscribe(genre=>{
       this.genres = genre
     })
@@ -185,5 +186,9 @@ this.uploadForm.reset()
         console.log(err);
       }); 
   this.uploadForm.reset()
+  }
+
+  ngOnDestroy(): void {
+    this.genreSubscription$.unsubscribe()
   }
 }

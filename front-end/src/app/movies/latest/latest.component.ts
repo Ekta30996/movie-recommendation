@@ -40,10 +40,10 @@ export class LatestComponent implements OnInit, OnDestroy {
         (movie) => {
           this.movies = movie;
           this.loader = false;
-          console.log(this.movies);
+          // console.log(this.movies);
         },
         (err) => {
-          console.log(err);
+          // console.log(err);
         }
       );
   }
@@ -62,7 +62,7 @@ export class LatestComponent implements OnInit, OnDestroy {
       .searchMovie(q)
       .pipe(debounceTime(100), distinctUntilChanged())
       .subscribe((movie) => {
-        console.log(movie);
+        // console.log(movie);
         this.movies = movie;
       });
   }
@@ -71,10 +71,10 @@ export class LatestComponent implements OnInit, OnDestroy {
     this._movieService.getMovieById(id).subscribe(
       (res) => {
         this.movie = res;
-        console.log(res);
+        // console.log(res);
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }

@@ -18,7 +18,7 @@
             </div>
             <div class="row">
                 <div class="col-3" *ngFor="let genre of genres">
-                    <div class="product__item">
+                    <div class="product__item" [style]=" isClicked ? 'border: 1px solid white ': '' ">
                         <h3 class="mt-2" style="color: white;">{{genre.genre}}</h3>
                         <div class="product__item__pic">
                             <img src="{{genre?.['genreurl']}}" (click)="onClickGenre(genre['_id'])" >
@@ -29,6 +29,7 @@
                     </div>
                 </div>
             </div>
+            <button type="submit" class="site-btn" routerLink="/movies/recommend" >Next</button>
         </div>
     </div>
 </div>

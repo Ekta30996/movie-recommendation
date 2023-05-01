@@ -38,7 +38,7 @@ export class SigninComponent implements OnInit {
           {
             localStorage.setItem('token', res['token']);
             this.router.navigate(['/movies/home'])
-            console.log(res);
+            // console.log(res);
           }
           else if(res['admin']){
             localStorage.setItem('token', res['token']);
