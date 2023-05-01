@@ -1,4 +1,4 @@
-const genreModel = require('../models/genre.model');
+const genreModel = require("../models/genre.model");
 const cloudinary = require("../lib/cloudinary");
 
 //upload genres
@@ -7,7 +7,7 @@ exports.uploadGenre = (req, res) => {
   cloudinary.uploader.upload(
     req.file.path,
     {
-      resource_type: 'image',
+      resource_type: "image",
       folder: "genre",
     },
     (err, result) => {
@@ -27,11 +27,11 @@ exports.uploadGenre = (req, res) => {
           status: "SUCCESS",
           newGenre,
         });
-        console.log('new genre'+ newGenre);
+        console.log("new genre" + newGenre);
       } catch (err) {
         res.status(500).send(err);
       }
-      console.log('Error occurs when upload genre');
+      console.log("Error occurs when upload genre");
     }
   );
 };
@@ -67,7 +67,7 @@ exports.deleteGenreById = async (req, res) => {
     const genre = await genreModel.findById(req.params.id);
     cloudinary.uploader.destroy(
       genre.cloudinary_id,
-      { resource_type: 'image' },
+      { resource_type: "image" },
       (err, result) => {
         if (err) {
           console.log(err);
@@ -88,7 +88,7 @@ exports.deleteGenreById = async (req, res) => {
       message: "Error occur when delete genre",
       err,
     });
-    console.log("Error occur when delete genre " + err);
+    console.log("Error occur when delete genre" + err);
   }
 };
 
@@ -141,6 +141,6 @@ exports.updatedGenreById = async (req, res) => {
       message: "Error occur when upadate genre",
       err,
     });
-    console.log("Error occur when update genre " + err);
+    console.log("Error occur when update genre" + err);
   }
 };

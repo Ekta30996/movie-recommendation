@@ -10,10 +10,7 @@ exports.uploadMovie = (req, res) => {
     {
       resource_type: "video",
       folder: "movie",
-      transformation:[
-        {quality:200},
-        {async:true}
-      ]
+      transformation: [{ quality: 200 }, { async: true }],
     },
     (err, result) => {
       if (err) {
@@ -45,9 +42,10 @@ exports.uploadMovie = (req, res) => {
 //list movies
 exports.readAllMovies = async (req, res) => {
   try {
-    const read = await movieModel.find();
+    const limit = req.query.limit
+    const read = await movieModel.find().sort({'uploadedat':-1}).limit(limit);
     res.status(200).json(read);
-    console.log("Retrieve all movies " + read);
+    console.log("Retrieve all movies" + read);
   } catch (err) {
     res.status(500).json({
       message: "Error occurs when retrive all movies",
@@ -77,9 +75,9 @@ exports.readMovieById = async (req, res) => {
 exports.deleteMovieById = async (req, res) => {
   try {
     const movie = await movieModel.findById(req.params.id);
-     cloudinary.uploader.destroy(
+    cloudinary.uploader.destroy(
       movie.cloudinary_id,
-      { resource_type: 'video' },
+      { resource_type: "video" },
       (err, result) => {
         if (err) {
           console.log(err);
@@ -159,30 +157,26 @@ exports.updatedMovieById = async (req, res) => {
   }
 };
 
-
-exports.readByParameters = async(req,res)=>{
-      try{
-          const q = req.params.q;
-          const read = await movieModel.find(
-              {
-                  '$or':[
-                      {'title':{$regex:q , $options:'i'}},
-                      {'description':{$regex:q , $options:'i'}},
-                      {'genre':{$regex:q , $options:'i'}}
-                  ]
-              }
-          )
-          if(read.length===0){
-            return res.status(400).send('No result found')
-          }
-          res.status(200).send(read)
-          console.log('Search movies '+ read)
-      }catch(err){
-          res.status(500).json({
-              message:'Error occurs when search',
-              err
-          })
-          console.log('Error occurs when search ',err)
-      }
+exports.readByParameters = async (req, res) => {
+  try {
+    const q = req.params.q;
+    const read = await movieModel.find({
+      $or: [
+        { title: { $regex: q, $options: "i" } },
+        { description: { $regex: q, $options: "i" } },
+        { genre: { $regex: q, $options: "i" } },
+      ],
+    });
+    if (read.length === 0) {
+      return res.status(400).send("No result found");
+    }
+    res.status(200).send(read);
+    console.log("Search movies " + read);
+  } catch (err) {
+    res.status(500).json({
+      message: "Error occurs when search",
+      err,
+    });
+    console.log("Error occurs when search ", err);
   }
-  
+};
