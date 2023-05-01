@@ -28,12 +28,12 @@ exports.register = async (req, res) => {
     if (password === '') {
       return res.status(400).json({ message: 'Password is required field'});
     }
-    if (password.length === 0 || password.length < 8) {
+    if (password.length === 0 || password.length <= 7) {
       return res
         .status(400)
         .json({ message: 'Password is minimum to 8 characters'});
     }
-    const hashPassword = await bcrypt.hash(password, process.env.SALT);
+    const hashPassword = await bcrypt.hash(password, 10);
 
     //3) Create new user
     const newUser = await userModel.create({
@@ -271,10 +271,10 @@ exports.login = async (req, res) => {
       console.log('read genre list'+read);
     }catch(err){
       res.status(500).json({
-        message: "Error occurs when retrieve movie by genre",
+        message: 'Error occurs when retrieve movie by genre',
         err,
       });
-      console.log("Error occurs when retrieve movie by genre", err);
+      console.log('Error occurs when retrieve movie by genre', err);
     }
   }
   
@@ -305,10 +305,10 @@ exports.login = async (req, res) => {
       console.log('read watchlist'+read);
     }catch(err){
       res.status(500).json({
-        message: "Error occurs when retrieve movie from watchlist",
+        message: 'Error occurs when retrieve movie from watchlist',
         err,
       });
-      console.log("Error occurs when retrieve movie from watchlist", err);
+      console.log('Error occurs when retrieve movie from watchlist', err);
     }
   }
   
@@ -339,9 +339,9 @@ exports.login = async (req, res) => {
       console.log('read favoritelist'+read);    
     }catch(err){
       res.status(500).json({
-        message: "Error occurs when retrieve movie from favoritelist",
+        message: 'Error occurs when retrieve movie from favoritelist',
         err,
       });
-      console.log("Error occurs when retrieve movie from favoritelist", err);
+      console.log('Error occurs when retrieve movie from favoritelist', err);
     }
   }
