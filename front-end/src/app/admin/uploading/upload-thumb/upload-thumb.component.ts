@@ -100,6 +100,16 @@ export class UploadThumbComponent {
             showConfirmButton: false,
             timer: 4000,
           });
+
+          if(err['status'] === '409')
+          this.progress = 0;
+          this.inProgress = false
+          Swal.fire({
+            icon: 'error',
+            title: 'Thumbnail is already exists',
+            showConfirmButton: false,
+            timer: 4000,
+          });
           this.message = 'Could not upload the file!';
           this.imgURL = this.reader.EMPTY
           console.log(err);

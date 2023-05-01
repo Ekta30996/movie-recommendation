@@ -1,68 +1,112 @@
 <div *ngIf="loader" id="preloder">
-    <div class="loader"></div>
+  <div class="loader"></div>
 </div>
 <ng-template #noData>
-    <div class="container mt-5 mb-5 mx-2">
-        <div class="d-flex justify-content-center row">
-            <div class="col-md-10">
-                <div class="row p-2 border rounded" style="background-color: #070720;">
-                    <h3 style="color:white">No any movie is exixts</h3>
-                </div>
-            </div>
+  <div class="container mt-5 mb-5 mx-2">
+    <div class="d-flex justify-content-center row">
+      <div class="col-md-10">
+        <div class="row p-2 border rounded" style="background-color: #070720">
+          <h3 style="color: white">No any movie is exixts</h3>
         </div>
+      </div>
     </div>
+  </div>
 </ng-template>
 
-<ng-container *ngIf="!isEdit && !addThumb">
-    <div class="container mt-5 mb-5 mx-3" *ngIf="movies.length!=0; else noData">
-        <div class="d-flex justify-content-center row"  *ngFor="let movie of movies">
-            <ng-container>
-                <div class="col-md-10" >
-                    <div class="row p-2 border rounded" style="background-color: #070720;">
-                        <div class="col-md-3 mt-1">
-                            <h6 style="color:white">Movie</h6>
-                            <video class="img-fluid img-responsive rounded product-image" style="border-radius: none;" controls>
-                                <source src="{{movie?.['videourl']}}">
-                            </video>
-                        </div>
-                        <div class="col-md-3 mt-1" *ngFor="let t of movie?.['thumb']">
-                            <h6 style="color:white">Thumbnail</h6>
-                            <img *ngIf="movie?.['thumb']"  style="width: 210px; height: 135px;" src="{{t?.['thumburl']}}" alt=" No Thumbnail" class="img-fluid img-responsive rounded product-image">
-                            <h1 *ngIf="!movie?.['thumb']"  style="width: 210px; height: 135px;"  class="img-fluid img-responsive rounded product-image">No thumbnail</h1>
-                        </div>
-                        <div class="col-md-4 mt-1">
-                            <h5 style="color:white; text-transform: capitalize;" >{{movie?.['title']}}</h5>
-                            <h3 style="color:white">{{movie?.['genre']}}</h3>
-                            <div [ngClass]="{'limitTextHeight': isReadMore}">
-                                <p  style="color:white">{{movie?.['description']}}<br></p>
-                            </div>
-                            <span style="font-size: small;" (click)="showText()">
-                                {{ isReadMore ? 'Read More... ' : ' Read Less' }}
-                              </span>
-                        </div>
-                            <div class="align-items-center align-content-center col-md-2 border-left mt-1">
-                                <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1" style="color:white">Action</h4>
-                            </div>
-                            <div class="d-flex flex-column mt-4">
-                                <button class="btn btn-success btn-sm" type="button" (click)="editMovie(movie._id)" >Edit</button>
-                                <button class="btn btn-danger btn-sm mt-2" type="button" (click)="deleteMovie(movie._id)">Delete</button>
-                                <button class="btn btn-primary btn-sm mt-2" type="button" (click)="uploadThumb(movie._id)">Thumbnail</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
-    </div>
-</ng-container>
+<!-- <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search> -->
 
+<ng-container *ngIf="!isEdit && !addThumb">
+  <div class="container mt-5 mb-5 mx-3" *ngIf="movies.length != 0; else noData">
+    <div class="d-flex justify-content-center row" *ngFor="let movie of movies">
+      <ng-container>
+        <div class="col-md-11">
+          <div class="row p-2 border rounded" style="background-color: #070720">
+            <div class="col-md-3 mt-1">
+              <h6 style="color: white">Movie</h6>
+              <video
+                class="img-fluid img-responsive rounded product-image"
+                style="border-radius: none"
+                controls
+              >
+                <source src="{{movie?.['videourl']}}" />
+              </video>
+            </div>
+            <div class="col-md-3 mt-3" *ngFor="let t of movie?.['thumb']">
+              <h6 style="color: white">Thumbnail</h6>
+              <img
+                *ngIf="movie?.['thumb']"
+                style="width: 210px; height: 135px"
+                src="{{t?.['thumburl']}}"
+                alt=" No Thumbnail"
+                class="img-fluid img-responsive rounded product-image"
+              />
+              <h1
+                *ngIf="!movie?.['thumb']"
+                style="width: 210px; height: 135px"
+                class="img-fluid img-responsive rounded product-image"
+              >
+                No thumbnail
+              </h1>
+            </div>
+            <div class="col-md-4 mt-1">
+              <h5 style="color: white; text-transform: capitalize">
+                {{movie?.['title']}}
+              </h5>
+              <h3 style="color: white">{{movie?.['genre']}}</h3>
+              <div [ngClass]="{ limitTextHeight: isReadMore }">
+                <p style="color: white">{{movie?.['description']}}<br /></p>
+              </div>
+              <span style="font-size: small" (click)="showText()">
+                {{ isReadMore ? "Read More... " : " Read Less" }}
+              </span>
+            </div>
+            <div
+              class="align-items-center align-content-center col-md-2 border-left mt-1"
+            >
+              <div class="d-flex flex-row align-items-center">
+                <h4 class="mr-1" style="color: white">Action</h4>
+              </div>
+
+              <button
+                class="btn btn-success btn-sm"
+                type="button"
+                (click)="editMovie(movie._id)"
+              >
+                Edit Movie
+              </button>
+              <button
+                class="btn btn-danger btn-sm mt-2"
+                type="button"
+                (click)="deleteMovie(movie._id)"
+              >
+                Delete Movie
+              </button>
+              <button
+                class="btn btn-primary btn-sm mt-2"
+                type="button"
+                (click)="uploadThumb(movie._id)"
+              >
+                Upload Thumbnail
+              </button>
+              <button
+                class="btn btn-danger btn-sm mt-2"
+                type="button"
+                (click)="uploadThumb(movie._id)"
+              >
+                Delete Thumbnail
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
 
 <ng-container *ngIf="isEdit">
-    <app-upload-movie [movieDetail]="movie"></app-upload-movie>
+  <app-upload-movie [movieDetail]="movie"></app-upload-movie>
 </ng-container>
 
-
 <ng-container *ngIf="addThumb">
-    <app-upload-thumb [movieDetail]="movie"></app-upload-thumb>
+  <app-upload-thumb [movieDetail]="movie"></app-upload-thumb>
 </ng-container>

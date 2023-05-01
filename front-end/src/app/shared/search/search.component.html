@@ -1,6 +1,7 @@
 <div class="search_class">
     <input
     [(ngModel)]="enteredSearchValue"
+    typeahead="states"
     (keyup)="onSearchTextChanged()"
       class="search-switch"
       type="search"
@@ -19,4 +20,9 @@
         margin-right: 30px;
       "
       >Search</span>
+      
 </div>
+
+
+  
+   

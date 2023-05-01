@@ -1,5 +1,7 @@
 import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +19,8 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    TypeaheadModule.forRoot(),
     HttpClientModule,
     SharedModule,
     MoviesModule, 

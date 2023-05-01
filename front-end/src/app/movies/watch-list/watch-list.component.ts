@@ -22,7 +22,7 @@ export class WatchListComponent implements OnInit , OnDestroy {
       this.watchlist = movie
       this.loader = false
       // console.log(movie);
-      console.log(this.watchlist);
+      // console.log(this.watchlist);
     })
   }
 

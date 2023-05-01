@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
         [Validators.required, Validators.pattern(this.usernamePattern)],
       ],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
     });
   }
 
@@ -51,12 +51,12 @@ export class SignupComponent implements OnInit {
           {
             Swal.fire({
               icon: 'success',
-              title: 'Email has been send',
+              title: 'Please verify your email address',
               showConfirmButton: false,
               timer: 4000,
             });
             localStorage.setItem('token', res['token']);
-            this.router.navigate(['/movies/home'])
+            this.router.navigate(['/genre/genre'])
           }
           
         }  

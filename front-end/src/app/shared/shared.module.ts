@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { SliderComponent } from './slider/slider.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -15,12 +16,13 @@ import { SliderComponent } from './slider/slider.component';
     FooterComponent,
     SearchComponent,
     SliderComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     SharedRoutingModule
   ],
-  exports:[HeaderComponent ,FooterComponent,SearchComponent,SliderComponent]
+  exports:[HeaderComponent ,FooterComponent,SearchComponent,SliderComponent,PageNotFoundComponent]
 })
 export class SharedModule { }

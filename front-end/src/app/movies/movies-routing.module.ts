@@ -9,6 +9,7 @@ import { AuthGuard } from '../shared/auth/auth.guard';
 import { SearchComponent } from '../shared/search/search.component';
 import { DetailsComponent } from './details/details.component';
 import { WatchNowComponent } from './watch-now/watch-now.component';
+import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path:'home',component:HomePageComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'search/:q',component:SearchComponent},
   {path:'details/:id',component:DetailsComponent},
   { path: 'watch', component:WatchNowComponent,canActivate:[AuthGuard]},
+
 
 ];
 

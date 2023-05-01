@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import {
   debounceTime,
   distinctUntilChanged,
-  filter,
   Subject,
   Subscription,
   takeUntil,
@@ -21,14 +20,12 @@ export class LatestComponent implements OnInit, OnDestroy {
   movie!: Movie;
   destroy$: Subject<boolean> = new Subject<boolean>();
   search$!: Subscription;
-  // paramSubscription! :Subscription
   loader: boolean = false;
 
   searchText: any = '';
 
   constructor(
     private _movieService: MoviesService,
-    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -65,18 +62,6 @@ export class LatestComponent implements OnInit, OnDestroy {
         // console.log(movie);
         this.movies = movie;
       });
-  }
-
-  getMovie(id: string) {
-    this._movieService.getMovieById(id).subscribe(
-      (res) => {
-        this.movie = res;
-        // console.log(res);
-      },
-      (err) => {
-        // console.log(err);
-      }
-    );
   }
 
   ngOnDestroy(): void {

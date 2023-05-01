@@ -40,7 +40,7 @@ export class MoviesService {
   listMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(READ_ALL_MOVIES_ENDPOINT).pipe(
       retry(3),
-      tap((res) => res)
+      tap((movie) => movie)
     );
   }
 
@@ -56,12 +56,14 @@ export class MoviesService {
 
   addToWatchlist(id: string): Observable<Movie> {
     const body = { id: id };
-    return this.http.post<Movie>(ADD_WATCHLIST, body);
+    return this.http.post<Movie>(ADD_WATCHLIST, body)
+    .pipe( retry(3),tap((movie)=>movie));
   }
 
   addToFavoritelist(id: string): Observable<Movie> {
     const body = { id: id };
-    return this.http.post<Movie>(ADD_FAVORITELIST, body);
+    return this.http.post<Movie>(ADD_FAVORITELIST, body)
+    .pipe( retry(3), tap((movie)=>movie));;
   }
 
   listWatchlist(): Observable<Movie[]> {

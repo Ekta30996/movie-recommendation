@@ -50,26 +50,24 @@
               class="follow-btn"
               *ngIf="!addToFavorite"
               (click)="addFavoriteList(movie._id)"
-              ><i class="fa fa-star-o"></i
-            ></a>
+              ><i class="fa-regular fa-star"></i>
+            </a>
             <a
               class="follow-btn"
               *ngIf="addToFavorite"
               (click)="addFavoriteList(movie._id)"
-              ><i class="fa fa-star"></i
-            ></a>
+              ><i class="fa-solid fa-star"></i>
+            </a>
             <a
               class="follow-btn"
               *ngIf="!addToWatch"
               (click)="addWatchList(movie._id)"
-              ><i class="fa fa-bookmark-o"></i
-            ></a>
+              ><i class="fa-regular fa-bookmark"></i></a>
             <a
               class="follow-btn"
               *ngIf="addToWatch"
               (click)="addWatchList(movie._id)"
-              ><i class="fa fa-bookmark"></i
-            ></a>
+              ><i class="fa-solid fa-bookmark"></i></a>
             <button class="watch-btn" (click)="sendMovieDeatils()">
               <span>Watch Now</span>
               <i class="fa fa-angle-right"></i>

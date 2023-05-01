@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { GenresService } from 'src/app/shared/service/genres.service';
 import Swal from 'sweetalert2';
@@ -22,6 +22,10 @@ import Swal from 'sweetalert2';
   
     ngOnInit(): void {
       this.loader = true;
+      // this.listGenres$ = interval(5000)
+      // .subscribe((genre)=>{
+      //   this.listGenre()
+      // })
       this.listGenres$ = this._genreService.loadGenre()
       .subscribe((genre) => {
           this.genres = genre;
@@ -32,7 +36,7 @@ import Swal from 'sweetalert2';
         }
       );
     }
-  
+
     onDeleteGenre(id: string) {
       Swal.fire({
         title: 'Are you sure?',

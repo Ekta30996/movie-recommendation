@@ -14,6 +14,7 @@ export class GenreComponent implements OnInit , OnDestroy{
   subscription!: Subscription
   loader:boolean = false
   isClicked:boolean = false
+  clickedId!:string
   constructor(private _genreService: GenresService){}
  
   ngOnInit(): void {
@@ -30,6 +31,7 @@ export class GenreComponent implements OnInit , OnDestroy{
     this._genreService.getGenreById(id)
     .subscribe(genre=>{
       console.log(genre);
+      this.clickedId = genre['_id']
     })
 
     this._genreService.addGenre(id)

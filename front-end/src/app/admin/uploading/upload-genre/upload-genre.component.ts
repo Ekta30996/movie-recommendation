@@ -1,4 +1,4 @@
-import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -43,13 +43,14 @@ export class UploadGenreComponent implements OnInit , OnChanges {
     console.log(this.selectedFile);
 
 
-    if(this.selectedFile.type ==='image/jpg' || this.selectedFile.type ==='image/jpeg'
-    || this.selectedFile.type ==='image/png' || this.selectedFile.type ==='image/webp'
-    || this.selectedFile.type ==='image/avif' )
+    if(this.selectedFile.type =='image/jpg' || this.selectedFile.type =='image/jpeg'
+    || this.selectedFile.type =='image/png' || this.selectedFile.type =='image/webp'
+    || this.selectedFile.type =='image/avif' || this.selectedFile.type =='image/svg' )
     {
       this.reader.readAsDataURL(this.selectedFile); 
       this.reader.onload = (_event) => {
       this.imgURL = this.reader.result; 
+      // console.log(this.imgURL);
     }}
     else{
       Swal.fire({
@@ -58,6 +59,8 @@ export class UploadGenreComponent implements OnInit , OnChanges {
         showConfirmButton: false,
         timer: 4000,
       });
+      console.log();
+      
       this.uploadForm.reset()
       this.imgURL = this.reader.EMPTY
     }    
@@ -110,6 +113,8 @@ export class UploadGenreComponent implements OnInit , OnChanges {
           });
           this.message = 'Could not upload the file!';
           this.imgURL = this.reader.EMPTY
+          // console.log(this.message);
+          
         }); 
     this.uploadForm.reset()
   }
@@ -163,7 +168,7 @@ export class UploadGenreComponent implements OnInit , OnChanges {
           });
           this.message = 'Could not upload the file!';
           this.imgURL = this.reader.EMPTY
-          console.log(err);
+          // console.log(err);
         }); 
     this.uploadForm.reset()
   }
