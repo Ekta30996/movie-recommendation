@@ -11,7 +11,6 @@ import { LatestComponent } from './latest/latest.component';
 import { DetailsComponent } from './details/details.component';
 import { WatchNowComponent } from './watch-now/watch-now.component';
 
-
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -22,11 +21,7 @@ import { WatchNowComponent } from './watch-now/watch-now.component';
     DetailsComponent,
     WatchNowComponent,
   ],
-  imports: [
-    CommonModule, 
-    SharedModule, 
-    MoviesRoutingModule
-  ],
-  exports:[HomePageComponent]
+  imports: [CommonModule, SharedModule, MoviesRoutingModule],
+  exports: [HomePageComponent],
 })
-export class MoviesModule { }
+export class MoviesModule {}

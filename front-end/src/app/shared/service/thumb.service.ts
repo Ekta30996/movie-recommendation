@@ -1,24 +1,23 @@
 import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Thumb } from '../thumb.interface';
 import { DELETE_THUMB_ENDPOINT, UPLOAD_THUMB_ENDPOINT } from '../constant';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThumbService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  uploadThumb(id:string,thumb:FormData): Observable<HttpEvent<Thumb>>{
-    return this.http.post<Thumb>(UPLOAD_THUMB_ENDPOINT + `${id}` , thumb, {
-      reportProgress: true,
-      observe: 'events',
-    })
-    .pipe(catchError(this.errorMgmt));
+  uploadThumb(id: string, thumb: FormData): Observable<HttpEvent<Thumb>> {
+    return this.http
+      .post<Thumb>(UPLOAD_THUMB_ENDPOINT + `${id}`, thumb, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(catchError(this.errorMgmt));
   }
-
 
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
@@ -35,12 +34,10 @@ export class ThumbService {
     });
   }
 
-  deleteThumb(id:string, thumbId:string):Observable<Thumb>{
-    return this.http.patch<Thumb>(DELETE_THUMB_ENDPOINT + `${id}`,thumbId)
+  deleteThumb(id: string, thumbId: string): Observable<Thumb> {
+    const body = {id:thumbId}
+    return this.http.patch<Thumb>(DELETE_THUMB_ENDPOINT + `${id}` , body);
   }
 
-  // editThumb(id:string,):Observable<Thumb>{
-  //   // return 
-  // }
-}
 
+}

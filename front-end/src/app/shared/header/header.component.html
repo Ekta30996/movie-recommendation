@@ -23,11 +23,7 @@
       <div class="col-lg-3">
         <div class="header__right">
           <!-- <app-search></app-search> -->
-          <a
-            ><span
-              class="icon_profile"
-            ></span
-          ></a>
+          <a><span class="icon_profile"></span></a>
           <a
             routerLink="/signin"
             class="primary"
@@ -35,15 +31,14 @@
             >Sign In</a
           >
           <Button
-              *ngIf="_authService.signedIn()"
-              (click)="_authService.signout()"
-              >Sign Out</Button>
+            *ngIf="_authService.signedIn()"
+            (click)="_authService.signout()"
+            >Sign Out</Button
+          >
         </div>
       </div>
     </div>
     <div id="mobile-menu-wrap"></div>
   </div>
 </header>
-<ng-container #container></ng-container>
-
 <!-- Header End -->

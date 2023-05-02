@@ -5,7 +5,7 @@
         <div class="login__form">
           <h3 *ngIf="!isEdit">Upload Genre</h3>
           <h3 *ngIf="isEdit">Edit Genre</h3>
-          <form [formGroup]="uploadForm"  novalidate>
+          <form [formGroup]="uploadForm" novalidate>
             <div class="genre-title">
               <input
                 type="text"
@@ -19,9 +19,15 @@
                 <small *ngIf="genre.errors?.['required']" class="text-danger"
                   >Genre is required</small
                 >
-                <small *ngIf="genre.errors?.['pattern']" class="text-danger">Genre is invalid</small>
-                <small *ngIf="genre.errors?.['minlength']" class="text-danger">Genre is minimun 4 characters</small>
-                <small *ngIf="genre.errors?.['maxlength']" class="text-danger">Genre is maximum 20 characters</small>
+                <small *ngIf="genre.errors?.['pattern']" class="text-danger"
+                  >Genre is invalid</small
+                >
+                <small *ngIf="genre.errors?.['minlength']" class="text-danger"
+                  >Genre is minimun 4 characters</small
+                >
+                <small *ngIf="genre.errors?.['maxlength']" class="text-danger"
+                  >Genre is maximum 20 characters</small
+                >
               </div>
             </div>
             <div
@@ -32,7 +38,8 @@
                 font-size: medium;
                 color: black;
                 height: 50px;
-              ">
+              "
+            >
               <input
                 type="file"
                 name="file"
@@ -75,7 +82,7 @@
         <div class="login__register">
           <h3>Preview</h3>
           <ng-container *ngIf="inProgress">
-            <div  class="progress">
+            <div class="progress">
               <div
                 class="progress-bar progress-bar-info progress-bar-striped"
                 role="progressbar"
@@ -86,30 +93,62 @@
               >
                 {{ progress }}%
               </div>
-            </div>  
+            </div>
           </ng-container>
           <!-- Shows when upload genre -->
-          <ng-container *ngIf="imgURL && !isEdit  ||  inProgress && !isSelectedInEditMode ">
-            <img src="{{imgURL}}" alt="" style="width:100px; height:100px; margin-top: 30px;">
+          <ng-container
+            *ngIf="(imgURL && !isEdit) || (inProgress && !isSelectedInEditMode)"
+          >
+            <img
+              src="{{ imgURL }}"
+              alt=""
+              style="width: 100px; height: 100px; margin-top: 30px"
+            />
           </ng-container>
 
           <!-- Shows when no any file is selected -->
           <ng-container *ngIf="!imgURL && !isEdit">
-            <h6 style="width:100px; height:100px; margin-top: 30px; color:white">No image selected</h6>
+            <h6
+              style="
+                width: 100px;
+                height: 100px;
+                margin-top: 30px;
+                color: white;
+              "
+            >
+              No image selected
+            </h6>
           </ng-container>
 
           <!-- Shows when in edit mode and genreDetails is not an empty  -->
-          <ng-container *ngIf="isEdit && genreDetail && !imgURL && !inProgress && !isSelectedInEditMode">
-            <img src="{{genreDetail['genreurl']}}" alt="" style="width:100px; height:100px; margin-top: 30px;" >
+          <ng-container
+            *ngIf="
+              isEdit &&
+              genreDetail &&
+              !imgURL &&
+              !inProgress &&
+              !isSelectedInEditMode
+            "
+          >
+            <img
+              src="{{ genreDetail['genreurl'] }}"
+              alt=""
+              style="width: 100px; height: 100px; margin-top: 30px"
+            />
           </ng-container>
 
           <!--  -->
-          <ng-container *ngIf="isEdit && imgURL || inProgress && isSelectedInEditMode ">
-            <img src="{{imgURL}}" alt="" style="width:100px; height:100px; margin-top: 30px;">
+          <ng-container
+            *ngIf="(isEdit && imgURL) || (inProgress && isSelectedInEditMode)"
+          >
+            <img
+              src="{{ imgURL }}"
+              alt=""
+              style="width: 100px; height: 100px; margin-top: 30px"
+            />
           </ng-container>
         </div>
       </div>
     </div>
   </div>
 </section>
-

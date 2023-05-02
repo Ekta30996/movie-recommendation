@@ -1,4 +1,4 @@
-<div class="container py-4" *ngIf="!isWatchNow ; else yesWatchNow">
+<div class="container py-4" *ngIf="!isWatchNow; else yesWatchNow">
   <div class="product__page__content">
     <div class="product__page__title">
       <div class="row">
@@ -25,10 +25,10 @@
       <div class="col-lg-9">
         <div class="anime__details__text">
           <div class="anime__details__title">
-            <h3>{{ movie['title'] | uppercase }}</h3>
+            <h3>{{ movie["title"] | uppercase }}</h3>
           </div>
           <div [ngClass]="{ limitTextHeight: isReadMore }">
-            <p style="color: white">{{ movie['description'] }}<br /></p>
+            <p style="color: white">{{ movie["description"] }}<br /></p>
           </div>
           <span style="font-size: medium; color: #e53637" (click)="showText()">
             {{ isReadMore ? "Read More... " : " Read Less" }}
@@ -37,9 +37,9 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <ul>
-                  <li><span>Genre:</span> {{ movie['genre'] }}</li>
+                  <li><span>Genre:</span> {{ movie["genre"] }}</li>
                   <li>
-                    <span>Date aired:</span> {{ movie['uploadedat'] | date }}
+                    <span>Date aired:</span> {{ movie["uploadedat"] | date }}
                   </li>
                 </ul>
               </div>
@@ -62,12 +62,14 @@
               class="follow-btn"
               *ngIf="!addToWatch"
               (click)="addWatchList(movie._id)"
-              ><i class="fa-regular fa-bookmark"></i></a>
+              ><i class="fa-regular fa-bookmark"></i
+            ></a>
             <a
               class="follow-btn"
               *ngIf="addToWatch"
               (click)="addWatchList(movie._id)"
-              ><i class="fa-solid fa-bookmark"></i></a>
+              ><i class="fa-solid fa-bookmark"></i
+            ></a>
             <button class="watch-btn" (click)="sendMovieDeatils()">
               <span>Watch Now</span>
               <i class="fa fa-angle-right"></i>

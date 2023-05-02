@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListComponent } from './listing/list/list.component';
@@ -12,11 +11,8 @@ import { MoviesComponent } from './listing/movies/movies.component';
 import { GenresComponent } from './listing/genres/genres.component';
 import { UploadMovieComponent } from './uploading/upload-movie/upload-movie.component';
 import { UploadGenreComponent } from './uploading/upload-genre/upload-genre.component';
-import { HeaderComponent } from './header/header.component';
-
 import { SearchComponent } from './search/search.component';
 import { UploadThumbComponent } from './uploading/upload-thumb/upload-thumb.component';
-
 
 @NgModule({
   declarations: [
@@ -28,15 +24,9 @@ import { UploadThumbComponent } from './uploading/upload-thumb/upload-thumb.comp
     GenresComponent,
     UploadMovieComponent,
     UploadGenreComponent,
-    HeaderComponent,
     SearchComponent,
-    UploadThumbComponent
+    UploadThumbComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    
-    AdminRoutingModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule],
 })
-export class AdminModule { }
+export class AdminModule {}

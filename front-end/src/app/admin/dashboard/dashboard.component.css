@@ -1,33 +1,38 @@
 li a,
-a{
-    text-decoration: none;
-    line-height: 70px;
-    color: #e53637;
-    font-weight: 700;
-    cursor: pointer;
+a {
+  text-decoration: none;
+  line-height: 70px;
+  color: #e53637;
+  font-weight: 700;
+  cursor: pointer;
 }
-li a:hover{
-    color: #832525;
+.header__logo {
+  font-size: 30px;
+  margin-left: 10px;
+  font-weight: 700;
 }
-.nav-item{
-    border-bottom: 1px solid #832525 ;
+li a:hover {
+  color: #832525;
+}
+.nav-item {
+  border-bottom: 1px solid #832525;
 }
 #sidebar {
-    height: 100%;
-    width: 300px;
-    background-color: #070720;
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-  #content{
-    margin-left: 260px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-    width: 100%;
-    height: auto;
-    color: white;
-}  
+  height: 100%;
+  width: 300px;
+  background-color: #070720;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+#content {
+  margin-left: 260px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+  width: 100%;
+  height: auto;
+  color: white;
+}

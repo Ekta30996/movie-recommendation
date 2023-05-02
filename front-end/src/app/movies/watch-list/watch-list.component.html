@@ -1,69 +1,80 @@
 <div id="preloder" *ngIf="loader">
-    <div class="loader"></div>
+  <div class="loader"></div>
 </div>
 
 <!-- <app-search></app-search> -->
 
 <ng-template #noData>
-    <div class="container p-4">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="product__page__content">
-                    <div class="product__page__title">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-6">
-                                <div class="section-title">
-                                    <h4>Watchlist</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container mt-5 mb-5 mx-2">
-                         <div class="d-flex justify-content-center row">
-                            <div class="col-md-10">
-                                <div class="row p-2 border rounded" style="background-color: #070720;">
-                                    <h3 style="color:#e53637">Your watchlist is empty</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="product__page__content">
+          <div class="product__page__title">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-6">
+                <div class="section-title">
+                  <h4>Watchlist</h4>
                 </div>
+              </div>
             </div>
+          </div>
+          <div class="container mt-5 mb-5 mx-2">
+            <div class="d-flex justify-content-center row">
+              <div class="col-md-10">
+                <div
+                  class="row p-2 border rounded"
+                  style="background-color: #070720"
+                >
+                  <h3 style="color: #e53637">Your watchlist is empty</h3>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </ng-template>
 
- 
-    <div class="container py-4" *ngIf="watchlist?.[0]?.['movies'].length != 0; else noData">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="product__page__content">
-                    <div class="product__page__title">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-6">
-                                <div class="section-title">
-                                    <h4>Watchlist</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" *ngIf="watchlist?.[0]?.['movies'].length != 0;">
-                        <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let movie of watchlist?.[0]?.['movies']" >
-                            <div class="product__item" *ngFor="let thumb of movie.thumb">
-                                <a [routerLink]="['/movies/details',movie._id]">
-                                <div class="product__item__pic ">
-                                    <video style="width:300px; height: 250px;" poster="{{thumb?.['thumburl']}}">
-                                        <source src="{{movie?.['videourl']}}">
-                                    </video>
-                                </div>
-                                <div class="product__item__text">
-                                    <div class="text" >{{movie?.['title'] | titlecase}}</div>
-                                </div>
-                            </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div
+  class="container py-4"
+  *ngIf="watchlist?.[0]?.['movies'].length != 0; else noData"
+>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="product__page__content">
+        <div class="product__page__title">
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-6">
+              <div class="section-title">
+                <h4>Watchlist</h4>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="row" *ngIf="watchlist?.[0]?.['movies'].length != 0;">
+          <div
+            class="col-lg-4 col-md-6 col-sm-6"
+            *ngFor="let movie of watchlist?.[0]?.['movies']"
+          >
+            <div class="product__item" *ngFor="let thumb of movie.thumb">
+              <a [routerLink]="['/movies/details', movie._id]">
+                <div class="product__item__pic">
+                  <video
+                    style="width: 300px; height: 250px"
+                    poster="{{thumb?.['thumburl']}}"
+                  >
+                    <source src="{{movie?.['videourl']}}" />
+                  </video>
+                </div>
+                <div class="product__item__text">
+                  <div class="text">{{movie?.['title'] | titlecase}}</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>

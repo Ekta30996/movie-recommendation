@@ -14,8 +14,8 @@
 .page-blur {
   opacity: 0.3;
 }
-.container{
-    margin-left: -10px;
+.container {
+  margin-left: -10px;
 }
 .limitTextHeight {
   height: 20px;
@@ -24,24 +24,13 @@
 video:hover {
   opacity: 0.8;
   transform: scale(1.1);
-  cursor:pointer;
+  cursor: pointer;
 }
 img:hover {
   opacity: 0.8;
   transform: scale(1.1);
-  cursor:pointer;
+  cursor: pointer;
 }
-button{
-  width: 190px;
+button {
+  width: 170px;
 }
-
-
-
-
-
-
-
-
-
-
-

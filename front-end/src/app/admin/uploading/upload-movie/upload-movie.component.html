@@ -1,118 +1,205 @@
 <section class="signup spad">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="login__form">
-            <h3 *ngIf="!isEdit">Upload Movie</h3>
-            <h3 *ngIf="isEdit">Edit Movie</h3>
-            <form [formGroup]="uploadForm" novalidate>
-              <div class="genre-title">
-                <input type="text" 
-				placeholder=" Movie title"
-				name="title"
-				formControlName="title"
-				pattern="[A-Za-z+\s][a-z0-9+\s]{4,20}"
-				required>
-                <div *ngIf="title && (title.valid || title.touched)">
-                  <small *ngIf="title.errors?.['required']" class="text-danger">Movie title is required</small>
-                  <small *ngIf="title.errors?.['pattern']" class="text-danger">Movie title is invalid</small>
-                  <small *ngIf="title.errors?.['minlength']" class="text-danger">Movie title is minimum 4 characters</small>
-                  <small *ngIf="title.errors?.['maxlength']" class="text-danger">Movie title is minimum 20 characters</small>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="login__form">
+          <h3 *ngIf="!isEdit">Upload Movie</h3>
+          <h3 *ngIf="isEdit">Edit Movie</h3>
+          <form [formGroup]="uploadForm" novalidate>
+            <div class="genre-title">
+              <input
+                type="text"
+                placeholder=" Movie title"
+                name="title"
+                formControlName="title"
+                pattern="[A-Za-z+\s][a-z0-9+\s]{4,20}"
+                required
+              />
+              <div *ngIf="title && (title.valid || title.touched)">
+                <small *ngIf="title.errors?.['required']" class="text-danger"
+                  >Movie title is required</small
+                >
+                <small *ngIf="title.errors?.['pattern']" class="text-danger"
+                  >Movie title is invalid</small
+                >
+                <small *ngIf="title.errors?.['minlength']" class="text-danger"
+                  >Movie title is minimum 4 characters</small
+                >
+                <small *ngIf="title.errors?.['maxlength']" class="text-danger"
+                  >Movie title is minimum 20 characters</small
+                >
               </div>
-              <div class="textarea" style="font-size: 15px; color: black;">
-                <textarea name="description" 
-				cols="50" 
-				rows="5"
-				pattern = "((.+)((\r?\n.+)*))"
-				placeholder=" Movie description"
-				formControlName="description"
-				>
-				</textarea>
-                <div *ngIf="description && (description.valid || description.touched)">
-                  <small *ngIf="description.errors?.['required']" class="text-danger">Movie description is required</small>
-                  <small *ngIf="description.errors?.['pattern']" class="text-danger">Movie description is invalid</small> 
-				  <small *ngIf="description.errors?.['minlength']" class="text-danger">Movie description is minimum 100 characters</small>
-                  <small *ngIf="description.errors?.['maxlength']" class="text-danger">Movie description is minimum 5000 characters</small>
-                </div>
+            </div>
+            <div class="textarea" style="font-size: 15px; color: black">
+              <textarea
+                name="description"
+                cols="50"
+                rows="5"
+                pattern="((.+)((\r?\n.+)*))"
+                placeholder=" Movie description"
+                formControlName="description"
+              >
+              </textarea>
+              <div
+                *ngIf="
+                  description && (description.valid || description.touched)
+                "
+              >
+                <small
+                  *ngIf="description.errors?.['required']"
+                  class="text-danger"
+                  >Movie description is required</small
+                >
+                <small
+                  *ngIf="description.errors?.['pattern']"
+                  class="text-danger"
+                  >Movie description is invalid</small
+                >
+                <small
+                  *ngIf="description.errors?.['minlength']"
+                  class="text-danger"
+                  >Movie description is minimum 100 characters</small
+                >
+                <small
+                  *ngIf="description.errors?.['maxlength']"
+                  class="text-danger"
+                  >Movie description is minimum 5000 characters</small
+                >
               </div>
-              <div class="file-input my-4 p-2" style="background-color: white ; width: 370px; font-size: medium; color: black;
-			   height: 50px;
-			  ">
-                <input type="file" 
-				name="file"
-				formControlName="file"
-				class="file-input"
-				(change)="onFileSelected($event)"
-				accept="video/*"
-				required>
-                <!-- <div *ngIf="password && (password.valid || password.touched)">
+            </div>
+            <div
+              class="file-input my-4 p-2"
+              style="
+                background-color: white;
+                width: 370px;
+                font-size: medium;
+                color: black;
+                height: 50px;
+              "
+            >
+              <input
+                type="file"
+                name="file"
+                formControlName="file"
+                class="file-input"
+                (change)="onFileSelected($event)"
+                accept="video/*"
+                required
+              />
+              <!-- <div *ngIf="password && (password.valid || password.touched)">
                   <small *ngIf="password.errors?.['required']" class="text-danger">Password is required</small>
                   <small *ngIf="password.errors?.['minlength']" class="text-danger">Password must contains minimum 8 characters</small>
                 </div> -->
-              </div>
-			  <div class="genre" style="width: 370px; border-radius: 0;">
-                <select class="form-select" 							
-					name="genre" 
-					formControlName="genre"
-				>
-				<option value="default" selected>Select genre</option>
-				<option *ngFor="let genre of genres">{{genre?.['genre']}}</option>
-				</select>
-                <!-- <div *ngIf="password && (password.valid || password.touched)">
+            </div>
+            <div class="genre" style="width: 370px; border-radius: 0">
+              <select class="form-select" name="genre" formControlName="genre">
+                <option value="default" selected>Select genre</option>
+                <option *ngFor="let genre of genres">
+                  {{genre?.['genre']}}
+                </option>
+              </select>
+              <!-- <div *ngIf="password && (password.valid || password.touched)">
                   <small *ngIf="password.errors?.['required']" class="text-danger">Password is required</small>
                   <small *ngIf="password.errors?.['minlength']" class="text-danger">Password must contains minimum 8 characters</small>
                 </div> -->
-              </div>
-              <button type="submit" class="site-btn" [disabled]="!uploadForm.valid" (click)="onUpload()" *ngIf="!isEdit">Upload Movie</button>
-              <button type="submit" class="site-btn" [disabled]="!uploadForm.valid" (click)="onEdit(movieDetail['_id'])" *ngIf="isEdit">Edit Movie</button>
-            </form>
-          </div>
+            </div>
+            <button
+              type="submit"
+              class="site-btn"
+              [disabled]="!uploadForm.valid"
+              (click)="onUpload()"
+              *ngIf="!isEdit"
+            >
+              Upload Movie
+            </button>
+            <button
+              type="submit"
+              class="site-btn"
+              [disabled]="!uploadForm.valid"
+              (click)="onEdit(movieDetail['_id'])"
+              *ngIf="isEdit"
+            >
+              Edit Movie
+            </button>
+          </form>
         </div>
-        <div class="col-lg-6">
-			<div class="login__register">
-				<h3>Preview</h3>
-				<ng-container *ngIf="inProgress">
-				  <div  class="progress">
-					<div
-					  class="progress-bar progress-bar-info progress-bar-striped"
-					  role="progressbar"
-					  attr.aria-valuenow="{{ progress }}"
-					  aria-valuemin="0"
-					  aria-valuemax="100"
-					  [ngStyle]="{ width: progress + '%' }"
-					>
-					  {{ progress }}%
-					</div>
-				  </div>  
-				</ng-container>
-				<!-- Shows when upload genre -->
-				<ng-container *ngIf="videoURL && !isEdit  ||  inProgress && !isSelectedInEditMode ">
-				  <video style="width:300px; height:300px; margin-top: 30px;" controls>
-					<source src="{{videoURL}}">
-				  </video>
-				</ng-container>
-	  
-				<!-- Shows when no any file is selected -->
-				<ng-container *ngIf="!videoURL && !isEdit">
-				  <h6 style="width:300px; height:300px; margin-top: 30px; color:white">No file selected</h6>
-				</ng-container>
-	  
-				<!-- Shows when in edit mode and genreDetails is not an empty  -->
-				<ng-container *ngIf="isEdit && movieDetail && !videoURL && !inProgress && !isSelectedInEditMode">
-					<video style="width:300px; height:300px; margin-top: 30px;" controls>
-						<source src="{{movieDetail.videourl}}">
-					  </video>
-				</ng-container>
-	  
-				<!--  -->
-				<ng-container *ngIf="isEdit && videoURL || inProgress && isSelectedInEditMode ">
-					<video style="width:300px; height:300px; margin-top: 30px;" controls>
-						<source src="{{videoURL}}">
-					  </video>
-				</ng-container>
-			  </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="login__register">
+          <h3>Preview</h3>
+          <ng-container *ngIf="inProgress">
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }"
+              >
+                {{ progress }}%
+              </div>
+            </div>
+          </ng-container>
+          <!-- Shows when upload genre -->
+          <ng-container
+            *ngIf="
+              (videoURL && !isEdit) || (inProgress && !isSelectedInEditMode)
+            "
+          >
+            <video
+              style="width: 300px; height: 300px; margin-top: 30px"
+              controls
+            >
+              <source src="{{ videoURL }}" />
+            </video>
+          </ng-container>
+
+          <!-- Shows when no any file is selected -->
+          <ng-container *ngIf="!videoURL && !isEdit">
+            <h6
+              style="
+                width: 300px;
+                height: 300px;
+                margin-top: 30px;
+                color: white;
+              "
+            >
+              No file selected
+            </h6>
+          </ng-container>
+
+          <!-- Shows when in edit mode and genreDetails is not an empty  -->
+          <ng-container
+            *ngIf="
+              isEdit &&
+              movieDetail &&
+              !videoURL &&
+              !inProgress &&
+              !isSelectedInEditMode
+            "
+          >
+            <video
+              style="width: 300px; height: 300px; margin-top: 30px"
+              controls
+            >
+              <source src="{{ movieDetail.videourl }}" />
+            </video>
+          </ng-container>
+
+          <!--  -->
+          <ng-container
+            *ngIf="(isEdit && videoURL) || (inProgress && isSelectedInEditMode)"
+          >
+            <video
+              style="width: 300px; height: 300px; margin-top: 30px"
+              controls
+            >
+              <source src="{{ videoURL }}" />
+            </video>
+          </ng-container>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

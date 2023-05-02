@@ -1,87 +1,99 @@
 <section class="login spad">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="login__form">
-            <h3 *ngIf="isAdded">Upload Thumbnail</h3>
-            <form [formGroup]="uploadForm"  novalidate>
-              <div
-                class="file-input my-4 p-2"
-                style="
-                  background-color: white;
-                  width: 370px;
-                  font-size: medium;
-                  color: black;
-                  height: 50px;
-                ">
-                <input
-                  type="file"
-                  name="file"
-                  formControlName="file"
-                  accept="image/*"
-                  (change)="onFileSelected($event)"
-                  required
-                />
-                <div *ngIf="file && (file.valid || file.touched)" class="mt-4">
-                  <small *ngIf="file.errors?.['required']" class="text-danger"
-                    >Thumbnail file is required</small
-                  >
-                  <small *ngIf="file.errors?.['accept']" class="text-danger"
-                    >It should image file</small
-                  >
-                </div>
-              </div>
-              <button
-                type="submit"
-                class="site-btn"
-                [disabled]="!uploadForm.valid"
-                (click)="onUpload(movieDetail['_id'])"
-              >
-                Upload Thumbnail
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="login__register">
-            <h3>Preview</h3>
-            <ng-container *ngIf="inProgress">
-              <div  class="progress">
-                <div
-                  class="progress-bar progress-bar-info progress-bar-striped"
-                  role="progressbar"
-                  attr.aria-valuenow="{{ progress }}"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  [ngStyle]="{ width: progress + '%' }"
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="login__form">
+          <h3 *ngIf="isAdded">Upload Thumbnail</h3>
+          <form [formGroup]="uploadForm" novalidate>
+            <div
+              class="file-input my-4 p-2"
+              style="
+                background-color: white;
+                width: 370px;
+                font-size: medium;
+                color: black;
+                height: 50px;
+              "
+            >
+              <input
+                type="file"
+                name="file"
+                formControlName="file"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+                required
+              />
+              <div *ngIf="file && (file.valid || file.touched)" class="mt-4">
+                <small *ngIf="file.errors?.['required']" class="text-danger"
+                  >Thumbnail file is required</small
                 >
-                  {{ progress }}%
-                </div>
-              </div>  
-            </ng-container>
-            <!-- Shows when upload genre -->
-            <ng-container *ngIf="imgURL && isAdded  ||  inProgress ">
-              <img src="{{imgURL}}" alt="" style="width:200px; height:100px; margin-top: 30px;">
-            </ng-container>
-  
-            <!-- Shows when no any file is selected -->
-            <ng-container *ngIf="!imgURL && isAdded">
-              <h6 style="width:100px; height:100px; margin-top: 30px; color:white">No image selected</h6>
-            </ng-container>
-  
-            <!-- Shows when in edit mode and movieDetails is not an empty  -->
-            <!-- <ng-container *ngIf="isEdit && movieDetail && !imgURL && !inProgress && !isSelectedInEditMode">
+                <small *ngIf="file.errors?.['accept']" class="text-danger"
+                  >It should image file</small
+                >
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="site-btn"
+              [disabled]="!uploadForm.valid"
+              (click)="onUpload(movieDetail['_id'])"
+            >
+              Upload Thumbnail
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="login__register">
+          <h3>Preview</h3>
+          <ng-container *ngIf="inProgress">
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }"
+              >
+                {{ progress }}%
+              </div>
+            </div>
+          </ng-container>
+          <!-- Shows when upload genre -->
+          <ng-container *ngIf="(imgURL && isAdded) || inProgress">
+            <img
+              src="{{ imgURL }}"
+              alt=""
+              style="width: 200px; height: 100px; margin-top: 30px"
+            />
+          </ng-container>
+
+          <!-- Shows when no any file is selected -->
+          <ng-container *ngIf="!imgURL && isAdded">
+            <h6
+              style="
+                width: 100px;
+                height: 100px;
+                margin-top: 30px;
+                color: white;
+              "
+            >
+              No image selected
+            </h6>
+          </ng-container>
+
+          <!-- Shows when in edit mode and movieDetails is not an empty  -->
+          <!-- <ng-container *ngIf="isEdit && movieDetail && !imgURL && !inProgress && !isSelectedInEditMode">
               <img src="{{movieDetail['genreurl']}}" alt="" style="width:100px; height:100px; margin-top: 30px;" >
             </ng-container> -->
-  
-            <!--  -->
-            <!-- <ng-container *ngIf="isEdit && imgURL || inProgress && isSelectedInEditMode ">
+
+          <!--  -->
+          <!-- <ng-container *ngIf="isEdit && imgURL || inProgress && isSelectedInEditMode ">
               <img src="{{imgURL}}" alt="" style="width:100px; height:100px; margin-top: 30px;">
             </ng-container> -->
-          </div>
         </div>
       </div>
     </div>
-  </section>
-  
-  
+  </div>
+</section>

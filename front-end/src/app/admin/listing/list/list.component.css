@@ -1,17 +1,12 @@
-select{
-    width:200px;
-    height: 40px;
-    background-color: #e53637;
-    border: none;
-    color: white;
+select {
+  width: 200px;
+  height: 40px;
+  background-color: #e53637;
+  border: none;
+  color: white;
 }
 
-.display{
-    color: white;
+.display {
+  color: white;
 }
-.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
+

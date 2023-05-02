@@ -1,17 +1,16 @@
-.genre-title{
+.genre-title {
   font-size: medium;
   height: 50px;
-  margin-bottom: 25px ;
+  margin-bottom: 25px;
 }
-.genre-title ::placeholder{
+.genre-title ::placeholder {
   color: black;
 }
-.genre-title input{
+.genre-title input {
   width: 372px;
   height: 50px;
-  color: black; 
+  color: black;
 }
-.progress
-{
+.progress {
   width: 400px;
 }

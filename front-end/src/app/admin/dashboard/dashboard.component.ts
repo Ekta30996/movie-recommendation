@@ -3,6 +3,7 @@ import { ListComponent } from '../listing/list/list.component';
 import { HomeComponent } from '../home/home.component';
 import { UploadComponent } from '../uploading/upload/upload.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,8 @@ export class DashboardComponent implements OnInit{
     upload:'upload'
   }
 
-  constructor(public router: Router){}
+  constructor(public router: Router,public _authService: AuthService){}
+
   ngOnInit(): void {
     
   }
@@ -45,7 +47,6 @@ export class DashboardComponent implements OnInit{
       case this.pages.upload:{
         type = UploadComponent
       }
-      
     }
     return type
   }

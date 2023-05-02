@@ -9,7 +9,6 @@ import { SearchComponent } from './search/search.component';
 import { SliderComponent } from './slider/slider.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -18,11 +17,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SliderComponent,
     PageNotFoundComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedRoutingModule
+  imports: [CommonModule, FormsModule, SharedRoutingModule],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SearchComponent,
+    SliderComponent,
+    PageNotFoundComponent,
   ],
-  exports:[HeaderComponent ,FooterComponent,SearchComponent,SliderComponent,PageNotFoundComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -82,7 +82,7 @@
                 Delete Movie
               </button>
               <button
-                class="btn btn-primary btn-sm mt-2"
+                class="btn btn-success btn-sm"
                 type="button"
                 (click)="uploadThumb(movie._id)"
               >
@@ -91,8 +91,8 @@
               <button
                 class="btn btn-danger btn-sm mt-2"
                 type="button"
-                (click)="uploadThumb(movie._id)"
               >
+              <!-- (click)="deleteThumb(movie._id ,movie?.['thumb']?.['_id'])" -->
                 Delete Thumbnail
               </button>
             </div>

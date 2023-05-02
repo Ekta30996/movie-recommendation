@@ -1,6 +1,7 @@
 const movieModel = require("../models/movie.model");
 const cloudinary = require("../lib/cloudinary");
 
+
 exports.uploadThumb = async (req, res) => {
   const movie = req.params.id;
 
@@ -43,18 +44,38 @@ exports.uploadThumb = async (req, res) => {
       }
     );
   }
+}
 
-  //delete movie
-  exports.deleteThumb = async (req, res) => 
+exports.deleteThumb = async(req,res) =>{
+  try
   {
-    // const id = req.params.id
-    // const movie = await movieModel.findById({'_id':id})
-    // try {
+    const id = req.params.id
+    const thumbId =  req.body
+    const movie = await movieModel.findById({'_id':id})
+    const thumb = movie.thumb
+    thumb.find(thumbItem =>
+      cloudinary_id = thumbItem.cloudinary_id)
 
-    // }
-    // catch(err){
-
-    // }
-
+    cloudinary.uploader.destroy(
+      cloudinary_id,
+      {resource_type:'image'},
+    (err,result)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(result);
+      }
+    })
+    const deleteThumb = await movieModel.findOneAndUpdate(
+      { _id: id },
+      { $pull:{'thumb':{'_id':thumbId }}},
+      { new: true }
+    );
+    res.status(200).send(deleteThumb)
+    console.log(deleteThumb);
+  }catch(err){
+    res.status(500).send(err)
+    console.log(err);
   }
 }

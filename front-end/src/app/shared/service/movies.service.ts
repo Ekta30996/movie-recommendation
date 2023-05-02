@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, retry, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, retry, tap, throwError } from 'rxjs';
 import {
   ADD_FAVORITELIST,
   ADD_WATCHLIST,
@@ -23,12 +23,17 @@ export class MoviesService {
   constructor(private http: HttpClient) {}
 
   movie!: Movie;
-  // passMovieData = new BehaviorSubject<Movie>(this.movie);
-  // currentMovie = this.passMovieData.asObservable();
 
   //search movie for ADMIN as well as USER
   searchMovie(q: string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(SERACH_MOVIE_ENDPOINT + `${q}`);
+    if(q === ''){
+      return of([])
+    }
+    return this.http.get<Movie[]>(SERACH_MOVIE_ENDPOINT + `${q}`)
+    .pipe(
+      map(res=>res),
+      tap(res=>console.log(res)
+    ));
   }
 
   //for ADMIN as well as USER
@@ -47,12 +52,6 @@ export class MoviesService {
   getMovieById(id: string): Observable<Movie> {
     return this.http.get<Movie>(READ_MOVIE_BY_ID_ENDPONT + `${id}`);
   }
-
-  // passMovieObject(movie: Movie) {
-  //   this.passMovieData.next(movie);
-  // }
-
-  //For USER
 
   addToWatchlist(id: string): Observable<Movie> {
     const body = { id: id };
@@ -90,7 +89,6 @@ export class MoviesService {
     .pipe(catchError(this.errorMgmt));
   }
 
-
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -105,8 +103,6 @@ export class MoviesService {
       return errorMessage;
     });
   }
-
-
 
   //edit movie
   editMovie(id: string, movie: FormData): Observable<HttpEvent<Movie>> {

@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -18,15 +17,14 @@ import { MoviesService } from 'src/app/shared/service/movies.service';
 export class LatestComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
   movie!: Movie;
+  state:Movie[] =[] 
   destroy$: Subject<boolean> = new Subject<boolean>();
   search$!: Subscription;
   loader: boolean = false;
 
   searchText: any = '';
 
-  constructor(
-    private _movieService: MoviesService,
-  ) {}
+  constructor(private _movieService: MoviesService) {}
 
   ngOnInit(): void {
     this.loader = true;
@@ -57,7 +55,7 @@ export class LatestComponent implements OnInit, OnDestroy {
     }
     this._movieService
       .searchMovie(q)
-      .pipe(debounceTime(100), distinctUntilChanged())
+      .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((movie) => {
         // console.log(movie);
         this.movies = movie;

@@ -6,40 +6,48 @@ import { GenresService } from 'src/app/shared/service/genres.service';
 @Component({
   selector: 'app-genre',
   templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.css']
+  styleUrls: ['./genre.component.css'],
 })
-export class GenreComponent implements OnInit , OnDestroy{
+export class GenreComponent implements OnInit, OnDestroy {
+  genres: Genre[] = [];
 
-  genres: Genre[] = []
-  subscription!: Subscription
-  loader:boolean = false
-  isClicked:boolean = false
-  clickedId!:string
-  constructor(private _genreService: GenresService){}
- 
+  listGenreSubscription!: Subscription;
+  getGenreSubscription!: Subscription
+  addGenreSubscription!: Subscription
+
+
+  loader: boolean = false;
+  isClicked: boolean = false;
+
+  clickedId!: string;
+
+  constructor(private _genreService: GenresService) {}
+
   ngOnInit(): void {
-    this.subscription =  this._genreService.loadGenre()
-    .subscribe((genre)=>{
-      this.genres = genre
+    this.listGenreSubscription = this._genreService.loadGenre().subscribe((genre) => {
+      this.genres = genre;
       console.log(this.genres);
-    })
+    });
   }
 
-  onClickGenre(id: string)
-  {
-    this.isClicked = !this.isClicked
-    this._genreService.getGenreById(id)
-    .subscribe(genre=>{
+  onClickGenre(id: string) {
+    this.isClicked = !this.isClicked;
+    this.getGenreSubscription = this._genreService.getGenreById(id).subscribe((genre) => {
       console.log(genre);
-      this.clickedId = genre['_id']
-    })
+      this.clickedId = genre['_id'];
+    });
 
-    this._genreService.addGenre(id)
-    .subscribe((genre)=>{
+    this.addGenreSubscription = this._genreService.addGenre(id).subscribe((genre) => {
       console.log(genre);
-    })
+    });
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.listGenreSubscription.unsubscribe();
+    if(this.getGenreSubscription){
+      this.getGenreSubscription.unsubscribe()
+    }
+    if(this.addGenreSubscription){
+      this.addGenreSubscription.unsubscribe()
+    }
   }
 }

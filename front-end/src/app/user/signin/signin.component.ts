@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import Swal from 'sweetalert2';
 
@@ -9,8 +10,9 @@ import Swal from 'sweetalert2';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit , OnDestroy {
   signinForm!: FormGroup;
+  signinSubscription$!:Subscription
 
   constructor(private fb:FormBuilder,
     private router: Router,
@@ -31,7 +33,7 @@ export class SigninComponent implements OnInit {
     return this.signinForm.get('password');
   }
   onSignin() {
-    this._authservice.signin(this.signinForm.value).subscribe(
+    this.signinSubscription$ = this._authservice.signin(this.signinForm.value).subscribe(
       (res) => {
         if (res['status'] === 'SUCCESS') {
           if(!res['admin'])
@@ -45,12 +47,6 @@ export class SigninComponent implements OnInit {
             this.router.navigate(['/admin/dashboard']) 
           }
         }  
-        // Swal.fire({
-        //   icon: 'success',
-        //   title: 'Your work has been saved',
-        //   showConfirmButton: false,
-        //   timer: 1500
-        // })
         localStorage.setItem('token',res['token'])
       },
       (err) => {
@@ -89,5 +85,11 @@ export class SigninComponent implements OnInit {
       }
     );
     this.signinForm.reset();
+  }
+  ngOnDestroy(): void {
+    if(this.signinSubscription$)
+    {
+      this.signinSubscription$.unsubscribe()
+    }
   }
 }

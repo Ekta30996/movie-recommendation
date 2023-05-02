@@ -1,23 +1,46 @@
 <div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar">
-      <div class="p-4">
-        <ul class="list-unstyled components mb-5 ">
-          <li class="nav-item mt-4" >
-            <a (click)="onCreateComponent(pages.home)"><i class="fas fa-home me-2"></i>Home</a>
-          </li>
-          <li class="nav-item">
-            <a (click)="onCreateComponent(pages.list)"><i class="fa-sharp fa-solid fa-list me-2"></i>List</a>
-          </li>
-          <li class="nav-item">
-            <a (click)="onCreateComponent(pages.upload)"><i class="fa-sharp fa-solid fa-upload me-2"></i>Upload</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-</div>  
-<app-header></app-header>
+  <nav id="sidebar">
+    <div class="p-4">
+      <ul class="list-unstyled components">
+        <div class="header__logo sticky">
+          <span style="color: white"
+            >Movie<span style="color: #e53637">Flix</span>
+          </span>
+        </div>
+
+        <li class="nav-item mt-4">
+          <a (click)="onCreateComponent(pages.home)"
+            ><i class="fas fa-home me-2"></i>Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a (click)="onCreateComponent(pages.list)"
+            ><i class="fa-sharp fa-solid fa-list me-2"></i>List</a
+          >
+        </li>
+        <li class="nav-item">
+          <a (click)="onCreateComponent(pages.upload)"
+            ><i class="fa-sharp fa-solid fa-upload me-2"></i>Upload</a
+          >
+        </li>
+        <li class="nav-item">
+          <button
+        class="btn btn-success  my-4"
+        type="submit"
+        style="background-color: #e53637; border: none; border-radius: 0"
+        *ngIf="_authService.signedIn()"
+        (click)="_authService.signout()"
+      >
+        Sign Out
+      </button>
+        </li> 
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
 <!-- Page Content  -->
-<div id="content" class="px-5" >
-  <!-- <app-search></app-search> -->
+<div id="content" class="px-5">
   <ng-container #container></ng-container>
 </div>

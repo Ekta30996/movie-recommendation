@@ -6,8 +6,6 @@ const auth = require("../middleware/auth");
 //upload thumbnails
 route.post("/upload/:id", auth, storage.single("thumb"), uploadThumb);
 
-//delete thumbnails
-// route.patch("/delete/:id", auth, deleteThumb);
-
+route.patch("/:id",auth,deleteThumb)
 
 module.exports = route;

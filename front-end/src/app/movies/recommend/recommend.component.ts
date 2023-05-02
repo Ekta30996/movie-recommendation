@@ -6,28 +6,29 @@ import { MoviesService } from 'src/app/shared/service/movies.service';
 @Component({
   selector: 'app-recommend',
   templateUrl: './recommend.component.html',
-  styleUrls: ['./recommend.component.css']
+  styleUrls: ['./recommend.component.css'],
 })
-export class RecommendComponent implements OnInit , OnDestroy {
+export class RecommendComponent implements OnInit, OnDestroy {
+  movies: Movie[] = [];
+  subscription!: Subscription;
+  loader: boolean = false;
+  constructor(private _movieService: MoviesService) {}
 
-  movies: Movie[] = []
-  subscription!: Subscription
-  loader: boolean = false
-  constructor(private _movieService: MoviesService){}
-  
   ngOnInit(): void {
-    this.loader = true
-    this.subscription = this._movieService.listMovieByGenre()
-    .subscribe(movie=>{
-      this.movies = movie
-      this.loader = false
-      // console.log(this.movies);
-    },err=>{
-      // console.log(err);
-    })
+    this.loader = true;
+    this.subscription = this._movieService.listMovieByGenre().subscribe(
+      (movie) => {
+        this.movies = movie;
+        this.loader = false;
+        // console.log(this.movies);
+      },
+      (err) => {
+        // console.log(err);
+      }
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
 }

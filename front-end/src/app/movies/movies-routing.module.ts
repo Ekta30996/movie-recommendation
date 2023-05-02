@@ -12,20 +12,30 @@ import { WatchNowComponent } from './watch-now/watch-now.component';
 import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {path:'home',component:HomePageComponent},
-  {path:'recommend',component:RecommendComponent,canActivate:[AuthGuard]},
-  {path:'favoritelist',component:FavoriteListComponent,canActivate:[AuthGuard]},
-  {path:'watchlist',component:WatchListComponent,canActivate:[AuthGuard]},
-  {path:'latest',component:LatestComponent},
-  {path:'search/:q',component:SearchComponent},
-  {path:'details/:id',component:DetailsComponent},
-  { path: 'watch', component:WatchNowComponent,canActivate:[AuthGuard]},
-
-
+  { path: 'home', component: HomePageComponent },
+  {
+    path: 'recommend',
+    component: RecommendComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'favoritelist',
+    component: FavoriteListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'watchlist',
+    component: WatchListComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'latest', component: LatestComponent },
+  { path: 'search/:q', component: SearchComponent },
+  { path: 'details/:id', component: DetailsComponent },
+  { path: 'watch', component: WatchNowComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MoviesRoutingModule { }
+export class MoviesRoutingModule {}

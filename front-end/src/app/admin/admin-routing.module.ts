@@ -5,11 +5,15 @@ import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.c
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

@@ -3,19 +3,18 @@ a:hover {
   text-decoration: none;
   color: white;
 }
-.footer{
+.footer {
   top: 73%;
 }
-.footer__nav{
+.footer__nav {
   height: 20px;
 }
-.footer__nav a
-{
-  text-decoration: none;  
+.footer__nav a {
+  text-decoration: none;
   color: white;
   text-decoration: none;
 }
-.footer__nav a:hover{
+.footer__nav a:hover {
   opacity: 0.5;
   cursor: pointer;
 }

@@ -9,9 +9,13 @@ import { MoviesService } from 'src/app/shared/service/movies.service';
   styleUrls: ['./favorite-list.component.css'],
 })
 export class FavoriteListComponent implements OnInit, OnDestroy {
+
   favoritelist: Movie[] = [];
+
   subscription!: Subscription;
+
   loader: boolean = false;
+  
   searchText: any;
 
   constructor(private _movieService: MoviesService) {}

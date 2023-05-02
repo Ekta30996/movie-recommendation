@@ -7,10 +7,9 @@ import { Signin } from 'src/app/user/signin/signin.interface';
 import { Signup } from 'src/app/user/signup/signup.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(signupUser: Signup): Observable<Signup> {
