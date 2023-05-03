@@ -2,6 +2,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  TrackByFunction,
 } from '@angular/core';
 import {
   Subscription,
@@ -27,6 +28,12 @@ export class MoviesComponent implements OnInit, OnDestroy {
   deleteMovieSubscription!: Subscription;
   editMovieSubscription!: Subscription;
 
+
+  page: number = 1
+  count: number = 0
+  tableSize: number = 2
+  tablesSizes: number[] = [2,4,6]
+
   showText() {
     this.isReadMore = !this.isReadMore;
   }
@@ -36,11 +43,12 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loader = true;
-    // this.subscription = interval(5000)
-    // .subscribe((movie)=>{
-    //   this.listMovies()
-    // })
+    this.listAllMovies()   
+   }
 
+
+   listAllMovies()
+   {
     this.listMovieSubscription = this._movieService.listMovies().subscribe(
       (movie) => {
         this.movies = movie;
@@ -53,6 +61,23 @@ export class MoviesComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  movieTrackBy(index:number,movie:Movie):string{
+    return movie._id
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.listAllMovies();
+  }
+
+  onTableSizeChange(event: any): void { 
+    this.tableSize = event.target.AsNumber;
+    this.page = 1;
+    this.listAllMovies();
+  }
+
+  
 
   deleteMovie(id: string) {
     Swal.fire({

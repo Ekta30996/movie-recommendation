@@ -26,6 +26,10 @@ export class WatchListComponent implements OnInit, OnDestroy {
       });
   }
 
+  movieTrackBy(index:number,movie:Movie):string{
+    return movie._id
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

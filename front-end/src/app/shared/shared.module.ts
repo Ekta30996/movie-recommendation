@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { SliderComponent } from './slider/slider.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AvatarModule } from 'ngx-avatars';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SliderComponent,
     PageNotFoundComponent,
   ],
-  imports: [CommonModule, FormsModule, SharedRoutingModule],
+  imports: [CommonModule, FormsModule, SharedRoutingModule,AvatarModule],
   exports: [
     HeaderComponent,
     FooterComponent,

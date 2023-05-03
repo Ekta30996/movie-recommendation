@@ -17,7 +17,16 @@
 
 <ng-container *ngIf="!isEdit && !addThumb">
   <div class="container mt-5 mb-5 mx-3" *ngIf="movies.length != 0; else noData">
-    <div class="d-flex justify-content-center row" *ngFor="let movie of movies">
+    <div class="d-flex justify-content-center row" *ngFor="let movie of movies
+      | paginate
+        : {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+          };
+    let i = index;
+    trackBy: movieTrackBy
+  ">
       <ng-container>
         <div class="col-md-11">
           <div class="row p-2 border rounded" style="background-color: #070720">
@@ -102,6 +111,17 @@
     </div>
   </div>
 </ng-container>
+
+<div class="d-flex justify-content-center">
+  <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)"
+  >
+  </pagination-controls>
+</div>
+
+
 
 <ng-container *ngIf="isEdit">
   <app-upload-movie [movieDetail]="movie"></app-upload-movie>

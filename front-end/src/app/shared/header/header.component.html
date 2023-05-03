@@ -23,18 +23,7 @@
       <div class="col-lg-3">
         <div class="header__right">
           <!-- <app-search></app-search> -->
-          <a><span class="icon_profile"></span></a>
-          <a
-            routerLink="/signin"
-            class="primary"
-            *ngIf="!_authService.signedIn()"
-            >Sign In</a
-          >
-          <Button
-            *ngIf="_authService.signedIn()"
-            (click)="_authService.signout()"
-            >Sign Out</Button
-          >
+          <ngx-avatars name="{{user['username']}}" size="50" routerLink="/profile"></ngx-avatars>
         </div>
       </div>
     </div>

@@ -5,16 +5,20 @@ import { UserRoutingModule } from './user-routing.module';
 import { SigninComponent } from './signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AvatarModule } from 'ngx-avatars';
 
 
 @NgModule({
   declarations: [
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AvatarModule,
     UserRoutingModule
   ]
 })

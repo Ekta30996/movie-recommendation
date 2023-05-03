@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const userModel = require("../models/user.model");
-const sendMail = async (username, email, userid) => {
+const sendInviteMail = async (username, email, userid) => {
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -47,7 +47,7 @@ const sendMail = async (username, email, userid) => {
       <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;"> 
      <tr>
      <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;"> 
-    <p style="margin: 0;">Hii ${username}, Thank you for choosing MovieFlix. First, you need to confirm your account. Just press the button below.</p>
+    <p style="margin: 0;">Hii ${username}, Thank you for choosing MovieFlix. You got apportunity for admin. Just press the button below.</p>
     </td> 
     </tr> 
      <tr> 
@@ -57,7 +57,7 @@ const sendMail = async (username, email, userid) => {
       <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;"> 
        <table border="0" cellspacing="0" cellpadding="0"> 
       <tr>
-    <td align="center" style="border-radius: 20px;" bgcolor="#e53637"> <a href="http://localhost:3000/user/invite?id=${userid}"  target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 20px; border: 1px solid #FFA73B; display: inline-block;">
+    <td align="center" style="border-radius: 20px;" bgcolor="#e53637"> <a href="http://localhost:3000/user/verify?id=${userid}"  target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 20px; border: 1px solid #FFA73B; display: inline-block;">
         Confirm Account</a>
       </td>
      </tr>
@@ -96,14 +96,14 @@ const sendMail = async (username, email, userid) => {
   } catch (err) {}
 };
 
-const emailVerification = async (req, res) => {
+const emailInvitation = async (req, res) => {
   try {
     const isVerified = await userModel.updateOne(
       { _id: req.query.id },
-      { $set: { isverified: 1 } }
+      { $set: { isadmin: 1 } }
     );
     console.log(isVerified);
-    res.render("email-verify");
+    res.render("email-invite");
   } catch (err) {
     res.status(500).json({
       message: "Error occurs when email verification",
@@ -113,4 +113,4 @@ const emailVerification = async (req, res) => {
   }
 };
 
-module.exports = { sendMail, emailVerification };
+module.exports = { sendInviteMail, emailInvitation };

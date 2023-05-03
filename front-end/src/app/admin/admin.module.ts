@@ -13,6 +13,7 @@ import { UploadMovieComponent } from './uploading/upload-movie/upload-movie.comp
 import { UploadGenreComponent } from './uploading/upload-genre/upload-genre.component';
 import { SearchComponent } from './search/search.component';
 import { UploadThumbComponent } from './uploading/upload-thumb/upload-thumb.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,6 @@ import { UploadThumbComponent } from './uploading/upload-thumb/upload-thumb.comp
     SearchComponent,
     UploadThumbComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule],
+  imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule,NgxPaginationModule],
 })
 export class AdminModule {}

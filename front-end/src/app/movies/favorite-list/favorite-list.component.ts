@@ -31,6 +31,11 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
       });
   }
 
+
+  movieTrackBy(index:number, movie:Movie):string {
+    return movie._id;
+   }
+
   onSearchTextEntered(searchValue: any) {
     this.searchText = searchValue;
     this.onSearchApi(this.searchText);

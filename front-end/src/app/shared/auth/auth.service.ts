@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SIGNIN_ENDPOINT, SIGNUP_ENDPOINT } from 'src/app/shared/constant';
+import { READ_GENRELIST_ENDPOINT, SIGNIN_ENDPOINT, SIGNUP_ENDPOINT } from 'src/app/shared/constant';
+import { User } from 'src/app/user/profile/user.interface';
 import { Signin } from 'src/app/user/signin/signin.interface';
 import { Signup } from 'src/app/user/signup/signup.interface';
 
@@ -31,5 +32,9 @@ export class AuthService {
   signout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
+  }
+
+  getGenreList():Observable<User>{
+    return this.http.get<User>(READ_GENRELIST_ENDPOINT )
   }
 }

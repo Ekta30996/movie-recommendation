@@ -1,5 +1,6 @@
 const userModel = require('../models/user.model');
 const { sendMail } = require('./user.mail');
+const { sendInviteMail } = require('./admin-invite.mail')
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -100,6 +101,8 @@ exports.login = async (req, res) => {
           status: 'ERROR',
         });
       }
+
+      // sendInviteMail(username, email, newUser._id);
   
       //3) generate token
       const token = jwt.sign(
@@ -108,6 +111,7 @@ exports.login = async (req, res) => {
         { expiresIn: '1d' }
       );
       const admin = userExists.isadmin
+
       res.status(200).json({
         message: 'User login successfully!!',
         token,
@@ -122,6 +126,8 @@ exports.login = async (req, res) => {
       });
       console.log('Error occurs when user signin', err);
     }
+
+    
   };
 
   exports.addGenre = async (req, res) => {
@@ -344,4 +350,37 @@ exports.login = async (req, res) => {
       });
       console.log('Error occurs when retrieve movie from favoritelist', err);
     }
+  }
+
+  exports.getGenrelist = async(req,res) =>{
+    try
+    {
+      const id = req.userId
+      const genrelist = await userModel.aggregate(
+        [
+          {
+            '$match': {
+              '_id': new ObjectId(id)
+            }
+          }, {
+            '$lookup': {
+              'from': 'genres', 
+              'localField': 'genrelist', 
+              'foreignField': '_id', 
+              'as': 'result'
+            }
+          }, {
+            '$project': {
+              'genres': '$result'
+            }
+          }
+        ]
+      )
+      res.status(200).send(genrelist[0])
+      console.log('genrelist of user'+genrelist);
+    }catch(err){
+      res.status(500).send(err)
+      console.log('error occurs when get user genrelist'+err);
+    }    
+    
   }

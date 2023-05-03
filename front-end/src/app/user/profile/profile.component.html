@@ -1,0 +1,80 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/> -->
+                            <ngx-avatars name="{{user['username']}}" size="100"></ngx-avatars>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{user['username']}}
+                                    </h5>            
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <h3 class="nav-link" [style]="about ? ' border-bottom:2px solid#18184e;' : 'color:#070720' "  (click)="onAbout()">About</h3>
+                                </li>
+                                <li class="nav-item">
+                                    <h3 class="nav-link" [style]="genre ? ' border-bottom:2px solid#18184e;' : 'color:#070720' " (click)="onGenre()">Genre</h3>
+                                </li>
+                            </ul>
+                        </div>  
+                    </div>
+                    <div class="col-md-2">
+                        <Button
+                            *ngIf="_authService.signedIn()"
+                            (click)="_authService.signout()"
+                            >Sign Out</Button>
+                    </div>
+                </div>
+                <div class="row">   
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" *ngIf="about">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user['username']}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user['email']}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            
+                            <div *ngIf="genre">
+                                        <div class="row" *ngFor="let genre of genrelist?.[0]?.['genres']">
+                                            <div class="col-md-6">
+                                                <label>Genre</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{genre?.['genre']}}</p>
+                                            </div>
+                                           
+                                        </div>
+                                        
+                                    <div class="col-md-6">
+                                        <button routerLink="/genre">Choose Genre</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>

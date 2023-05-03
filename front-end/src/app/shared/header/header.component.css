@@ -31,3 +31,7 @@ button {
   font-weight: 500;
   border: none;
 }
+.icon_profile{
+  border-radius: 50%;
+  width: 100px;
+}

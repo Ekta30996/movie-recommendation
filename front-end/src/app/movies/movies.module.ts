@@ -10,6 +10,7 @@ import { WatchListComponent } from './watch-list/watch-list.component';
 import { LatestComponent } from './latest/latest.component';
 import { DetailsComponent } from './details/details.component';
 import { WatchNowComponent } from './watch-now/watch-now.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { WatchNowComponent } from './watch-now/watch-now.component';
     DetailsComponent,
     WatchNowComponent,
   ],
-  imports: [CommonModule, SharedModule, MoviesRoutingModule],
+  imports: [CommonModule, SharedModule, MoviesRoutingModule,NgxPaginationModule],
   exports: [HomePageComponent],
 })
 export class MoviesModule {}

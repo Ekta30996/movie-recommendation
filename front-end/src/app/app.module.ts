@@ -24,7 +24,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     HttpClientModule,
     SharedModule,
     MoviesModule, 
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [AuthService,
     AuthGuard,

@@ -4,7 +4,7 @@ import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.c
 
 import { GenreComponent } from './genre/genre.component';
 
-const routes: Routes = [{ path: 'genre', component: GenreComponent }];
+const routes: Routes = [{ path: '', component: GenreComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
