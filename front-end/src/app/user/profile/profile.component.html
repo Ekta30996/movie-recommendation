@@ -8,7 +8,6 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/> -->
                             <ngx-avatars name="{{user['username']}}" size="100"></ngx-avatars>
                         </div>
                         
@@ -18,7 +17,12 @@
                         <div class="profile-head">
                                     <h5>
                                         {{user['username']}}
-                                    </h5>            
+                                    </h5>      
+                                    <Button
+                                        *ngIf="_authService.signedIn()"
+                                        (click)="_authService.signout()"
+                                        >Sign Out
+                                    </Button>      
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <h3 class="nav-link" [style]="about ? ' border-bottom:2px solid#18184e;' : 'color:#070720' "  (click)="onAbout()">About</h3>
@@ -29,11 +33,10 @@
                             </ul>
                         </div>  
                     </div>
-                    <div class="col-md-2">
-                        <Button
-                            *ngIf="_authService.signedIn()"
-                            (click)="_authService.signout()"
-                            >Sign Out</Button>
+                    <div class="col-2">
+                        
+                        <button routerLink="/genre/genre" (click)="onNavigateGenre()">Choose Genre</button>
+
                     </div>
                 </div>
                 <div class="row">   
@@ -56,8 +59,23 @@
                                                 <p>{{user['email']}}</p>
                                             </div>
                                         </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Admin</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{user['isadmin'] ? 'true': 'false'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email Verify</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user['isverified'] ? 'true': 'false'}}</p>
+                                    </div>
+                                </div>
                             </div>
-                            
                             <div *ngIf="genre">
                                         <div class="row" *ngFor="let genre of genrelist?.[0]?.['genres']">
                                             <div class="col-md-6">
@@ -70,7 +88,6 @@
                                         </div>
                                         
                                     <div class="col-md-6">
-                                        <button routerLink="/genre">Choose Genre</button>
                                 </div>
                             </div>
                         </div>

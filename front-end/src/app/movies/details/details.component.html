@@ -54,7 +54,7 @@
             </a>
             <a
               class="follow-btn"
-              *ngIf="addToFavorite"
+              *ngIf="addToFavorite || favorite"
               (click)="addFavoriteList(movie._id)"
               ><i class="fa-solid fa-star"></i>
             </a>
@@ -66,7 +66,7 @@
             ></a>
             <a
               class="follow-btn"
-              *ngIf="addToWatch"
+              *ngIf="addToWatch || watch"
               (click)="addWatchList(movie._id)"
               ><i class="fa-solid fa-bookmark"></i
             ></a>

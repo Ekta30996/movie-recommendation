@@ -2,7 +2,7 @@
   <nav id="sidebar">
     <div class="p-4">
       <ul class="list-unstyled components">
-        <div class="header__logo sticky">
+        <div class="logo">
           <span style="color: white"
             >Movie<span style="color: #e53637">Flix</span>
           </span>
@@ -24,17 +24,10 @@
           >
         </li>
         <li class="nav-item">
-          <button
-        class="btn btn-success  my-4"
-        type="submit"
-        style="background-color: #e53637; border: none; border-radius: 0"
-        *ngIf="_authService.signedIn()"
-        (click)="_authService.signout()"
-      >
-        Sign Out
-      </button>
-        </li> 
-        
+          <a (click)="onCreateComponent(pages.profile)"
+            ><i class="fa-sharp fa-solid fa-user me-2"></i>Profile</a
+          >
+        </li>
       </ul>
     </div>
   </nav>

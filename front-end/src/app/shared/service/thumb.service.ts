@@ -34,8 +34,8 @@ export class ThumbService {
     });
   }
 
-  deleteThumb(id: string, thumbId: string): Observable<Thumb> {
-    const body = {id:thumbId}
+  deleteThumb(id: string): Observable<Thumb> {
+    const body = {id:id}
     return this.http.patch<Thumb>(DELETE_THUMB_ENDPOINT + `${id}` , body);
   }
 

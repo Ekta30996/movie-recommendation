@@ -12,8 +12,9 @@ exports.uploadGenre = (req, res) => {
     },
     (err, result) => {
       if (err) {
-        console.log(err);
-        return res.status(500).send(err);
+        console.log("Error occurs when upload genre on cloudinary ", err);
+      } else {
+        console.log("Genre uploaded successfully on cloudinary ", result);
       }
       try {
         const newGenre = new genreModel({
@@ -23,15 +24,12 @@ exports.uploadGenre = (req, res) => {
           cloudinary_id: result.public_id,
         });
         newGenre.save();
-        res.status(200).json({
-          status: "SUCCESS",
-          newGenre,
-        });
-        console.log("new genre" + newGenre);
+        res.status(200).send(newGenre);
+        console.log("Genre uploaded successfully!!" + newGenre);
       } catch (err) {
         res.status(500).send(err);
       }
-      console.log("Error occurs when upload genre");
+      console.log("Error occurs when upload genre ", err);
     }
   );
 };
@@ -41,7 +39,7 @@ exports.readAllGenre = async (req, res) => {
   try {
     const read = await genreModel.find();
     res.status(200).send(read);
-    console.log("All genre", read);
+    console.log("All genre ", read);
   } catch (err) {
     res.status(500).send(err);
     console.log("Error occurs when read all genre ", err);
@@ -54,10 +52,10 @@ exports.readGenreById = async (req, res) => {
     const id = req.params.id;
     const read = await genreModel.find({ _id: id });
     res.status(200).send(read[0]);
-    console.log(read);
+    console.log("Read genre by id ", read[0]);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when read genre by id", err);
+    console.log("Error occurs when read genre by id ", err);
   }
 };
 
@@ -70,25 +68,18 @@ exports.deleteGenreById = async (req, res) => {
       { resource_type: "image" },
       (err, result) => {
         if (err) {
-          console.log(err);
+          console.log("Error occurs when delete genre from cloudinary", err);
         } else {
-          console.log(result);
+          console.log("Genre deleted successfully from cloudinary ", result);
         }
       }
     );
     const deleted = await genreModel.deleteOne(genre);
-
-    res.status(200).json({
-      message: "Genre deleted successfully!!",
-      deleted,
-    });
-    console.log("Genre deleted successfully!!");
+    res.status(200).send(deleted);
+    console.log("Genre deleted successfully!! ", deleted);
   } catch (err) {
-    res.status(500).json({
-      message: "Error occur when delete genre",
-      err,
-    });
-    console.log("Error occur when delete genre" + err);
+    res.status(500).send(err);
+    console.log("Error occurs when delete genre" + err);
   }
 };
 
@@ -102,9 +93,15 @@ exports.updatedGenreById = async (req, res) => {
       { resource_type: "image" },
       (err, result) => {
         if (err) {
-          console.log(err);
+          console.log(
+            "Error occurs when update(deleted) genre on cloudinary ",
+            err
+          );
         } else {
-          console.log(result);
+          console.log(
+            "Genre updated(deleted) successfully on cloudinary ",
+            result
+          );
         }
       }
     );
@@ -116,8 +113,15 @@ exports.updatedGenreById = async (req, res) => {
       },
       async (err, result) => {
         if (err) {
-          console.log(err);
-          return res.status(500).send(err);
+          console.log(
+            "Error occurs when updated(upload) genre on cloudinary ",
+            err
+          );
+        } else {
+          console.log(
+            "Genre updated(uploaded) successfully on cloudinary ",
+            result
+          );
         }
         const updatedGenre = {
           genre: req.body.genre,
@@ -130,17 +134,12 @@ exports.updatedGenreById = async (req, res) => {
           updatedGenre,
           { new: true }
         );
-        res.status(200).json({
-          message: "updated",
-          updated,
-        });
+        res.status(200).send(updated);
+        console.log("Genre updated successfully!! ", updated);
       }
     );
   } catch (err) {
-    res.status(500).json({
-      message: "Error occur when upadate genre",
-      err,
-    });
-    console.log("Error occur when update genre" + err);
+    res.status(500).send(err);
+    console.log("Error occur when update genre ", err);
   }
 };

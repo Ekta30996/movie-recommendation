@@ -94,13 +94,14 @@ export class MoviesComponent implements OnInit, OnDestroy {
           (movie) => {
             console.log(movie);
             this.loader = false;
+            Swal.fire('Deleted!', 'Movie has been deleted.', 'success');
+            this.movies = this.movies.filter(item => item['_id'] != id);
           },
           (err) => {
             console.log(err);
             this.loader = false;
           }
         );
-        Swal.fire('Deleted!', 'Movie has been deleted.', 'success');
       }
     });
   }
@@ -119,7 +120,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteThumb(id:string, thumbId:string){
+  deleteThumb(id:string){
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -130,7 +131,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Yes, delete it!', 
     }).then((result) => {
       if (result.isConfirmed) {
-        this.deleteMovieSubscription =  this._thumbService.deleteThumb(id,thumbId).subscribe(
+        this.deleteMovieSubscription =  this._thumbService.deleteThumb(id).subscribe(
           (thumb) => {
             console.log(thumb);
             this.loader = false;
@@ -144,6 +145,9 @@ export class MoviesComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+
+  
 
   ngOnDestroy(): void {
     this.listMovieSubscription.unsubscribe();

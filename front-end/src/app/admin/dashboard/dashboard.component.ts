@@ -4,6 +4,7 @@ import { HomeComponent } from '../home/home.component';
 import { UploadComponent } from '../uploading/upload/upload.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth/auth.service';
+import { ProfileComponent } from 'src/app/user/profile/profile.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +16,12 @@ export class DashboardComponent implements OnInit{
   @ViewChild('container',{read:ViewContainerRef , static:true})
   container!:ViewContainerRef
 
+  isAdmin:boolean = false
   pages:any ={
     home:'home',
     list:'list',
-    upload:'upload'
+    upload:'upload',
+    profile:'profile'
   }
 
   constructor(public router: Router,public _authService: AuthService){}
@@ -46,6 +49,11 @@ export class DashboardComponent implements OnInit{
       }
       case this.pages.upload:{
         type = UploadComponent
+        break
+      }
+      case this.pages.profile:{
+        type = ProfileComponent
+        this.isAdmin = true
       }
     }
     return type

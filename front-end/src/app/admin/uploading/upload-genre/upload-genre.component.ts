@@ -1,7 +1,6 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { GenresService } from 'src/app/shared/service/genres.service';
@@ -12,32 +11,28 @@ import Swal from 'sweetalert2';
   templateUrl: './upload-genre.component.html',
   styleUrls: ['./upload-genre.component.css'],
 })
-export class UploadGenreComponent implements OnInit, OnChanges , OnDestroy {
-
+export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
   @Input() genreDetail!: Genre;
 
-  uploadGenreSubscription!: Subscription
-  editGenreSubscription!: Subscription
+  uploadGenreSubscription!: Subscription;
+  editGenreSubscription!: Subscription;
 
   isEdit: boolean = false;
   inProgress: boolean = false;
   isSelectedInEditMode: boolean = false;
-  
+
   progress: number = 0;
 
   uploadForm!: FormGroup;
   selectedFile!: File;
-  
+
   message: string = '';
-  
+
   imgURL: any;
 
   reader = new FileReader();
 
-  constructor(
-    private fb: FormBuilder,
-    private _genreService: GenresService,
-  ) {}
+  constructor(private fb: FormBuilder, private _genreService: GenresService) {}
 
   ngOnInit(): void {
     this.uploadForm = this.fb.group({
@@ -128,7 +123,7 @@ export class UploadGenreComponent implements OnInit, OnChanges , OnDestroy {
           showConfirmButton: false,
           timer: 4000,
         });
-        this.message = 'Could not upload the file!';
+        // this.message = 'Could not upload the file!';
         this.imgURL = this.reader.EMPTY;
         // console.log(this.message);
       }
@@ -179,7 +174,7 @@ export class UploadGenreComponent implements OnInit, OnChanges , OnDestroy {
           showConfirmButton: false,
           timer: 4000,
         });
-        this.message = 'Could not upload the file!';
+        // this.message = 'Could not upload the file!';
         this.imgURL = this.reader.EMPTY;
         // console.log(err);
       }
@@ -188,11 +183,11 @@ export class UploadGenreComponent implements OnInit, OnChanges , OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.uploadGenreSubscription){
-      this.uploadGenreSubscription.unsubscribe()
+    if (this.uploadGenreSubscription) {
+      this.uploadGenreSubscription.unsubscribe();
     }
-    if(this.editGenreSubscription){
-      this.editGenreSubscription.unsubscribe()
+    if (this.editGenreSubscription) {
+      this.editGenreSubscription.unsubscribe();
     }
   }
 }

@@ -54,14 +54,14 @@ export class MoviesService {
   }
 
   addToWatchlist(id: string): Observable<Movie> {
-    const body = { id: id };
-    return this.http.post<Movie>(ADD_WATCHLIST, body)
+    // const body = { id: id };
+    return this.http.post<Movie>(ADD_WATCHLIST, {id:id})
     .pipe( retry(3),tap((movie)=>movie));
   }
 
   addToFavoritelist(id: string): Observable<Movie> {
-    const body = { id: id };
-    return this.http.post<Movie>(ADD_FAVORITELIST, body)
+    // const body = { id: id };
+    return this.http.post<Movie>(ADD_FAVORITELIST, {id:id})
     .pipe( retry(3), tap((movie)=>movie));;
   }
 

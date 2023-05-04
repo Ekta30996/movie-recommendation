@@ -59,13 +59,14 @@ export class GenresComponent implements OnInit, OnDestroy {
         this.deleteGenreSubscription = this._genreService.deleteGenre(id).subscribe(
           (genre) => {
             this.loader = false;
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+            this.genres = this.genres.filter(item=>item['_id'] != id)
           },
           (err) => {
             console.log(err);
             this.loader = false;
           }
         );
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
   }
