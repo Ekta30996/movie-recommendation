@@ -20,6 +20,7 @@ export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
   isEdit: boolean = false;
   inProgress: boolean = false;
   isSelectedInEditMode: boolean = false;
+  loader:boolean = false
 
   progress: number = 0;
 
@@ -51,7 +52,7 @@ export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     this.selectedFile = (target.files as FileList)[0];
-    console.log(this.selectedFile);
+    // console.log(this.selectedFile);
 
     if (
       this.selectedFile.type == 'image/jpg' ||
@@ -94,7 +95,7 @@ export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
     fd.append('image', this.selectedFile, this.selectedFile.name);
 
     this.inProgress = true;
-
+    this.loader = true
     this.uploadGenreSubscription = this._genreService.uploadGenre(fd).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
@@ -105,6 +106,7 @@ export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
             this.inProgress = false;
             this.progress = 0;
             this.imgURL = this.reader.EMPTY;
+            this.loader = false
             Swal.fire({
               icon: 'success',
               title: 'Genre uploaded successfully!!',
@@ -144,9 +146,10 @@ export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
 
     this.inProgress = true;
     this.isSelectedInEditMode = true;
-
+    this.loader = true
     this.editGenreSubscription = this._genreService.editGenre(id, fd).subscribe(
       (event: any) => {
+        
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);
           // console.log(this.progress);
@@ -156,6 +159,7 @@ export class UploadGenreComponent implements OnInit, OnChanges, OnDestroy {
             this.inProgress = false;
             this.progress = 0;
             this.imgURL = this.reader.EMPTY;
+            this.loader = false
             Swal.fire({
               icon: 'success',
               title: 'Genre edited successfully!!',

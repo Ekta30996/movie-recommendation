@@ -1,10 +1,6 @@
 <div id="preloder" *ngIf="loader">
   <div class="loader"></div>
 </div>
-<app-search
-  (searchTextChanged)="onSearchTextEntered($event)"
-  [state]="movies"
-></app-search>
 <div class="container py-4">
   <div class="row">
     <div class="col-lg-12">
@@ -19,8 +15,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let movie of movies; trackBy: movieTrackBy">
-            <div class="product__item" *ngFor="let thumb of movie.thumb">
+          <div
+            class="col-lg-4 col-md-6 col-sm-6"
+            *ngFor="let movie of movies; trackBy: movieTrackBy"
+          >
+            <div class="product__item" *ngFor="let thumb of movie.thumb"  >
               <a [routerLink]="['/movies/details', movie._id]">
                 <div class="product__item__pic">
                   <video

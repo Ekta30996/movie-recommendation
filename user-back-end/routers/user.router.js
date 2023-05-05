@@ -1,6 +1,5 @@
-const { emailInvitation } = require('../controllers/admin-invite.mail')
 const {register,login, readByGenre, readWatchlist, readFavoritelist, addGenre, addWatchlist, addfavoritelist, getGenrelist}  = require('../controllers/user.controller')
-const { emailVerification } = require('../controllers/user.mail')
+const { emailVerification, emailInvitation } = require('../controllers/user.mail')
 const auth = require('../middleware/auth')
 const route = require('express').Router()
 

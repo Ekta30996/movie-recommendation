@@ -6,10 +6,8 @@ import { FavoriteListComponent } from './favorite-list/favorite-list.component';
 import { WatchListComponent } from './watch-list/watch-list.component';
 import { LatestComponent } from './latest/latest.component';
 import { AuthGuard } from '../shared/auth/auth.guard';
-import { SearchComponent } from '../shared/search/search.component';
 import { DetailsComponent } from './details/details.component';
 import { WatchNowComponent } from './watch-now/watch-now.component';
-import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -29,8 +27,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'latest', component: LatestComponent },
-  { path: 'search/:q', component: SearchComponent },
-  { path: 'details/:id', component: DetailsComponent },
+  { path: 'latest/:q', component: LatestComponent },
+  { path: 'details/:id', component: DetailsComponent , canActivate:[AuthGuard] },
   { path: 'watch', component: WatchNowComponent, canActivate: [AuthGuard] },
 ];
 

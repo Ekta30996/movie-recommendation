@@ -15,7 +15,7 @@ export class WatchListComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   loader: boolean = false;
   constructor(private _movieService: MoviesService,
-    private router:Router) {}
+    private router: Router) { }
 
   ngOnInit(): void {
     // this.loader = true;
@@ -27,28 +27,28 @@ export class WatchListComponent implements OnInit, OnDestroy {
         // console.log(movie);
         // console.log(this.watchlist);
       },
-      (err)=>{
-        if (err['status'] == '0') {
-         Swal.fire({
-           icon: 'error',
-           title: 'Server is not running',
-           showConfirmButton: false,
-           timer: 4000,
-         });
-       }
-       else if (err['status'] == '401') {
-         Swal.fire({
-           icon: 'error',
-           title: 'Unauthorized user',
-           showConfirmButton: false,
-           timer: 4000,
-         });
-         this.router.navigate(['/'])
-       }
-    })
+        (err) => {
+          if (err['status'] == '0') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Server is not running',
+              showConfirmButton: false,
+              timer: 4000,
+            });
+          }
+          else if (err['status'] == '401') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Unauthorized user',
+              showConfirmButton: false,
+              timer: 4000,
+            });
+            this.router.navigate(['/'])
+          }
+        })
   }
 
-  movieTrackBy(index:number,movie:Movie):string{
+  movieTrackBy(index: number, movie: Movie): string {
     return movie._id
   }
 

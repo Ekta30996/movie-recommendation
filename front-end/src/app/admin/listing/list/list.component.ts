@@ -17,8 +17,6 @@ export class ListComponent implements OnInit {
   @ViewChild('list', { read: ViewContainerRef, static: true })
   container!: ViewContainerRef;
 
-
-
   pages = {
     movie: 'movie',
     genre: 'genre',
@@ -47,6 +45,4 @@ export class ListComponent implements OnInit {
     }
     return type;
   }
-
- 
 }

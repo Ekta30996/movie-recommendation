@@ -2,7 +2,7 @@
 export const SIGNUP_ENDPOINT = 'http://localhost:3000/user/signup';
 export const SIGNIN_ENDPOINT = 'http://localhost:3000/user/signin';
 export const ADD_GENRE_ENDPOINT = 'http://localhost:3000/user/addgenre';
-export const READ_GENRELIST_ENDPOINT = 'http://localhost:3000/user'
+export const READ_GENRELIST_ENDPOINT = 'http://localhost:3000/user';
 
 //when user add movie in watchlist or favorite list
 export const ADD_WATCHLIST = 'http://localhost:3000/user/watchlist';

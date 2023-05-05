@@ -28,16 +28,14 @@ export class ThumbService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
+    // console.log(errorMessage);
     return throwError(() => {
       return errorMessage;
     });
   }
 
   deleteThumb(id: string): Observable<Thumb> {
-    const body = {id:id}
-    return this.http.patch<Thumb>(DELETE_THUMB_ENDPOINT + `${id}` , body);
+    const body = { id: id };
+    return this.http.patch<Thumb>(DELETE_THUMB_ENDPOINT + `${id}`, body);
   }
-
-
 }

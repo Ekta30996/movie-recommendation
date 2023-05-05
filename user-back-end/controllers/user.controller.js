@@ -1,6 +1,5 @@
 const userModel = require('../models/user.model');
 const { sendMail } = require('./user.mail');
-const { sendInviteMail } = require('./admin-invite.mail')
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

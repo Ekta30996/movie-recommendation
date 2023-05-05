@@ -346,7 +346,7 @@ ol {
 	list-style: none;
 	display: inline-block;
 	position: relative;
-	margin-right: 16px;
+	margin-right: 10px;
 }
 
 .header__menu ul li.active a {
@@ -377,14 +377,14 @@ ol {
 
 .header__right {
 	text-align: right;
-	padding: 20px 0 15px;
+	padding-top: 15px ;
 }
 
 .header__right a {
 	display: inline-block;
 	font-size: 18px;
 	color: #ffffff;
-	margin-right: 30px;
+	margin-right: 20px;
 }
 
 .header__right a:last-child {
@@ -405,7 +405,7 @@ ol {
 
 .hero__items {
 	padding: 250px 0 42px 50px;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 
 .hero__text {

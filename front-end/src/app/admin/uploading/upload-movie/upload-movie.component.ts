@@ -8,7 +8,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Genre } from 'src/app/shared/genre.interface';
 import { Movie } from 'src/app/shared/movie.interface';
@@ -22,12 +21,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./upload-movie.component.css'],
 })
 export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
-
   @Input() movieDetail!: Movie;
 
   isEdit: boolean = false;
   inProgress: boolean = false;
   isSelectedInEditMode: boolean = false;
+  loader:boolean = false
 
   uploadForm!: FormGroup;
   selectedFile!: File;
@@ -47,8 +46,7 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private _genreService: GenresService,
-    private _movieService: MoviesService,
-    private router: Router
+    private _movieService: MoviesService
   ) {}
 
   ngOnInit(): void {
@@ -127,7 +125,8 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
     fd.append('genre', this.uploadForm.get('genre')?.value);
 
     this.inProgress = true;
-    this.uploadMovieSubscription =  this._movieService.uploadMovie(fd).subscribe(
+    this.loader = true
+    this.uploadMovieSubscription = this._movieService.uploadMovie(fd).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);
@@ -138,6 +137,7 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
             this.inProgress = false;
             this.progress = 0;
             this.videoURL = this.reader.EMPTY;
+            this.loader = false
             Swal.fire({
               icon: 'success',
               title: 'Movie uploaded successfully!!',
@@ -183,8 +183,9 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
 
     this.inProgress = true;
     this.isSelectedInEditMode = true;
+    this.loader = true
 
-    this.editMovieSubscription =  this._movieService.editMovie(id, fd).subscribe(
+    this.editMovieSubscription = this._movieService.editMovie(id, fd).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);
@@ -195,6 +196,7 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
             this.inProgress = false;
             this.progress = 0;
             this.videoURL = this.reader.EMPTY;
+            this.loader = false
             Swal.fire({
               icon: 'success',
               title: 'Movie edited successfully!!',
@@ -216,7 +218,7 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
         });
         this.message = 'Could not upload the file!';
         this.videoURL = this.reader.EMPTY;
-        console.log(err);
+        // console.log(err);
       }
     );
     this.uploadForm.reset();
@@ -224,11 +226,11 @@ export class UploadMovieComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     this.genreListSubscription.unsubscribe();
-    if(this.uploadMovieSubscription){
-      this.uploadMovieSubscription.unsubscribe()
+    if (this.uploadMovieSubscription) {
+      this.uploadMovieSubscription.unsubscribe();
     }
-    if(this.editMovieSubscription){
-      this.editMovieSubscription.unsubscribe()
+    if (this.editMovieSubscription) {
+      this.editMovieSubscription.unsubscribe();
     }
   }
 }

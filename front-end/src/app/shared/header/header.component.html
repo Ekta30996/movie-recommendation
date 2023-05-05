@@ -7,7 +7,7 @@
           <span>Movie<span style="color: #e53637">Flix</span> </span>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-7">
         <div class="header__nav">
           <nav class="header__menu mobile-menu">
             <ul>
@@ -20,14 +20,19 @@
           </nav>
         </div>
       </div>
-      <div class="col-lg-3">
-        <div class="header__right">
-          <!-- <app-search></app-search> -->
-          <ngx-avatars name="{{user['username']}}" size="50" routerLink="/profile"></ngx-avatars>
+      <div class="col-lg-4">
+        <div class="header_right">
+          <ul>
+            <li><app-search
+              (searchTextChanged)="onSearchTextEntered($event)"
+            ></app-search></li>
+            <li><ngx-avatars routerLink="/profile" name="{{user['username']}}" size="50"></ngx-avatars>
+            </li>
+          </ul>
         </div>
-      </div>
     </div>
-    <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- <div id="mobile-menu-wrap"></div> -->
   </div>
 </header>
 <!-- Header End -->

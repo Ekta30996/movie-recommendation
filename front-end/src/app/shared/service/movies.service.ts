@@ -26,14 +26,13 @@ export class MoviesService {
 
   //search movie for ADMIN as well as USER
   searchMovie(q: string): Observable<Movie[]> {
-    if(q === ''){
-      return of([])
+    if (q === '') {
+      return of([]);
     }
-    return this.http.get<Movie[]>(SERACH_MOVIE_ENDPOINT + `${q}`)
-    .pipe(
-      map(res=>res),
-      tap(res=>console.log(res)
-    ));
+    return this.http.get<Movie[]>(SERACH_MOVIE_ENDPOINT + `${q}`).pipe(
+      map((res) => res),
+      tap((res) => {})
+    );
   }
 
   //for ADMIN as well as USER
@@ -55,14 +54,18 @@ export class MoviesService {
 
   addToWatchlist(id: string): Observable<Movie> {
     // const body = { id: id };
-    return this.http.post<Movie>(ADD_WATCHLIST, {id:id})
-    .pipe( retry(3),tap((movie)=>movie));
+    return this.http.post<Movie>(ADD_WATCHLIST, { id: id }).pipe(
+      retry(3),
+      tap((movie) => movie)
+    );
   }
 
   addToFavoritelist(id: string): Observable<Movie> {
     // const body = { id: id };
-    return this.http.post<Movie>(ADD_FAVORITELIST, {id:id})
-    .pipe( retry(3), tap((movie)=>movie));;
+    return this.http.post<Movie>(ADD_FAVORITELIST, { id: id }).pipe(
+      retry(3),
+      tap((movie) => movie)
+    );
   }
 
   listWatchlist(): Observable<Movie[]> {
@@ -82,11 +85,12 @@ export class MoviesService {
 
   //upload movie
   uploadMovie(movie: FormData): Observable<HttpEvent<Movie>> {
-    return this.http.post<Movie>(UPLOAD_MOVIE_ENDPOINT, movie, {
-      reportProgress: true,
-      observe: 'events',
-    })
-    .pipe(catchError(this.errorMgmt));
+    return this.http
+      .post<Movie>(UPLOAD_MOVIE_ENDPOINT, movie, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(catchError(this.errorMgmt));
   }
 
   errorMgmt(error: HttpErrorResponse) {
@@ -98,7 +102,7 @@ export class MoviesService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
+    // console.log(errorMessage);
     return throwError(() => {
       return errorMessage;
     });
@@ -106,11 +110,11 @@ export class MoviesService {
 
   //edit movie
   editMovie(id: string, movie: FormData): Observable<HttpEvent<Movie>> {
-    return this.http.patch<Movie>(EDIT_MOVIE_ENDPOINT + `${id}`, movie,{
-      reportProgress: true,
-      observe: 'events'
-    }).pipe(
-      catchError(this.errorMgmt)
-    )
+    return this.http
+      .patch<Movie>(EDIT_MOVIE_ENDPOINT + `${id}`, movie, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(catchError(this.errorMgmt));
   }
 }

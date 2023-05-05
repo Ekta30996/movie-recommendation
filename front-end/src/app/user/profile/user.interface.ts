@@ -10,12 +10,10 @@ export interface User {
   favoritelist: [string];
 }
 
-
-export interface UserToken{
-    email:string
-    exp:Date
-    iat:Date 
-    id:string
-    username:string
-
+export interface UserToken {
+  email: string;
+  exp: Date;
+  iat: Date;
+  id: string;
+  username: string;
 }

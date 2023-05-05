@@ -18,6 +18,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
   isAdded: boolean = false;
   inProgress: boolean = false;
   isSelectedInEditMode: boolean = false;
+  loader: boolean = false
 
 
   uploadForm!: FormGroup;
@@ -42,7 +43,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     this.selectedFile = (target.files as FileList)[0];
-    console.log(this.selectedFile);
+    // console.log(this.selectedFile);
 
     if (
       this.selectedFile.type === 'image/jpg' ||
@@ -75,6 +76,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
     const fd = new FormData();
     fd.append('thumb', this.selectedFile, this.selectedFile.name);
     this.inProgress = true;
+    this.loader = true
     this.uploadThumbSubscription = this._thumbService.uploadThumb(id, fd).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
@@ -85,6 +87,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
             this.inProgress = false;
             this.progress = 0;
             this.imgURL = this.reader.EMPTY;
+            this.loader = false
             Swal.fire({
               icon: 'success',
               title: 'Thumbnail uploaded successfully!!',
@@ -113,7 +116,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
         });
         this.message = 'Could not upload the file!';
         this.imgURL = this.reader.EMPTY;
-        console.log(err);
+        // console.log(err);
       }
     );
     this.uploadForm.reset();

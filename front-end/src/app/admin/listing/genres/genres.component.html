@@ -5,7 +5,7 @@
   <div class="container mt-5 mb-5 mx-1">
     <div class="d-flex justify-content-center row">
       <div class="col-md-10">
-        <div class="row p-2 border " style="background-color: #070720">
+        <div class="row p-2 border" style="background-color: #070720">
           <h3 style="color: white">No any genre is exists</h3>
         </div>
       </div>
@@ -15,11 +15,11 @@
 <ng-container *ngIf="!isEdit">
   <div class="container mt-5 mb-5 mx-1" *ngIf="genres.length != 0; else noData">
     <div class="d-flex justify-content-center row">
-      <div class="col-md-7" *ngFor="let genre of genres">
-        <div class="row p-2 border ">
+      <div class="col-md-7" *ngFor="let genre of genres; trackBy: genreTrackBy">
+        <div class="row p-2 border">
           <div class="col-md-3 mt-1">
             <img
-              class="img-fluid img-responsive  product-image"
+              class="img-fluid img-responsive product-image"
               src="{{genre?.['genreurl']}}"
               style="width: 100px; height: 100px"
             />

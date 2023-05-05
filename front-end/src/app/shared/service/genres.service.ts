@@ -43,9 +43,9 @@ export class GenresService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      console.log(error);
+      // console.log(error);
     }
-    console.log(errorMessage);
+    // console.log(errorMessage);
     return throwError(errorMessage);
   }
 

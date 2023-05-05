@@ -22,11 +22,11 @@
             class="product__item"
             [style]="
               isClicked && clickedId === genre['_id']
-                ? 'border: 2px solid white '
-                : ''
+                ? 'background-color: white '
+                : 'background-color: #e53637'
             "
           >
-            <h3 class="mt-2" style="color: white">{{ genre.genre }}</h3>
+            <h3 class="mt-2" style="color: #070720">{{ genre.genre }}</h3>
             <div class="product__item__pic">
               <img
                 src="{{genre?.['genreurl']}}"
@@ -39,9 +39,7 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="site-btn" (click)="goOnNext()">
-        Next
-      </button>
+      <button type="submit" class="site-btn" (click)="goOnNext()">Next</button>
     </div>
   </div>
 </div>

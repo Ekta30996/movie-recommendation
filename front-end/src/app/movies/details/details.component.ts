@@ -103,22 +103,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
        this.favoriteMovies.filter((f)=>
         {
           if(f._id == this.movie._id){
-            console.log('yes');
+            // console.log('yes');
              this.favorite = true
           } 
           else{
-            console.log('no');
+            // console.log('no');
             this.favorite = false
           }
         })
         this.watchMovies.filter((w)=>
         {
           if(w._id == this.movie._id){
-            console.log('yes');
+            // console.log('yes');
              this.watch = true
           } 
           else{
-            console.log('no');
+            // console.log('no');
             this.watch = false
           }
         })

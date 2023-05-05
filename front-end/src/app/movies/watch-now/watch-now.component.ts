@@ -7,7 +7,6 @@ import { Movie } from 'src/app/shared/movie.interface';
   styleUrls: ['./watch-now.component.css'],
 })
 export class WatchNowComponent implements OnInit {
-  
   loader: boolean = false;
   isReadMore: boolean = true;
 

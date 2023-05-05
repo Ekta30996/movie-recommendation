@@ -2,7 +2,6 @@
   <div class="loader"></div>
 </div>
 
-
 <ng-template #noData>
   <div class="container mt-5 mb-5 mx-2">
     <div class="d-flex justify-content-center row">
@@ -15,27 +14,29 @@
   </div>
 </ng-template>
 
-
-
 <ng-container *ngIf="!isEdit && !addThumb">
   <div class="container mt-5 mb-5 mx-3" *ngIf="movies.length != 0; else noData">
-    <div class="d-flex justify-content-center row" *ngFor="let movie of movies
-      | paginate
-        : {
-            itemsPerPage: tableSize,
-            currentPage: page,
-            totalItems: count
-          };
-    let i = index;
-    trackBy: movieTrackBy
-  ">
+    <div
+      class="d-flex justify-content-center row"
+      *ngFor="
+        let movie of movies
+          | paginate
+            : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+              };
+        let i = index;
+        trackBy: movieTrackBy
+      "
+    >
       <ng-container>
         <div class="col-md-11">
           <div class="row p-2 border" style="background-color: #070720">
             <div class="col-md-3 mt-1">
               <!-- <h6 style="color: white">Movie</h6> -->
               <video
-                class="img-fluid img-responsive  product-image"
+                class="img-fluid img-responsive product-image"
                 style="border-radius: none"
                 controls
               >
@@ -49,12 +50,12 @@
                 style="width: 210px; height: 135px"
                 src="{{t?.['thumburl']}}"
                 alt=" No Thumbnail"
-                class="img-fluid img-responsive  product-image"
+                class="img-fluid img-responsive product-image"
               />
               <h1
                 *ngIf="!movie?.['thumb']"
                 style="width: 210px; height: 135px"
-                class="img-fluid img-responsive  product-image"
+                class="img-fluid img-responsive product-image"
               >
                 No thumbnail
               </h1>
@@ -102,7 +103,8 @@
               <button
                 class="btn btn-danger btn-sm mt-2"
                 type="button"
-              (click)="deleteThumb(movie._id)">
+                (click)="deleteThumb(movie._id)"
+              >
                 Delete Thumbnail
               </button>
             </div>
@@ -113,17 +115,15 @@
   </div>
 </ng-container>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center" *ngIf="!isEdit && !addThumb">
   <pagination-controls
     previousLabel="Prev"
     nextLabel="Next"
     (pageChange)="onTableDataChange($event)"
-    style=" size:20px;"
+    style="size: 20px"
   >
   </pagination-controls>
 </div>
-
-
 
 <ng-container *ngIf="isEdit">
   <app-upload-movie [movieDetail]="movie"></app-upload-movie>

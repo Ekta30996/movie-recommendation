@@ -24,14 +24,14 @@ img {
   color: white;
   font-weight: 500;
 }
-button {
-  background-color: #e53637;
-  padding: 7px;
-  color: white;
-  font-weight: 500;
-  border: none;
-}
+
 .icon_profile{
   border-radius: 50%;
   width: 100px;
+}
+
+.header_right ul li{
+  list-style: none;
+  display: inline-block;
+  margin-top: 10px;
 }

@@ -55,28 +55,9 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
   }
 
 
-  movieTrackBy(index:number, movie:Movie):string {
+  favoriteMovieTrackBy(index:number, movie:Movie):string {
     return movie._id;
    }
-
-  onSearchTextEntered(searchValue: any) {
-    this.searchText = searchValue;
-    this.onSearchApi(this.searchText);
-  }
-
-  onSearchApi(data: string) {
-    const q = data;
-    if (q.length === 0) {
-      return;
-    }
-    this._movieService
-      .searchMovie(q)
-      .pipe(debounceTime(100), distinctUntilChanged())
-      .subscribe((movie) => {
-        // console.log(movie);
-        this.favoritelist = movie;
-      });
-  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
