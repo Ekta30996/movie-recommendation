@@ -15,7 +15,17 @@
 <ng-container *ngIf="!isEdit">
   <div class="container mt-5 mb-5 mx-1" *ngIf="genres.length != 0; else noData">
     <div class="d-flex justify-content-center row">
-      <div class="col-md-7" *ngFor="let genre of genres; trackBy: genreTrackBy">
+      <div class="col-md-7" *ngFor="
+      let genre of genres
+        | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };
+      let i = index;
+      trackBy: genreTrackBy
+    ">
         <div class="row p-2 border">
           <div class="col-md-3 mt-1">
             <img
@@ -53,6 +63,17 @@
     </div>
   </div>
 </ng-container>
+
+<div class="d-flex justify-content-center" *ngIf="!isEdit">
+  <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)"
+    style="size: 20px"
+  >
+  </pagination-controls>
+</div>
+
 <ng-container *ngIf="isEdit">
   <app-upload-genre [genreDetail]="genreById"></app-upload-genre>
 </ng-container>

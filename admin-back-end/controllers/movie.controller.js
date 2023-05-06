@@ -28,10 +28,10 @@ exports.uploadMovie = (req, res) => {
         });
         newVideo.save();
         res.status(200).send(newVideo);
-        console.log("Movie uploaded successfully!! ", newVideo);
+        // console.log("Movie uploaded successfully!! ", newVideo);
       } catch (err) {
         res.status(500).send(err);
-        console.log("Error occurs when upload movies ", newVideo);
+        // console.log("Error occurs when upload movies ", newVideo);
       }
     }
   );
@@ -43,10 +43,10 @@ exports.readAllMovies = async (req, res) => {
     const limit = req.query.limit;
     const read = await movieModel.find().sort({ uploadedat: -1 }).limit(limit);
     res.status(200).json(read);
-    console.log("Retrieve all movies" + read);
+    // console.log("Retrieve all movies" + read);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when retrive all movies " + err);
+    // console.log("Error occurs when retrive all movies " + err);
   }
 };
 
@@ -56,10 +56,10 @@ exports.readMovieById = async (req, res) => {
   try {
     const read = await movieModel.find({ _id: id });
     res.status(200).send(read[0]);
-    console.log("Read movie by id: ", read);
+    // console.log("Read movie by id: ", read);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when retrieve movie by id", err);
+    // console.log("Error occurs when retrieve movie by id", err);
   }
 };
 
@@ -80,10 +80,10 @@ exports.deleteMovieById = async (req, res) => {
     );
     const deleted = await movie.deleteOne(movie);
     res.status(200).send(deleted);
-    console.log("Movie deleted successfully!!");
+    // console.log("Movie deleted successfully!!");
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occur when delete movie " + err);
+    // console.log("Error occur when delete movie " + err);
   }
 };
 
@@ -141,12 +141,12 @@ exports.updatedMovieById = async (req, res) => {
           { new: true }
         );
         res.status(200).send(updated);
-        console.log("Movie updated successfully on cloudinary");
+        // console.log("Movie updated successfully on cloudinary");
       }
     );
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when update movie " + err);
+    // console.log("Error occurs when update movie " + err);
   }
 };
 
@@ -164,9 +164,9 @@ exports.readByParameters = async (req, res) => {
       return res.status(400).send("No result found");
     }
     res.status(200).send(read);
-    console.log("Search movies " + read);
+    // console.log("Search movies " + read);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when search ", err);
+    // console.log("Error occurs when search ", err);
   }
 };

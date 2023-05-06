@@ -25,11 +25,11 @@ exports.uploadGenre = (req, res) => {
         });
         newGenre.save();
         res.status(200).send(newGenre);
-        console.log("Genre uploaded successfully!!" + newGenre);
+        // console.log("Genre uploaded successfully!!" + newGenre);
       } catch (err) {
         res.status(500).send(err);
       }
-      console.log("Error occurs when upload genre ", err);
+      // console.log("Error occurs when upload genre ", err);
     }
   );
 };
@@ -39,10 +39,10 @@ exports.readAllGenre = async (req, res) => {
   try {
     const read = await genreModel.find();
     res.status(200).send(read);
-    console.log("All genre ", read);
+    // console.log("All genre ", read);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when read all genre ", err);
+    // console.log("Error occurs when read all genre ", err);
   }
 };
 
@@ -52,10 +52,10 @@ exports.readGenreById = async (req, res) => {
     const id = req.params.id;
     const read = await genreModel.find({ _id: id });
     res.status(200).send(read[0]);
-    console.log("Read genre by id ", read[0]);
+    // console.log("Read genre by id ", read[0]);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when read genre by id ", err);
+    // console.log("Error occurs when read genre by id ", err);
   }
 };
 
@@ -76,10 +76,10 @@ exports.deleteGenreById = async (req, res) => {
     );
     const deleted = await genreModel.deleteOne(genre);
     res.status(200).send(deleted);
-    console.log("Genre deleted successfully!! ", deleted);
+    // console.log("Genre deleted successfully!! ", deleted);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when delete genre" + err);
+    // console.log("Error occurs when delete genre" + err);
   }
 };
 
@@ -135,11 +135,11 @@ exports.updatedGenreById = async (req, res) => {
           { new: true }
         );
         res.status(200).send(updated);
-        console.log("Genre updated successfully!! ", updated);
+        // console.log("Genre updated successfully!! ", updated);
       }
     );
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occur when update genre ", err);
+    // console.log("Error occur when update genre ", err);
   }
 };

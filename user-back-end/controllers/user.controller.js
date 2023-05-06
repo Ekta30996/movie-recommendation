@@ -51,7 +51,7 @@ exports.register = async (req, res) => {
     const token = jwt.sign(
       { email: newUser.email, id: newUser._id , username:newUser.username},
       process.env.SECRET_KEY,
-      { expiresIn: '10m' }
+      { expiresIn: '1d' }
     );
     const admin = newUser.isadmin
     res.status(201).json({
@@ -66,7 +66,7 @@ exports.register = async (req, res) => {
       err,
       status: 'ERROR',
     });
-    console.log('Error occurs when signup', err);
+    // console.log('Error occurs when signup', err);
   }
 };
 
@@ -101,7 +101,7 @@ exports.login = async (req, res) => {
         });
       }
 
-      // sendInviteMail(username, email, newUser._id);
+      // sendInviteMai  l(username, email, newUser._id);
   
       //3) generate token
       const token = jwt.sign(
@@ -123,7 +123,7 @@ exports.login = async (req, res) => {
         err,
         status: 'ERROR',
       });
-      console.log('Error occurs when user signin', err);
+      // console.log('Error occurs when user signin', err);
     }
 
     
@@ -136,7 +136,7 @@ exports.login = async (req, res) => {
   
       //1) find user by auth id using middleware
       const user = await userModel.findById({ _id: id });
-      console.log(user);
+      // console.log(user);
   
       //2) check genre id is already exists or not
       const alreadyAdded =  user.genrelist.find((id) => id.toString() === genre);
@@ -161,7 +161,7 @@ exports.login = async (req, res) => {
         err,
         status: 'ERROR',
       })
-      console.log('Error occurs when user add genre in genre',err);
+      // console.log('Error occurs when user add genre in genre',err);
     }
   };
   
@@ -173,7 +173,7 @@ exports.login = async (req, res) => {
   
       //1) find user by auth id using middleware
       const user = await userModel.findById({ _id: id });
-      console.log(user);
+      // console.log(user);
   
       //2) check movie id is already exists or not
       const alreadyAdded =  user.watchlist.find((id) => id.toString() === watch);
@@ -198,7 +198,7 @@ exports.login = async (req, res) => {
         err,
         status: 'ERROR',
       })
-      console.log('Error occurs when user add movie in watchlist',err);
+      // console.log('Error occurs when user add movie in watchlist',err);
     }
   };
   
@@ -211,7 +211,7 @@ exports.login = async (req, res) => {
   
       //1) find user by auth id using middleware
       const user = await userModel.findById({ _id: id });
-      console.log(user);
+      // console.log(user);
   
       //2) check movie id is already exists or not
       const alreadyAdded =  user.favoritelist.find((id) => id.toString() === favorite);
@@ -237,7 +237,7 @@ exports.login = async (req, res) => {
         err,
         status: 'ERROR',
       })
-      console.log('Error occurs when user add movie in favoritelist',err);
+      // console.log('Error occurs when user add movie in favoritelist',err);
     }
   };
   
@@ -273,13 +273,13 @@ exports.login = async (req, res) => {
         ]
       )
       res.status(200).send(read)
-      console.log('read genre list'+read);
+      // console.log('read genre list'+read);
     }catch(err){
       res.status(500).json({
         message: 'Error occurs when retrieve movie by genre',
         err,
       });
-      console.log('Error occurs when retrieve movie by genre', err);
+      // console.log('Error occurs when retrieve movie by genre', err);
     }
   }
   
@@ -307,13 +307,13 @@ exports.login = async (req, res) => {
         ]
       )
       res.status(200).send(read)
-      console.log('read watchlist'+read);
+      // console.log('read watchlist'+read);
     }catch(err){
       res.status(500).json({
         message: 'Error occurs when retrieve movie from watchlist',
         err,
       });
-      console.log('Error occurs when retrieve movie from watchlist', err);
+      // console.log('Error occurs when retrieve movie from watchlist', err);
     }
   }
   
@@ -341,13 +341,13 @@ exports.login = async (req, res) => {
         ]
       )
       res.status(200).send(read)
-      console.log('read favoritelist'+read);    
+      // console.log('read favoritelist'+read);    
     }catch(err){
       res.status(500).json({
         message: 'Error occurs when retrieve movie from favoritelist',
         err,
       });
-      console.log('Error occurs when retrieve movie from favoritelist', err);
+      // console.log('Error occurs when retrieve movie from favoritelist', err);
     }
   }
 
@@ -376,10 +376,10 @@ exports.login = async (req, res) => {
         ]
       )
       res.status(200).send(genrelist[0])
-      console.log('genrelist of user'+genrelist);
+      // console.log('genrelist of user'+genrelist);
     }catch(err){
       res.status(500).send(err)
-      console.log('error occurs when get user genrelist'+err);
+      // console.log('error occurs when get user genrelist'+err);
     }    
     
   }

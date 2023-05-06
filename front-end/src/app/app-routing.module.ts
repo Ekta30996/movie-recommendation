@@ -8,7 +8,6 @@ const routes: Routes = [
   {path:'admin',loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)},
   {path:'genre',loadChildren:()=>import('./genre/genre.module').then(m=>m.GenreModule)},
   {path:'**' , component:PageNotFoundComponent}
-
 ];  
 
 @NgModule({

@@ -36,7 +36,7 @@ exports.uploadThumb = async (req, res) => {
           return res.status(200).send(find);
         } catch (err) {
           res.status(500).send(err);
-          console.log("Error occurs when upload thumb ", err);
+          // console.log("Error occurs when upload thumb ", err);
         }
       }
     );
@@ -70,6 +70,6 @@ exports.deleteThumb = async (req, res) => {
     return res.status(200).send(deleteThumb);
   } catch (err) {
     res.status(500).send(err);
-    console.log("Error occurs when delete thumb ", err);
+    // console.log("Error occurs when delete thumb ", err);
   }
 };

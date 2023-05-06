@@ -15,6 +15,7 @@ import {
 } from "rxjs";
 import { Movie } from "src/app/shared/movie.interface";
 import { MoviesService } from "src/app/shared/service/movies.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-latest",
@@ -66,10 +67,16 @@ export class LatestComponent implements OnInit, OnDestroy {
         (movie) => {
           this.movies = movie;
           this.loader = false;
-          // console.log(this.movies);
         },
         (err) => {
-          // console.log(err);
+          if (err['status'] == '0') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Server is not running',
+              showConfirmButton: false,
+              timer: 4000,
+            });
+          }
         },
       );
   }

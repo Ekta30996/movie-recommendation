@@ -27,3 +27,4 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule,NgxPaginationModule],
 })
 export class AdminModule {}
+  

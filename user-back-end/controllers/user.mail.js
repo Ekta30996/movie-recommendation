@@ -106,10 +106,11 @@ const sendMail = async (username, email, userid) => {
     };
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        console.log(err);
+        res.status(500).send(err);
+        // console.log(err);
       } else {
         res.status(200).send("For verification email has been sent");
-        console.log("Email has been send", info.response);
+        // console.log("Email has been send", info.response);
       }
     });
   } catch (err) {}
@@ -128,7 +129,7 @@ const emailVerification = async (req, res) => {
       message: "Error occurs when email verification",
       err,
     });
-    console.log("Error occurs when email verification " + err);
+    // console.log("Error occurs when email verification " + err);
   }
 };
 
@@ -138,14 +139,14 @@ const emailInvitation = async (req, res) => {
       { _id: req.query.id },
       { $set: { isadmin: 1 } }
     );
-    console.log(isVerified);
+    // console.log(isVerified);
     res.render("email-invite");
   } catch (err) {
     res.status(500).json({
       message: "Error occurs when email verification",
       err,
     });
-    console.log("Error occurs when email verification " + err);
+    // console.log("Error occurs when email verification " + err);
   }
 };
 module.exports = { sendMail, emailVerification , emailInvitation };

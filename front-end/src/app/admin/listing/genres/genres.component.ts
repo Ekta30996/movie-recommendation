@@ -14,6 +14,11 @@ export class GenresComponent implements OnInit, OnDestroy {
   genreById!: Genre;
   loader: boolean = false;
 
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 3;
+  tablesSizes: number[] = [3, 6, 9];
+
   listGenreSubscription!: Subscription;
   deleteGenreSubscription!: Subscription;
   getGenreSubscription!: Subscription;
@@ -23,6 +28,10 @@ export class GenresComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loader = true;
+    this.listGenre()
+  }
+
+  listGenre(){
     this.listGenreSubscription = this._genreService.loadGenre().subscribe(
       (genre) => {
         this.loader = true;
@@ -67,6 +76,17 @@ export class GenresComponent implements OnInit, OnDestroy {
 
   genreTrackBy(index: number, genre: Genre): string {
     return genre['_id'];
+  }
+
+    onTableDataChange(event: any) {
+    this.page = event;
+    this.listGenre();
+  }
+
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.AsNumber;
+    this.page = 1;
+    this.listGenre();
   }
 
   onGetGenreById(id: string) {
