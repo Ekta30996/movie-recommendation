@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, Subject, tap, throwError } from 'rxjs';
+import { catchError, Observable, retry, tap, throwError } from 'rxjs';
 import {
   ADD_GENRE_ENDPOINT,
   DELETE_GENRE_ENDPOINT,

@@ -35,8 +35,8 @@ export class MoviesService {
     );
   }
 
+  
   //for ADMIN as well as USER
-
   listMovieByGenre(): Observable<Movie[]> {
     return this.http.get<Movie[]>(READ_MOVIE_BY_GENRE_ENDPOINT);
   }
