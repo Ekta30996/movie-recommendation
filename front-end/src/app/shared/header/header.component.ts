@@ -6,8 +6,6 @@ import { AuthService } from '../auth/auth.service';
 import  jwt_decode from "jwt-decode";
 import { User } from 'src/app/user/profile/user.interface';
 import { MoviesService } from '../service/movies.service';
-import { Movie } from '../movie.interface';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -24,7 +22,7 @@ export class HeaderComponent implements OnInit {
   
   token!:any
   user!:User
-  searchText = ''
+  searchText!:Event 
 
   ngOnInit(): void {
       this.token = this._authService.getToken()
@@ -39,9 +37,9 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  onSearchTextEntered(searchValue: any) {
+  onSearchTextEntered(searchValue: Event) {
     this.searchText = searchValue;
     console.log(this.searchText);
-        this.router.navigate(['/movies/latest/',{q:this.searchText}]);
+      this.router.navigate(['/movies/latest/',{q:this.searchText}]);
   }
 }
