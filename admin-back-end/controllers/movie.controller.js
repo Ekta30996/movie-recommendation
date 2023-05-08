@@ -9,7 +9,6 @@ exports.uploadMovie = (req, res) => {
     {
       resource_type: "video",
       folder: "movie",
-      transformation: [{ quality: 200 }, { async: true }],
     },
     (err, result) => {
       if (err) {

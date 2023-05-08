@@ -76,7 +76,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
     const fd = new FormData();
     fd.append('thumb', this.selectedFile, this.selectedFile.name);
     this.inProgress = true;
-    this.loader = true
+    // this.loader = true
     this.uploadThumbSubscription = this._thumbService.uploadThumb(id, fd).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
@@ -87,7 +87,7 @@ export class UploadThumbComponent implements OnInit , OnChanges , OnDestroy {
             this.inProgress = false;
             this.progress = 0;
             this.imgURL = this.reader.EMPTY;
-            this.loader = false
+            // this.loader = false
             Swal.fire({
               icon: 'success',
               title: 'Thumbnail uploaded successfully!!',
